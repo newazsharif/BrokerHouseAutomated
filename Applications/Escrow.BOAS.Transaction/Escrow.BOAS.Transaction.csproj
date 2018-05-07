@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8057A46D-2351-4F5C-95D8-F4B38D415142}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Escrow.BOAS.Transaction</RootNamespace>
+    <AssemblyName>Escrow.BOAS.Transaction</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factories\ForceChargeApplyFactory.cs" />
+    <Compile Include="Factories\ForceChargeApplyTempFactory.cs" />
+    <Compile Include="Factories\FundPaymentFactory.cs" />
+    <Compile Include="Factories\FundReceiveFactory.cs" />
+    <Compile Include="Factories\FundTransferFactory.cs" />
+    <Compile Include="Factories\FundWithdrawalRequestFactory.cs" />
+    <Compile Include="Factories\InvestorFactory.cs" />
+    <Compile Include="Interfaces\IForceChargeApplyFactory.cs" />
+    <Compile Include="Interfaces\IFundPaymentFactory.cs" />
+    <Compile Include="Interfaces\IFundReceiveFactory.cs" />
+    <Compile Include="Interfaces\IFundTransferFactory.cs" />
+    <Compile Include="Models\DimDate.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rsp_manual_charge_branch_wise_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rsp_payment_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rsp_receive_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_already_processed_on_dem_char_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_on_dem_char_approve_list_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_on_dem_char_upl_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_on_dem_char_xl_upl_err_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_payment_approve_list_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_transfer_approve_list_Result.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBank.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBankBranch.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerBankAccount.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerBranch.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObject.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObjectValue.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblForceChargeApply.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblFundReceive.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblFundTransfer.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblFundWithdraw.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblFundWithdrawalRequest.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblGlobalCharge.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestor.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorFundBalance.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorImage.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblJoinHolder.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransactionModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransactionModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_all_investors_account_type_setting.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_InvestorFundBalance.cs">
+      <DependentUpon>TransactionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Models\TransactionModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TransactionModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\TransactionModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TransactionModel.edmx</DependentUpon>
+      <LastGenOutput>TransactionModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\TransactionModel.edmx.diagram">
+      <DependentUpon>TransactionModel.edmx</DependentUpon>
+    </None>
+    <None Include="Models\TransactionModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TransactionModel.edmx</DependentUpon>
+      <LastGenOutput>TransactionModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Escrow.Utility\Escrow.Utility.csproj">
+      <Project>{1861170e-d78f-45e2-8b0c-325ddb9e6e46}</Project>
+      <Name>Escrow.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,80 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 9/12/2015
+    ///Reason:
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Export Share Limit";
+    Layout = null;
+}
+
+<h2>Export Share Limit</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ExportShareLimitController" ng-init="loadShareLimit()">
+    <form class="form-horizontal" ng-submit="" name="expShareLimitForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Date</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="exportDate" class="form-control input-sm" data-ng-model="expShareLimit.export_date" onload-focus="true" ng-readonly="true" enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Object</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="expShareLimit.file_for" class="dropdown form-control input-sm"
+                        ng-options="fileFor.value as fileFor.text for fileFor in fileForList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="overflow-x:scroll; width:100%">
+            <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                        <th st-sort="file_type">File Type</th>
+                        <th st-sort="file_name">File Name</th>
+                        <th st-sort="import_dt">Import Date</th>
+                        <th st-sort="version_no">Version No</th>
+                        <th st-sort="exported">Exported</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td row-select="row" ng-click="select(row.id)"></td>
+                        <td>{{row.file_type}}</td>
+                        <td>{{row.file_name}}</td>
+                        <td>{{row.import_dt}}</td>
+                        <td>{{row.version_no}}</td>
+                        <td>{{row.exported}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Export" data-ng-click="exportShareLimit()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#ExportShareLimitList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section Scripts {
+}
+

@@ -1,0 +1,12 @@
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\Escrow.BOAS.Configuration.dll.config
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\Escrow.BOAS.Configuration.dll
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\Escrow.BOAS.Configuration.pdb
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\EntityFramework.dll
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\EntityFramework.SqlServer.dll
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\Escrow.Utility.dll
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\Escrow.Utility.pdb
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\EntityFramework.xml
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\bin\Debug\EntityFramework.SqlServer.xml
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\obj\Debug\Escrow.BOAS.Configuration.csprojResolveAssemblyReference.cache
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\obj\Debug\Escrow.BOAS.Configuration.dll
+D:\TFS\BOAS\Engineering\Development\Dev\Applications\Escrow.BOAS.Configuration\obj\Debug\Escrow.BOAS.Configuration.pdb

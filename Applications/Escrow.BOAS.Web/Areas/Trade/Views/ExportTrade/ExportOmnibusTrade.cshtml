@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<h2>Export Omnibus Trade</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ExportOmnibusTradeController" ng-init="LoadAllDropDown()">
+    <form class="form-horizontal" ng-submit="" name="ExportOmnibusTradeForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Export Location</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-readonly="true" data-ng-model="ExportOmnibusTrade.exportTradePath" enter-as-tab />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Stock Exchange</label>
+            </div>
+            <div class="col-md-10">
+                <select data-ng-model="ExportOmnibusTrade.stock_Exchange" class="dropdown form-control input-sm"
+                        ng-options="Stock.value as Stock.text for Stock in StockList" enter-as-tab onload-focus="true" required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Omnibus Master</label>
+            </div>
+            <div class="col-md-10">
+                <select data-ng-model="ExportOmnibusTrade.omnibus_master_id" class="dropdown form-control input-sm"
+                        ng-options="Omnibus.value as Omnibus.text for Omnibus in OmnibusMasterList" enter-as-tab >
+                    <option value="">---------------Select All---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Process Date</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="ExportOmnibusTrade.trd_dt" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+            </div>
+            <div class="col-md-1">
+                <span class="input-group-btn">
+                    <button style="margin-left : -19px" type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <input type="radio" value="T" data-ng-model="ExportOmnibusTrade.isTxtOrXml" ng-checked="true" /> Text File
+            </div>
+            <div class="col-md-2">
+                <input type="radio" value="X" data-ng-model="ExportOmnibusTrade.isTxtOrXml" /> XML File
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-2">
+                <img class="loader" src="~/Content/images/ajax-loader.gif" hidden />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-1 col-md-offset-2">
+                <input type="submit" value="Export" ng-click="ExportOmnibusTradeData()" class="btn btn-default" style="margin-left:-16px" />
+            </div>
+        </div>
+    </form>
+</div>

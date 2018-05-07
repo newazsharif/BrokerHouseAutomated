@@ -1,0 +1,168 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 8/11/2015
+    ///Reason: Dynamic Report View
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+@*@ViewBag.Title = "{{header}}";*@
+@{
+    //ViewBag.Title = "{{header}}";
+    Layout = null;
+}
+
+
+<div @*class="container"*@ ng-controller="ReportController" ng-init="loadDynamicView()">
+    <h2>{{header}}</h2>
+    <hr />
+    <form class="form-horizontal" ng-submit="" name="rptForm">
+        <div class="form-group" ng-repeat="item in dynamicView">
+            <div class="col-md-2">
+                <label>{{item.field_label}}</label>
+            </div>
+            <div class="col-md-10">
+                <input type="hidden" name="objectId" data-ng-model="item.field_id" />
+
+                <input type="text" class="form-control input-sm" data-ng-model="item.field_value" ng-if="item.is_field_required && item.field_type == 'textbox'" enter-as-tab required />
+
+                <input type="text" class="form-control input-sm" data-ng-model="item.field_value" ng-if="!item.is_field_required && item.field_type == 'textbox'" enter-as-tab />
+
+                <input type="text" class="form-control input-sm" data-ng-model="item.field_value" ng-if="item.is_field_required && item.field_type == 'number' && item.number_type == 'numbersOnly'" numbers-only enter-as-tab required />
+
+                <input type="text" class="form-control input-sm" data-ng-model="item.field_value" ng-if="!item.is_field_required && item.field_type == 'number' && item.number_type == 'numbersOnly'" numbers-only enter-as-tab />
+
+                <input type="text" class="form-control input-sm" data-ng-model="item.field_value" ng-if="item.is_field_required && item.field_type == 'number' && item.number_type == 'positiveNumbersOnly'" positive-numbers-only enter-as-tab required />
+
+                <input type="text" class="form-control input-sm" data-ng-model="item.field_value" ng-if="!item.is_field_required && item.field_type == 'number' && item.number_type == 'positiveNumbersOnly'" positive-numbers-only enter-as-tab />
+
+                <p style="width:36%" class="input-group" ng-if="item.is_field_required && item.field_type == 'daterange'">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="item.field_value" is-open="opened[$index]" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+
+                <p style="width:36%" class="input-group" ng-if="!item.is_field_required && item.field_type == 'daterange'">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="item.field_value" is-open="opened[$index]" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+
+                <p style="width:36%" class="input-group" ng-if="item.is_field_required && item.field_type == 'date'">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="item.field_value" is-open="opened[$index]" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+
+                <p style="width:36%" class="input-group" ng-if="!item.is_field_required && item.field_type == 'date'">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="item.field_value" is-open="opened[$index]" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,$index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="branch.value as branch.text for branch in branchList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'branch_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="branch.value as branch.text for branch in branchList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'branch_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="charge.value as charge.text for charge in ChargeTypelist" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'charge_type_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="charge.value as charge.text for branch in ChargeTypelist" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'charge_type_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="designation.value as designation.text for designation in designationList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'designation_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="designation.value as designation.text for designation in designationList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'designation_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="department.value as department.text for department in departmentList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'department_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="department.value as department.text for department in departmentList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'department_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="activeStatus.value as activeStatus.text for activeStatus in activeStatusList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'active_status_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="activeStatus.value as activeStatus.text for activeStatus in activeStatusList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'active_status_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="investorAccountType.value as investorAccountType.text for investorAccountType in investorAccountTypeList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'account_type_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="investorAccountType.value as investorAccountType.text for investorAccountType in investorAccountTypeList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'account_type_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="investorSubAccountType.value as investorSubAccountType.text for investorSubAccountType in investorSubAccountTypeList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'sub_account_type_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="investorSubAccountType.value as investorSubAccountType.text for investorSubAccountType in investorSubAccountTypeList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'sub_account_type_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="transactionMode.value as transactionMode.text for transactionMode in transactionModeList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'transaction_mode_id'" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="transactionMode.value as transactionMode.text for transactionMode in transactionModeList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'transaction_mode_id'" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="isApproved.value as isApproved.text for isApproved in isApprovedList" ng-if="item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'is_approved'" enter-as-tab required>
+                    @*<option value="">All</option>*@
+                </select>
+
+                <select data-ng-model="item.field_value" class="dropdown form-control input-sm"
+                        ng-options="isApproved.value as isApproved.text for isApproved in isApprovedList" ng-if="!item.is_field_required && item.field_type == 'dropdown' && item.field_id == 'is_approved'" enter-as-tab>
+                    @*<option value="">All</option>*@
+                </select>
+
+            </div>
+        </div>
+
+        <a class="various iframe btn btn-default" ng-click="setDynamicProperty($event)" ng-if="rptForm.$valid"
+           ng-href="../../Reports/Report/showReport?field_id={{field_id}}&field_value={{field_value}}&field_type={{field_type}}&reportName={{reportName}}&reportDataSource={{reportDataSource}}&spName={{spName}}&rptTitle={{header}}"
+           fancyboxable>Report</a>
+</form>
+</div>
+@section Scripts {
+}
+

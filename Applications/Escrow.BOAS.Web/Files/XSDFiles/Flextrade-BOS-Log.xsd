@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Flextrade-BOS-Log" version="0.7.10" elementFormDefault="qualified">
+  <xs:element nillable="false" name="Log">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Summary" type="SummaryType" minOccurs="1" maxOccurs="1" />
+        <!-- If there is any error when parsing the file or uploading the records in the database there will be an ErrorLog -->
+        <xs:element name="ErrorLog" type="ErrorLogType" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SummaryType">
+    <xs:sequence>
+      <xs:element name="FileType" type="FileType" />
+      <xs:element name="FileStatus" type="FileStatus" />
+      <xs:element name="ProcessingMode" type="ProcessingMode" />
+      <xs:element name="DateProcessed" type="xs:date" />
+      <xs:element name="TotalDuration" type="xs:time" />
+      <!-- Number of records processed. If there is a fatal parsing error this number is not the total records of the file -->
+      <xs:element name="Record" type="xs:unsignedInt" />
+      <!-- Number of successful records processed -->
+      <xs:element name="Successful" type="xs:unsignedInt" />
+      <!-- Number of wrong records processed -->
+      <xs:element name="Wrong" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorLogType">
+    <xs:sequence>
+      <!-- XML_Error is an error that causes the XML parser to abort the parsing process -->
+      <xs:element name="XML_Error" type="ErrorType" minOccurs="0" maxOccurs="unbounded" />
+      <!-- DB_Error is an error return by the DataBase when processing the insertion/update of the message -->
+      <xs:element name="Data_Error" type="DataErrorType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FileType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Positions" />
+      <xs:enumeration value="Clients" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FileStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotReceived" />
+      <xs:enumeration value="Rejected" />
+      <xs:enumeration value="ProcessedError" />
+      <xs:enumeration value="Processing" />
+      <xs:enumeration value="ProcessedOK" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProcessingMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BatchInsertOrUpdate" />
+      <xs:enumeration value="BatchInsert" />
+      <xs:enumeration value="IncrementQuantity" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ErrorType">
+    <!-- A line number where the error occurred -->
+    <xs:attribute name="lineNum" type="xs:unsignedInt" />
+    <!-- A column number where the error occurred -->
+    <xs:attribute name="colNum" type="xs:unsignedInt" />
+    <!-- The error message -->
+    <xs:attribute name="errText" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DataErrorType">
+    <!-- The error code -->
+    <xs:attribute name="errCode" type="xs:int" />
+    <!-- A line number where the error occurred -->
+    <xs:attribute name="lineNum" type="xs:unsignedInt" />
+    <!-- A column number where the error occurred -->
+    <xs:attribute name="colNum" type="xs:unsignedInt" />
+    <!-- The error message -->
+    <xs:attribute name="errText" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

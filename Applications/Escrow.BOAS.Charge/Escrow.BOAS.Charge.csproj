@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A5813CCA-43AB-4614-9D77-27BF84A35945}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Escrow.BOAS.Charge</RootNamespace>
+    <AssemblyName>Escrow.BOAS.Charge</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factories\BranchAccountTypeSettingFactory.cs" />
+    <Compile Include="Factories\BranchChargeFactory.cs" />
+    <Compile Include="Factories\BranchChargeSlabFactory.cs" />
+    <Compile Include="Factories\ExchangeChargeFactory.cs" />
+    <Compile Include="Factories\ExchangeChargeSlabFactory.cs" />
+    <Compile Include="Factories\GloabalChargeSlabFactory.cs" />
+    <Compile Include="Factories\GlobalAccountTypeSettingFactory.cs" />
+    <Compile Include="Factories\GlobalChargeFactory.cs" />
+    <Compile Include="Factories\InvestorAccountTypeSettingFactory.cs" />
+    <Compile Include="Factories\InvestorChargeFactory.cs" />
+    <Compile Include="Factories\InvestorChargeSlabFactory.cs" />
+    <Compile Include="Factories\SubAccountAccountTypeSettingFactory.cs" />
+    <Compile Include="Factories\SubAccountChargeFactory.cs" />
+    <Compile Include="Factories\SubAccountChargeSlabFactory.cs" />
+    <Compile Include="Models\ChargeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChargeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChargeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChargeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChargeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DimDate.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBranchAccountTypeSetting.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBranchCharge.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBranchChargeSlab.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerBranch.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObject.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObjectValue.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblExchangeCharge.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblExchangeChargeSlab.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblGlobalAccountTypeSetting.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblGlobalCharge.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblGlobalChargeSlab.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorAccountTypeSetting.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorCharge.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorChargeSlab.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSubAccountAccountTypeSetting.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSubAccountCharge.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSubAccountChargeSlab.cs">
+      <DependentUpon>ChargeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\ChargeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChargeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Models\ChargeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChargeModel.edmx</DependentUpon>
+      <LastGenOutput>ChargeModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\ChargeModel.edmx.diagram">
+      <DependentUpon>ChargeModel.edmx</DependentUpon>
+    </None>
+    <None Include="Models\ChargeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChargeModel.edmx</DependentUpon>
+      <LastGenOutput>ChargeModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Escrow.Utility\Escrow.Utility.csproj">
+      <Project>{1861170e-d78f-45e2-8b0c-325ddb9e6e46}</Project>
+      <Name>Escrow.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

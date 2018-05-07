@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>Escrow</DataSourceReference>
+      <CommandText>SELECT        NULL AS id, 'All' AS name
+UNION ALL
+SELECT        cov.object_value_id AS id, cov.display_value AS name
+FROM            tblConstantObject AS co INNER JOIN
+                         tblConstantObjectValue AS cov ON co.object_id = cov.object_id
+WHERE        (co.object_name = 'DEPARTMENT')</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="id">
+        <DataField>id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="name">
+        <DataField>name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

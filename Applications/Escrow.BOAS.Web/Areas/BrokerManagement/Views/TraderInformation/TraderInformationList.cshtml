@@ -1,0 +1,67 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 20/9/2015
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Trader Information";
+    Layout = null;
+}
+
+<h2>Trader Information</h2>
+<div class="row" ng-controller="TraderInformationController" ng-init="loadTraderList()">
+    <div class="col-md-12">
+        <a href="/#NewTraderInformation" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th st-sort="trader_code">Code</th>
+                    <th st-sort="employee">Employee</th>
+                    <th st-sort="ar_no">Ar No</th>
+                    <th st-sort="trade_work_station">Work Station</th>
+                    <th st-sort="license_renew_date">Renew Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="7"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+
+                    <td>{{ row.trader_code }}</td>
+                    <td>{{ row.employee }}</td>
+                    <td>{{ row.ar_no }}</td>
+                    <td>{{ row.trade_work_station }}</td>
+                    <td>{{ row.license_renew_date }}</td>
+                    <td><a href="/#EditTrader/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteTrader(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            <tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+}
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<h2>Export PayIn PayOut</h2>
+<hr />
+<div @*class="container"*@ ng-controller="PayInOutController" ng-init="LoadAllDropDown()">
+    <form class="form-horizontal" ng-submit="" name="PayInOutForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>File Path</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" readonly data-ng-model="PayinOutPath" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Stock Exchange</label>
+            </div>
+            <div class="col-md-10">
+                <select data-ng-model="PayInOut.stock_Exchange" class="dropdown form-control input-sm"
+                        ng-options="Stock.value as Stock.text for Stock in StockList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Process Date</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="PayInOut.trd_dt" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <input type="radio" value="I" data-ng-model="PayInOut.isInOut" ng-checked="true" /> PayIn
+            </div>
+            <div class="col-md-2">
+                <input type="radio" value="O" data-ng-model="PayInOut.isInOut" /> PayOut
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-md-offset-2">
+                <img class="loader" src="~/Content/images/ajax-loader.gif" hidden />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-1 col-md-offset-2">
+                <input type="submit" value="Export" ng-click="ExportPayInOut()" class="btn btn-default" style="margin-left:-16px" />
+            </div>
+       </div>
+</form>
+</div>

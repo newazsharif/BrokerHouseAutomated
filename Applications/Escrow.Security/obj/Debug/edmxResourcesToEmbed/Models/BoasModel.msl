@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EscrowBOASModelStoreContainer" CdmEntityContainer="BoasEntities">
+    <EntitySetMapping Name="DimDates">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.DimDate">
+        <MappingFragment StoreEntitySet="DimDate">
+          <ScalarProperty Name="DateKey" ColumnName="DateKey" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="FullDateUK" ColumnName="FullDateUK" />
+          <ScalarProperty Name="FullDateUSA" ColumnName="FullDateUSA" />
+          <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+          <ScalarProperty Name="DaySuffix" ColumnName="DaySuffix" />
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
+          <ScalarProperty Name="DayOfWeekUSA" ColumnName="DayOfWeekUSA" />
+          <ScalarProperty Name="DayOfWeekUK" ColumnName="DayOfWeekUK" />
+          <ScalarProperty Name="DayOfWeekInMonth" ColumnName="DayOfWeekInMonth" />
+          <ScalarProperty Name="DayOfWeekInYear" ColumnName="DayOfWeekInYear" />
+          <ScalarProperty Name="DayOfQuarter" ColumnName="DayOfQuarter" />
+          <ScalarProperty Name="DayOfYear" ColumnName="DayOfYear" />
+          <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+          <ScalarProperty Name="WeekOfQuarter" ColumnName="WeekOfQuarter" />
+          <ScalarProperty Name="WeekOfYear" ColumnName="WeekOfYear" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="MonthOfQuarter" ColumnName="MonthOfQuarter" />
+          <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+          <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="YearName" ColumnName="YearName" />
+          <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+          <ScalarProperty Name="MMYYYY" ColumnName="MMYYYY" />
+          <ScalarProperty Name="FirstDayOfMonth" ColumnName="FirstDayOfMonth" />
+          <ScalarProperty Name="LastDayOfMonth" ColumnName="LastDayOfMonth" />
+          <ScalarProperty Name="FirstDayOfQuarter" ColumnName="FirstDayOfQuarter" />
+          <ScalarProperty Name="LastDayOfQuarter" ColumnName="LastDayOfQuarter" />
+          <ScalarProperty Name="FirstDayOfYear" ColumnName="FirstDayOfYear" />
+          <ScalarProperty Name="LastDayOfYear" ColumnName="LastDayOfYear" />
+          <ScalarProperty Name="IsHolidayUSA" ColumnName="IsHolidayUSA" />
+          <ScalarProperty Name="IsWeekday" ColumnName="IsWeekday" />
+          <ScalarProperty Name="HolidayUSA" ColumnName="HolidayUSA" />
+          <ScalarProperty Name="IsHolidayUK" ColumnName="IsHolidayUK" />
+          <ScalarProperty Name="HolidayUK" ColumnName="HolidayUK" />
+          <ScalarProperty Name="IsHoliday" ColumnName="IsHoliday" />
+          <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+          <ScalarProperty Name="FiscalDayOfYear" ColumnName="FiscalDayOfYear" />
+          <ScalarProperty Name="FiscalWeekOfYear" ColumnName="FiscalWeekOfYear" />
+          <ScalarProperty Name="FiscalMonth" ColumnName="FiscalMonth" />
+          <ScalarProperty Name="FiscalQuarter" ColumnName="FiscalQuarter" />
+          <ScalarProperty Name="FiscalQuarterName" ColumnName="FiscalQuarterName" />
+          <ScalarProperty Name="FiscalYear" ColumnName="FiscalYear" />
+          <ScalarProperty Name="FiscalYearName" ColumnName="FiscalYearName" />
+          <ScalarProperty Name="FiscalMonthYear" ColumnName="FiscalMonthYear" />
+          <ScalarProperty Name="FiscalMMYYYY" ColumnName="FiscalMMYYYY" />
+          <ScalarProperty Name="FiscalFirstDayOfMonth" ColumnName="FiscalFirstDayOfMonth" />
+          <ScalarProperty Name="FiscalLastDayOfMonth" ColumnName="FiscalLastDayOfMonth" />
+          <ScalarProperty Name="FiscalFirstDayOfQuarter" ColumnName="FiscalFirstDayOfQuarter" />
+          <ScalarProperty Name="FiscalLastDayOfQuarter" ColumnName="FiscalLastDayOfQuarter" />
+          <ScalarProperty Name="FiscalFirstDayOfYear" ColumnName="FiscalFirstDayOfYear" />
+          <ScalarProperty Name="FiscalLastDayOfYear" ColumnName="FiscalLastDayOfYear" />
+          <ScalarProperty Name="FullDateCDBL" ColumnName="FullDateCDBL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDayProcesses">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblDayProcess">
+        <MappingFragment StoreEntitySet="tblDayProcess">
+          <ScalarProperty Name="process_date" ColumnName="process_date" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="start_by" ColumnName="start_by" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="end_by" ColumnName="end_by" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_rpt_special_permission">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tbl_rpt_special_permission">
+        <MappingFragment StoreEntitySet="tbl_rpt_special_permission">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="Client_id" ColumnName="Client_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

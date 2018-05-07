@@ -1,0 +1,141 @@
+﻿@*
+    ///Created by: Shohid
+    ///Edit date: 22/03/2016
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Trader Investor Mapping";
+    Layout = null;
+}
+
+
+<style>
+    #test{
+        width:537px !important;
+        text-align:center;
+
+    }
+    #search_res{
+         width:500px !important;
+        text-align:center;
+    }
+</style>
+<h2>Trader Investor Mapping</h2><br />
+<div @*class="container"*@ ng-controller="TraderInvestorMappingController" ng-init="loadDropdowns()">
+    <form class="form-horizontal" ng-submit="" name="newTraderInvMapForm">
+        <div class="form-group">
+            <div class="col-md-1">
+                <label>Trader</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="traderInvMap.trader_id" class="dropdown form-control input-sm"
+                        ng-options="trader.value as trader.text for trader in traderList" ng-change="loadInvestors()" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+            <div class="col-md-1">                
+            </div>
+            <div class="col-md-1">
+                <label>Search</label>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control input-sm" placeholder="Client id..." ng-model="traderInvMap.search" enter-as-tab />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="getSearchResult()"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>   
+        </div>
+        @*<div class="form-group">
+                   
+        </div>*@
+
+        <div class="row">
+            <div  class="col-md-5">
+                <table st-table="searchDisplayedCollection" st-safe-src="searchRowCollection" class="table table-hover" fixed-header id="table-width-136">
+                    <thead style="width: 100%">
+                        <tr>
+                            <th row-select-all="searchDisplayedCollection" selected="selected" ng-click="selectAll(searchDisplayedCollection)"></th>
+                            <th st-sort="client_id">Client Id</th>
+                            <th st-sort="bo_code">BO Code</th>
+                            @*<th st-sort="first_holder_name">Name</th>*@
+                        <tr>
+                            <th colspan="4"><input st-search="" class="form-control input-sm" placeholder="search ..." type="text" /></th>                           
+                        </tr>
+                    </thead>
+                    <tbody @*style="overflow-x:scroll; width:100%; max-height:585px;"*@>
+
+                        <tr ng-repeat=" searchRow in searchDisplayedCollection" ng-mousemove="hoverThis(searchRow.client_id)" tooltip={{info}} @*data-popover-template="dynamicPopover.templateUrl" data-popover-trigger=" mouseenter"*@>
+                            <td row-select="searchRow" ng-click="select(searchRow.client_id)"></td>
+                            <td>{{ searchRow.client_id }}</td>
+                            <td>{{ searchRow.bo_code }}</td>
+                            @*<td>{{ searchRow.first_holder_name }}</td>*@
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" id="search_res" @*class="text-center" style="width:537px !important;"*@>
+                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+
+                            </td>
+                        </tr>
+                    </tfoot>  
+                </table>
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-default" value=">>" data-ng-click="searchInvToInvList()" />              
+            </div>
+            <div class="col-md-6">                
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped" fixed-header>
+                    <thead>
+                        <tr>
+                            <th st-sort="client_id">Client Id</th>
+                            <th st-sort="bo_code">BO Code</th>                            
+                            <th st-sort="trader_id">Trader Id</th>
+                        <tr>
+                        <tr>
+                            <th colspan="4"><input st-search="" class="form-control input-sm" placeholder="search ..." type="text" /></th>
+                            @*<th>Items/Page</th>
+                            <th><input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only /></th>*@
+                        </tr>
+                    </thead>
+                    <tbody @*style="overflow-x:scroll; width:100%; max-height:400px;"*@>
+                            <tr ng-repeat=" row in displayedCollection">
+                            <td>{{ row.client_id }}</td>
+                            <td>{{ row.bo_code }}</td>                            
+                            <td>
+                                <select data-ng-model="row.trader_id" class="dropdown form-control input-sm"
+                                        ng-options="trader.value as trader.text for trader in traderList" enter-as-tab required>
+                                    <option value="">---------------Select---------------</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" id="test" @*class="text-center" style="width:537px !important;"*@>
+                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                                
+                            </td>
+                        </tr>
+                    </tfoot>              
+                </table>
+                @*<div class="row" style="text-align:center;">*@
+                    <div class="col-md-6" style="text-align:center">
+                        <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveTraderInvMap()" />
+                    </div>
+                @*</div>*@
+            </div>
+        </div>
+        
+
+    </form>
+</div>
+@section Scripts {
+}
+

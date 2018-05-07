@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Flextrade-BOS-Trades" version="0.7.10" elementFormDefault="qualified">
+  <xs:element name="EODTickers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Ticker" maxOccurs="unbounded">
+          <xs:complexType>
+            <!-- Stock Code /Security Identifier -->
+            <xs:attribute name="SecurityCode" type="SecurityCode" />
+            <!-- ISIN code for the ticker -->
+            <xs:attribute name="ISIN" type="xs:string" />
+            <!-- Instrument Category -->
+            <xs:attribute name="Category" type="CategoryDef" />
+            <!-- Compulsory Spot -->
+            <xs:attribute name="CompulsorySpot" type="CompulsorySpotDef" />
+            <!-- Date of last trade to which price refers: YYYYMMDD -->
+            <xs:attribute name="TradeDate" type="DateType" />
+            <!-- Open Price -->
+            <xs:attribute name="Open" type="xs:double" />
+            <!-- High Price -->
+            <xs:attribute name="High" type="xs:double" />
+            <!-- Low Price -->
+            <xs:attribute name="Low" type="xs:double" />
+            <!-- Close Price -->
+            <xs:attribute name="Close" type="xs:double" />
+            <!-- Var -->
+            <xs:attribute name="Var" type="xs:decimal" />
+            <!-- Var% -->
+            <xs:attribute name="VarPercent" type="xs:decimal" />
+            <!-- Asset class -->
+            <xs:attribute name="AssetClass" type="AssetDef" />
+            <!-- Sector -->
+            <xs:attribute name="Sector" type="SectorDef" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="SecurityCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateType">
+    <xs:restriction base="xs:string">
+      <xs:length value="8" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CompulsorySpotDef">
+    <!-- Settlement requirement -->
+    <xs:restriction base="xs:string">
+      <!-- If instrument is SPOT, then Yes -->
+      <xs:enumeration value="Y" />
+      <!-- If instrument is PUBLIC, then No -->
+      <xs:enumeration value="N" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CategoryDef">
+    <xs:restriction base="xs:string">
+      <!-- 1st class stock -->
+      <xs:enumeration value="A" />
+      <!-- 2nd class stock -->
+      <xs:enumeration value="B" />
+      <!-- Green class stock -->
+      <xs:enumeration value="G" />
+      <!-- New stock -->
+      <xs:enumeration value="N" />
+      <!-- Junk stock -->
+      <xs:enumeration value="Z" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AssetDef">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="12" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SectorDef">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="12" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

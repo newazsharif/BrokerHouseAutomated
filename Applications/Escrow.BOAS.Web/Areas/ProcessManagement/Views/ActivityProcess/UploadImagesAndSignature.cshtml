@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<h2>Investor Image and Signature Upload Process</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ImageUploadProcessController" ng-init="initialLoad()">
+    <form class="form-horizontal" ng-submit="" name="BackUpProcessForm">
+        <div class="form-group">
+            <div class="col-md-offset-1">
+                <input type="submit" class="btn btn-default" value="Upload Investor Image and Signature" data-ng-click="Upload()" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+

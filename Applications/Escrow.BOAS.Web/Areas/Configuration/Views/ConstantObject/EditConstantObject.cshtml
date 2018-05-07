@@ -1,0 +1,47 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 16/8/2015
+    ///Reason: Constant Object Edit View
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Edit Constant Object";
+    Layout = null;
+}
+
+<h2>Edit Constant Object</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ConstantObjectController" ng-init="loadConstantObjectById()">
+    <form class="form-horizontal" ng-submit="" name="editConsForm">
+        <input type="hidden" name="objectId" data-ng-model="object_id" />
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Object Name</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="objectName" class="form-control input-sm" data-ng-model="editConsObject.object_name" ng-change="editConsObject.object_name=editConsObject.object_name.toUpperCase();" onload-focus="true" enter-as-tab required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Purpose</label>
+            </div>
+            <div class="col-md-7">
+                <textarea name="Purpose" class="form-control input-sm" data-ng-model="editConsObject.Purpose" enter-as-tab></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="editConstantObject()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadConstantObjectById()" />
+                <a href="/#ConstantObject" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section Scripts {
+}

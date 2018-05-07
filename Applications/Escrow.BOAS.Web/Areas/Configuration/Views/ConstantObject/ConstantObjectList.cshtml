@@ -1,0 +1,62 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 16/8/2015
+    ///Reason: Constant Object List View
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Constant Object";
+    Layout = null;
+}
+
+<h2>Constant Object</h2>
+<hr />
+<div class="row" ng-controller="ConstantObjectController" ng-init="loadObjectList()">
+    <div class="col-md-12">
+        <a href="/#AddNewConstant" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="object_name">Object Name</th>
+                    <th st-sort="Purpose">Purpose</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="4"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.object_name}}</td>
+                    <td>{{row.Purpose}}</td>
+                    <td><a href="/#EditConstant/{{row.object_id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteConstantObject(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+@section Scripts {
+}
+

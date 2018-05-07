@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<views>
+  <view id="rptEmp" title="Employee Report" header="Employee Report" reportName="rptEmployeeInformation.rdlc" reportDataSource="EmployeeInformation" spName="dbo.rsp_employee_information">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Employee Code" type="textbox" id="employee_code" value="" require="true" max="" min=""/>
+    <field name="Name" type="textbox" id="name" value="" require="false" max="" min=""/>
+    <field name="National ID" type="textbox" id="national_id" value="" require="false" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+    <field name="Designation" type="dropdown" id="designation_id" value="" require="false" max="" min=""/>
+    <field name="Department" type="dropdown" id="department_id" value="" require="false" max="" min=""/>
+  </view>
+  <view id="rptBrokComIncBranWise" title="Brokerage Commission Income Branch Wise" header="Brokerage Commission Income Branch Wise" reportName="rptBrokComIncBranWise.rdlc" reportDataSource="BrokComIncBranWise" spName="Trade.rsp_brokerage_commission_income_branch_wise">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+  </view>
+  <view id="rptBrokComIncTraderWise" title="Brokerage Commission Income Trader Wise" header="Brokerage Commission Income Trader Wise" reportName="rptBrokComIncTraderWise.rdlc" reportDataSource="BrokComIncTraderWise" spName="Trade.rsp_brokerage_commission_income_trader_wise">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+  </view>
+  <view id="rptClientReceivablePayable" title="Client Receivable Payable" header="Client Receivable Payable" reportName="rptClientReceivablePayable.rdlc" reportDataSource="ClientReceivablePayable" spName="Investor.rsp_client_receivable_payable">
+    <field name="Report Date" type="date" id="report_date" value="process date" require="true" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+  </view>
+
+  <view id="rptClientReceivable" title="Client Receivable" header="Client Receivable" reportName="rptClientReceivable.rdlc" reportDataSource="ClientReceivable" spName="Investor.rsp_client_receivable">
+    <field name="Report Date" type="date" id="report_date" value="process date" require="true" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+  </view>
+
+  <view id="rptClientPayable" title="Client Payable" header="Client Payable" reportName="rptClientPayable.rdlc" reportDataSource="ClientPayable" spName="Investor.rsp_client_payable">
+    <field name="Report Date" type="date" id="report_date" value="process date" require="true" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+  </view>
+  
+  <view id="rptInvestorList" title="Investor List" header="Investor List" reportName="rptInvestorList.rdlc" reportDataSource="InvestorList" spName="Investor.rsp_investor_list">
+    <field name="Active Status" type="dropdown" id="active_status_id" value="" require="false" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+    <field name="Account Type" type="dropdown" id="account_type_id" value="" require="false" max="" min=""/>
+    <field name="Sub Account Type" type="dropdown" id="sub_account_type_id" value="" require="false" max="" min=""/>
+  </view>
+  <view id="rptPayment" title="Payment" header="Payment" reportName="rptPayment.rdlc" reportDataSource="Payment" spName="[Transaction].rsp_payment">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Voucher No" type="textbox" id="voucher_no" value="" require="false" max="" min=""/>
+    <field name="Client Code" type="textbox" id="client_id" value="" require="false" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+    <field name="Transaction Mode" type="dropdown" id="transaction_mode_id" value="" require="false" max="" min=""/>
+    <field name="Status" type="dropdown" id="is_approved" value="2" require="false" max="" min=""/>
+  </view>
+  <view id="rptReceive" title="Receive" header="Receive" reportName="rptReceive.rdlc" reportDataSource="Receive" spName="[Transaction].rsp_receive">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Voucher No" type="textbox" id="voucher_no" value="" require="false" max="" min=""/>
+    <field name="Client Code" type="textbox" id="client_id" value="" require="false" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+    <field name="Transaction Mode" type="dropdown" id="transaction_mode_id" value="" require="false" max="" min=""/>
+    <field name="Status" type="dropdown" id="is_approved" value="2" require="false" max="" min=""/>
+  </view>
+  <view id="rptClientLedger" title="Client Ledger Statement" header="Client Ledger Statement" reportName="rptClientLedger.rdlc" reportDataSource="rptClientLedger" spName="Investor.rsp_client_ledger">
+    <field name="Client Code" type="textbox" id="client_id" value="" require="true" max="" min=""/>
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+  </view>
+  <view id="rptTrdConfirmationNoteBrokCopy" title="Trade Confirmation Note Broker Copy" header="Trade Confirmation Note Broker Copy" reportName="rptTrdConfirmationNoteBrokCopy.rdlc" reportDataSource="rptTrdConfirmationNoteBrokCopy" spName="[Trade].rsp_trade_confirmation_note_broker_copy">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Client Code" type="textbox" id="client_id" value="" require="false" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+  </view>
+  <view id="rptTrdConfirmationStatement" title="Trade Confirmation Statement" header="Trade Confirmation Statement" reportName="rptTrdConfirmationStatement.rdlc" reportDataSource="rptTrdConfirmationStatement" spName="[Trade].rsp_trade_confirmation_statement">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+  </view>
+  <view id="rptTrdConfirmStatementConsolidate" title="Trade Confirmation Statement Consolidate" header="Trade Confirmation Statement Consolidate" reportName="rptTrdConfirmStatementConsolidate.rdlc" reportDataSource="rptTrdConfirmStatementConsolidate" spName="[Trade].rsp_trade_confirmation_statement_consolidate">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+  </view>
+  <view id="rptBrokComIncAgentWise" title="Brokerage Commission Income Agent Wise" header="Brokerage Commission Income Agent Wise" reportName="rptBrokComIncAgentWise.rdlc" reportDataSource="rptBrokComIncAgentWise" spName="[Trade].rsp_brokerage_commission_income_agent_wise">
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Agent Code" type="textbox" id="ref_code" value="" require="false" max="" min=""/>
+  </view>
+
+
+  <view id="rptManualChargeBranchWise" title="On Demand Charge" header="On Demand Charge" reportName="rptManualChargeBranchWise.rdlc" reportDataSource="rptManualChargeBranchWise" spName="[Transaction].rsp_manual_charge_branch_wise">
+    <field name="Client Code" type="textbox" id="client_id" value="" require="false" max="" min=""/>
+    <field name="" type="daterange" id="" value="process date" require="true" max="" min=""/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+    <field name="Charge Type" type="dropdown" id="charge_type_id" value="" require="false" max="" min=""/>
+  </view>
+  <view id="rptClientExposure" title="Client Exposure Statement as on" header="Client Exposure Statement as on" reportName="rptClientExposure.rdlc" reportDataSource="rptClientExposure" spName="[Investor].rsp_client_exposure_statement">
+    <field name="Report Date" type="date" id="report_date" value="process date" require="true" max="" min=""/>
+    <field name="Min balance" type="number" id="min_bal" value="0" require="false" max="" min="" numberType ="numbersOnly"/>
+    <field name="Min balance" type="number" id="max_bal" value="0" require="false" max="" min="" numberType ="numbersOnly"/>
+    <field name="Branch" type="dropdown" id="branch_id" value="" require="false" max="" min=""/>
+  </view>
+  <view id="rptClientPortfolioStatementAsOn" title="Client Portfolio As On" header="Client Portfolio As On" reportName="rptClientPortfolioStatementAsOn.rdlc" reportDataSource="rptClientPortfolioStatementAsOn" spName="[Investor].rsp_client_portfolio_statement_as_on">
+    <field name="Client Code" type="textbox" id="client_id" value="" require="false" max="" min=""/>
+    <field name="Report Date" type="date" id="report_date" value="process date" require="true" max="" min=""/>
+  </view>
+</views>

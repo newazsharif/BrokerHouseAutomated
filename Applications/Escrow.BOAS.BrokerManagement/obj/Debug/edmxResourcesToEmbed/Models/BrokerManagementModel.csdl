@@ -1,0 +1,832 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOAS.BrokerManagement.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblDepositoryPerticipant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Precision="3" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dp_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="clearance_no" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="bo_reference_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_omnibus" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="omnibus_master_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblDepositoryPerticipant" FromRole="tblDepositoryPerticipant" ToRole="tblInvestor" />
+  </EntityType>
+  <EntityType Name="tblEmployeeUserMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Precision="5" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employee_id" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <NavigationProperty Name="tblEmployee" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployeeUserMapping_tblEmployee" FromRole="tblEmployeeUserMapping" ToRole="tblEmployee" />
+  </EntityType>
+  <EntityType Name="tblTrader">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Precision="2" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="trader_code" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employee_id" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="ar_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="trade_work_station" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="license_renew_dt" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="branch_id" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+    <NavigationProperty Name="DimDate" Relationship="Self.FK_tblTrader_TraderLicenseRenewDate" FromRole="tblTrader" ToRole="DimDate" />
+    <NavigationProperty Name="tblEmployee" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblTrader_tblEmployee" FromRole="tblTrader" ToRole="tblEmployee" />
+    <Property Name="Is_Default" Type="Boolean" />
+    <Property Name="investor_range" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblTrader" FromRole="tblTrader" ToRole="tblInvestor" />
+  </EntityType>
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="IsHolidayUSA" Type="Boolean" />
+    <Property Name="IsWeekday" Type="Boolean" />
+    <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHolidayUK" Type="Boolean" />
+    <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHoliday" Type="Boolean" />
+    <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblTraders" Relationship="Self.FK_tblTrader_TraderLicenseRenewDate" FromRole="DimDate" ToRole="tblTrader" />
+    <NavigationProperty Name="tblEmployees" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeJoiningDate" FromRole="DimDate" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblEmployees1" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeReleaseDate" FromRole="DimDate" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblBrokerBranches" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="DimDate" ToRole="tblBrokerBranch" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_DimDate" FromRole="DimDate" ToRole="tblInvestor" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="Decimal" Precision="3" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="object_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblConstantObjectValues" Relationship="Self.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="Decimal" Precision="4" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="display_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="object_id" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="sorting_order" Type="Int16" />
+    <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblConstantObject" Relationship="Self.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+    <NavigationProperty Name="tblEmployees" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDepartment" FromRole="tblConstantObjectValue" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblEmployees1" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDesignation" FromRole="tblConstantObjectValue" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblEmployees2" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeGender" FromRole="tblConstantObjectValue" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors1" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue1" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors2" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue2" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors3" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue3" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors4" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue4" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors5" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue5" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors6" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue6" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+    <NavigationProperty Name="tblInvestors7" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue7" FromRole="tblConstantObjectValue" ToRole="tblInvestor" />
+  </EntityType>
+  <Association Name="FK_tblTrader_TraderLicenseRenewDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="0..1" />
+    <End Role="tblTrader" Type="Self.tblTrader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblTrader">
+        <PropertyRef Name="license_renew_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BrokerManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDepositoryPerticipants" EntityType="Self.tblDepositoryPerticipant" />
+    <EntitySet Name="tblEmployeeUserMappings" EntityType="Self.tblEmployeeUserMapping" />
+    <EntitySet Name="tblTraders" EntityType="Self.tblTrader" />
+    <EntitySet Name="DimDates" EntityType="Self.DimDate" />
+    <EntitySet Name="tblConstantObjects" EntityType="Self.tblConstantObject" />
+    <EntitySet Name="tblConstantObjectValues" EntityType="Self.tblConstantObjectValue" />
+    <AssociationSet Name="FK_tblTrader_TraderLicenseRenewDate" Association="Self.FK_tblTrader_TraderLicenseRenewDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblTrader" EntitySet="tblTraders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+    </AssociationSet>
+    <FunctionImport Name="ssp_branches_by_user_id" ReturnType="Collection(Escrow.BOAS.BrokerManagement.Models.ssp_branches_by_user_id_Result)">
+      <Parameter Name="user_id" Mode="In" Type="String" />
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="tblEmployees" EntityType="Escrow.BOAS.BrokerManagement.Models.tblEmployee" />
+    <AssociationSet Name="FK_tblEmployee_EmployeeDepartment" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDepartment">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeDesignation" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDesignation">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeGender" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeGender">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeJoiningDate" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeJoiningDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeReleaseDate" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeReleaseDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployeeUserMapping_tblEmployee" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployeeUserMapping_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblEmployeeUserMapping" EntitySet="tblEmployeeUserMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTrader_tblEmployee" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblTrader_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblTrader" EntitySet="tblTraders" />
+    </AssociationSet>
+    <EntitySet Name="tblBanks" EntityType="Escrow.BOAS.BrokerManagement.Models.tblBank" />
+    <EntitySet Name="tblBankBranches" EntityType="Escrow.BOAS.BrokerManagement.Models.tblBankBranch" />
+    <EntitySet Name="tblBrokerBankAccounts" EntityType="Escrow.BOAS.BrokerManagement.Models.tblBrokerBankAccount" />
+    <AssociationSet Name="FK_tblBankBranch_tblBank" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblBankBranch_tblBank">
+      <End Role="tblBank" EntitySet="tblBanks" />
+      <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerBankAccount_tblBankBranch" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBankAccount_tblBankBranch">
+      <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+      <End Role="tblBrokerBankAccount" EntitySet="tblBrokerBankAccounts" />
+    </AssociationSet>
+    <EntitySet Name="tblBrokerBranches" EntityType="Escrow.BOAS.BrokerManagement.Models.tblBrokerBranch" />
+    <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_tblBrokerBranch" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <EntitySet Name="tblInvestors" EntityType="Escrow.BOAS.BrokerManagement.Models.tblInvestor" />
+    <AssociationSet Name="FK_tblInvestor_tblBank" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBank">
+      <End Role="tblBank" EntitySet="tblBanks" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblBankBranch" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBankBranch">
+      <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblBrokerBranch" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblDepositoryPerticipant" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblDepositoryPerticipant">
+      <End Role="tblDepositoryPerticipant" EntitySet="tblDepositoryPerticipants" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblTrader" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblTrader">
+      <End Role="tblTrader" EntitySet="tblTraders" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_DimDate" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue1" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue2" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue3" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue4" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue5" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue5">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue6" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue6">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue7" Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue7">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestor" EntitySet="tblInvestors" />
+    </AssociationSet>
+    <FunctionImport Name="ssp_get_investor_info" ReturnType="Collection(Escrow.BOAS.BrokerManagement.Models.ssp_get_investor_info_Result2)">
+      <Parameter Name="investor_ids" Mode="In" Type="String" />
+      <Parameter Name="trader_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="tblBrokerImages" EntityType="Escrow.BOAS.BrokerManagement.Models.tblBrokerImage" />
+  </EntityContainer>
+  <ComplexType Name="ssp_branches_by_user_id_Result">
+    <Property Type="Decimal" Name="id" Nullable="false" Precision="2" Scale="0" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="contact_person" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="contact_no" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="registration_dt" Nullable="false" Precision="9" Scale="0" />
+    <Property Type="Int32" Name="active_status_id" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="5" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employee_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="father_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="national_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branch_id" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="birth_date" Type="DateTime" Precision="3" />
+    <Property Name="mailing_address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="permanent_address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ref1_details" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ref2_details" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="department_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="joining_dt" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="release_dt" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="designation_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="gender_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="email_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="mother_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDepartment" FromRole="tblEmployee" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDesignation" FromRole="tblEmployee" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeGender" FromRole="tblEmployee" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeJoiningDate" FromRole="tblEmployee" ToRole="DimDate" />
+    <NavigationProperty Name="DimDate1" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeReleaseDate" FromRole="tblEmployee" ToRole="DimDate" />
+    <NavigationProperty Name="tblEmployeeUserMappings" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployeeUserMapping_tblEmployee" FromRole="tblEmployee" ToRole="tblEmployeeUserMapping" />
+    <NavigationProperty Name="tblTraders" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblTrader_tblEmployee" FromRole="tblEmployee" ToRole="tblTrader" />
+    <NavigationProperty Name="tblBrokerBranch" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_tblBrokerBranch" FromRole="tblEmployee" ToRole="tblBrokerBranch" />
+  </EntityType>
+  <Association Name="FK_tblEmployee_EmployeeDepartment">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeDesignation">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="designation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeGender">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeJoiningDate">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.DimDate" Role="DimDate" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="joining_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeReleaseDate">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.DimDate" Role="DimDate" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="release_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployeeUserMapping_tblEmployee">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployeeUserMapping" Role="tblEmployeeUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblEmployeeUserMapping">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTrader_tblEmployee">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblTrader" Role="tblTrader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblTrader">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblBank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="short_name" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="bank_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBankBranches" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblBankBranch_tblBank" FromRole="tblBank" ToRole="tblBankBranch" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBank" FromRole="tblBank" ToRole="tblInvestor" />
+  </EntityType>
+  <EntityType Name="tblBankBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branch_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="routing_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="bank_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="contact_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBank" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblBankBranch_tblBank" FromRole="tblBankBranch" ToRole="tblBank" />
+    <NavigationProperty Name="tblBrokerBankAccounts" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBankAccount_tblBankBranch" FromRole="tblBankBranch" ToRole="tblBrokerBankAccount" />
+    <Property Name="district_id" Type="Decimal" Precision="4" Scale="0" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBankBranch" FromRole="tblBankBranch" ToRole="tblInvestor" />
+  </EntityType>
+  <EntityType Name="tblBrokerBankAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bank_branch_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="account_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_default" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBankBranch" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBankAccount_tblBankBranch" FromRole="tblBrokerBankAccount" ToRole="tblBankBranch" />
+  </EntityType>
+  <Association Name="FK_tblBankBranch_tblBank">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBank" Role="tblBank" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBankBranch" Role="tblBankBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBankBranch">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerBankAccount_tblBankBranch">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBankBranch" Role="tblBankBranch" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBrokerBankAccount" Role="tblBrokerBankAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBrokerBankAccount">
+        <PropertyRef Name="bank_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblBrokerBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ipo_branch_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="registration_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="tblBrokerBranch" ToRole="DimDate" />
+    <NavigationProperty Name="tblEmployees" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_tblBrokerBranch" FromRole="tblBrokerBranch" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblInvestors" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBrokerBranch" FromRole="tblBrokerBranch" ToRole="tblInvestor" />
+  </EntityType>
+  <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblBrokerBranch">
+        <PropertyRef Name="registration_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_tblBrokerBranch">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblInvestor">
+    <Key>
+      <PropertyRef Name="client_id" />
+    </Key>
+    <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="bo_refernce_id" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="bo_code" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="first_holder_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="birth_date" Type="DateTime" Precision="3" />
+    <Property Name="gender_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="national_id" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="passport_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="nibondhon_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="father_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="mother_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="account_type_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="operation_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="sub_account_type_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="mailing_address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="permanent_address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="thana_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="district_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="phone_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="mobile_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bank_id" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="bank_branch_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="banc_account_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="beftn_enabled" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="email_enabled" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="internet_enabled" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="sms_enabled" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="branch_id" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="opening_date" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="passport_issue_place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="passport_issue_date" Type="DateTime" Precision="3" />
+    <Property Name="passport_valid_to_date" Type="DateTime" Precision="3" />
+    <Property Name="trader_id" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="introducer_id" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="ipo_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="trade_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="omnibus_master_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="export_st" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="export_log_id" Type="Decimal" Precision="20" Scale="0" />
+    <NavigationProperty Name="tblBank" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBank" FromRole="tblInvestor" ToRole="tblBank" />
+    <NavigationProperty Name="tblBankBranch" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBankBranch" FromRole="tblInvestor" ToRole="tblBankBranch" />
+    <NavigationProperty Name="tblBrokerBranch" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBrokerBranch" FromRole="tblInvestor" ToRole="tblBrokerBranch" />
+    <NavigationProperty Name="tblDepositoryPerticipant" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblDepositoryPerticipant" FromRole="tblInvestor" ToRole="tblDepositoryPerticipant" />
+    <NavigationProperty Name="tblTrader" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblTrader" FromRole="tblInvestor" ToRole="tblTrader" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_DimDate" FromRole="tblInvestor" ToRole="DimDate" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue1" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue2" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue3" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue3" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue4" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue4" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue5" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue5" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue6" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue6" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue7" Relationship="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue7" FromRole="tblInvestor" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <Association Name="FK_tblInvestor_tblBank">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBank" Role="tblBank" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblBankBranch">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBankBranch" Role="tblBankBranch" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="bank_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblBrokerBranch">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblDepositoryPerticipant">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblDepositoryPerticipant" Role="tblDepositoryPerticipant" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepositoryPerticipant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="bo_refernce_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblTrader">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblTrader" Role="tblTrader" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTrader">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="trader_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_DimDate">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.DimDate" Role="DimDate" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="opening_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue1">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue2">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="operation_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue3">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="sub_account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue4">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="thana_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue5">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="district_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue6">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="ipo_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue7">
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Role="tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="trade_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="psp_get_investor_info_Result">
+    <Property Type="String" Name="client_id" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="bo_code" Nullable="true" MaxLength="16" />
+    <Property Type="String" Name="first_holder_name" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="trader_id" Nullable="false" Precision="2" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="ssp_get_investor_info_Result">
+    <Property Type="String" Name="client_id" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="bo_code" Nullable="true" MaxLength="16" />
+    <Property Type="String" Name="first_holder_name" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="trader_id" Nullable="false" Precision="2" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="ssp_get_investor_info_Result1">
+    <Property Type="String" Name="client_id" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="bo_code" Nullable="true" MaxLength="16" />
+    <Property Type="String" Name="first_holder_name" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="trader_id" Nullable="false" Precision="2" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="ssp_get_investor_info_Result2">
+    <Property Type="String" Name="client_id" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="bo_code" Nullable="true" MaxLength="16" />
+    <Property Type="String" Name="first_holder_name" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="trader_id" Nullable="false" Precision="2" Scale="0" />
+    <Property Type="String" Name="trader" Nullable="false" MaxLength="12" />
+  </ComplexType>
+  <EntityType Name="tblBrokerImage">
+    <Key>
+      <PropertyRef Name="membership_id" />
+    </Key>
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="report_header_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="report_footer_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="report_logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+  </EntityType>
+</Schema>

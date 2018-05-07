@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5299B220-DD4F-4A65-B995-EA452B5FB7E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Escrow.BOAS.InvestorManagement</RootNamespace>
+    <AssemblyName>Escrow.BOAS.InvestorManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factories\FundBalanceFactory.cs" />
+    <Compile Include="Factories\PortStatementFactory.cs" />
+    <Compile Include="Factories\IntroducerFactory.cs" />
+    <Compile Include="Factories\InvestorFactory.cs" />
+    <Compile Include="Factories\InvestorImageFactory.cs" />
+    <Compile Include="Factories\JoinHolderFactory.cs" />
+    <Compile Include="Factories\OmnibusFactory.cs" />
+    <Compile Include="Factories\ShareBalanceFactory.cs" />
+    <Compile Include="Interfaces\IInvestorFactory.cs" />
+    <Compile Include="Interfaces\IPortStatementFactory.cs" />
+    <Compile Include="Metadata\JoinHolderMetaData.cs" />
+    <Compile Include="Metadata\tblInvestorImageMetadata.cs" />
+    <Compile Include="Metadata\tblInvestorMetadata.cs" />
+    <Compile Include="Models\DimDate.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InvestorManagementModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvestorManagementModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InvestorManagementModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InvestorManagementModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvestorManagementModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblAccountClosing.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBank.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBankBranch.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerBranch.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObject.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObjectValue.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblDayProcess.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblIntroducer.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestor.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorFinancialLedger.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorFundBalance.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorImage.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorShareBalance.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorShareLedger.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestorTemp.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblJoinHolder.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblNominee.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblOmnibu.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblPowerOfAtornee.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTrader.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_all_investors_account_type_setting.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_all_investors_charges.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_InvestorFundBalance.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_InvestorShareBalance.cs">
+      <DependentUpon>InvestorManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\InvestorManagementModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InvestorManagementModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\InvestorManagementModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InvestorManagementModel.edmx</DependentUpon>
+      <LastGenOutput>InvestorManagementModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\InvestorManagementModel.edmx.diagram">
+      <DependentUpon>InvestorManagementModel.edmx</DependentUpon>
+    </None>
+    <None Include="Models\InvestorManagementModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InvestorManagementModel.edmx</DependentUpon>
+      <LastGenOutput>InvestorManagementModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Escrow.BOAS.Configuration\Escrow.BOAS.Configuration.csproj">
+      <Project>{f86da6e0-d2d8-4c64-8c1c-873bd04b5835}</Project>
+      <Name>Escrow.BOAS.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Escrow.Utility\Escrow.Utility.csproj">
+      <Project>{1861170e-d78f-45e2-8b0c-325ddb9e6e46}</Project>
+      <Name>Escrow.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

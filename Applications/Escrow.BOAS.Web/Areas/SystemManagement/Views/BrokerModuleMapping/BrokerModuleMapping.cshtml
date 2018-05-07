@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h2>Broker Module mapping</h2>
+<hr/>
+<div @*class="container"*@ ng-controller="BrokerModuleMappingController" ng-init="getDdlBroker()">
+    
+    <div class="form-group">
+<div class="col-md-2">
+            <label>Broker</label>
+        </div>
+        <div class="col-md-4">
+            <select data-ng-model="BrokerModuleMapping.membership_id" class="dropdown form-control input-sm"
+                    ng-options="broker.value as broker.text for broker in brokerList" ng-change="GetModuleListByBroker(BrokerModuleMapping.membership_id)" enter-as-tab required>
+                <option value="">---------------Select---------------</option>
+            </select>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    <br/>
+    <div class="form-group" >
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-hover" fixed-header id="table-width-136">
+            <thead>
+            <tr>
+                <th> <input type="checkbox" ng-checked="allSelect" ng-model="allSelect" ng-click="selectAll(displayedCollection)"/></th>
+                <th st-sort="name">Module Name</th>
+                <th st-sort="id_name">Module Id</th>
+            </tr>
+            <tr>
+                <th colspan="12"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text"/></th>
+            </tr>
+            </thead>
+            <tbody id="tbodyStyle">
+                <tr ng-repeat="row in displayedCollection">
+                    <td><input type="checkbox" ng-checked="row.selected" ng-model="row.selected" ng-click="changeSelectAll(row.selected)" /></td>
+                    <td>{{row.name}}</td>
+                    <td>{{row.id_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group">
+        @*<div class="col-md-2"></div>*@
+        <div class="col-md-4">
+            <a ng-click="SaveBrokerModuleMapping()" class="btn btn-default">Save</a>
+        </div>
+    </div>
+
+</div>

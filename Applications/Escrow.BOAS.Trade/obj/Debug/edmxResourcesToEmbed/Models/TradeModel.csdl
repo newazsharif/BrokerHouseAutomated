@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TradeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DimDates" EntityType="Escrow.BOASModel.DimDate" />
+    <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOASModel.tblConstantObject" />
+    <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOASModel.tblConstantObjectValue" />
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+    </AssociationSet>
+    <FunctionImport Name="psp_execute_close_price_file">
+      <Parameter Name="changed_user_id" Mode="In" Type="String" />
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="isp_non_trading_day">
+      <Parameter Name="from_date" Mode="In" Type="Decimal" />
+      <Parameter Name="to_date" Mode="In" Type="Decimal" />
+      <Parameter Name="non_trading_type_id" Mode="In" Type="Decimal" />
+      <Parameter Name="input_info" Mode="In" Type="String" />
+      <Parameter Name="remarks" Mode="In" Type="String" />
+      <Parameter Name="active_status_id" Mode="In" Type="Decimal" />
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+      <Parameter Name="changed_user_id" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="tblClosingPrices" EntityType="Escrow.BOASModel.tblClosingPrice" />
+    <EntitySet Name="tblNonTradingDetails" EntityType="Escrow.BOASModel.tblNonTradingDetail" />
+    <EntitySet Name="tblNonTradingMasters" EntityType="Escrow.BOASModel.tblNonTradingMaster" />
+    <EntitySet Name="tmpTradeDatas" EntityType="Escrow.BOASModel.tmpTradeData" />
+    <AssociationSet Name="FK_tblNonTradeMaster_DimDate" Association="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblNonTradingMaster" EntitySet="tblNonTradingMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNonTradeMaster_DimDate1" Association="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate1">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblNonTradingMaster" EntitySet="tblNonTradingMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNonTradingDetail_DimDate" Association="Escrow.BOASModel.FK_tblNonTradingDetail_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblNonTradingDetail" EntitySet="tblNonTradingDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNonTradeMaster_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblNonTradeMaster_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblNonTradingMaster" EntitySet="tblNonTradingMasters" />
+    </AssociationSet>
+    <EntitySet Name="tblTradeDatas" EntityType="Escrow.BOASModel.tblTradeData" />
+    <AssociationSet Name="FK_tblTradeData_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblTradeData" EntitySet="tblTradeDatas" />
+    </AssociationSet>
+    <FunctionImport Name="psp_execute_trade_file">
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+      <Parameter Name="changed_user_id" Mode="In" Type="String" />
+      <Parameter Name="stock_exchange_id" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="psp_reverse_trade_file">
+      <Parameter Name="date" Mode="In" Type="Decimal" />
+      <Parameter Name="stock_exchange_id" Mode="In" Type="Decimal" />
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+      <Parameter Name="changed_user_id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="psp_export_omnibus_trade" ReturnType="Collection(String)">
+      <Parameter Name="stock_Exchange_id" Mode="In" Type="Decimal" />
+      <Parameter Name="trd_dt" Mode="In" Type="Decimal" />
+      <Parameter Name="omnibus_master_id" Mode="In" Type="String" />
+      <Parameter Name="isTxtOrXml" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="tblFTOmnibusImportLogs" EntityType="Escrow.BOASModel.tblFTOmnibusImportLog" />
+    <AssociationSet Name="FK_tblFTImportLog_DimDate" Association="Escrow.BOASModel.FK_tblFTImportLog_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblFTOmnibusImportLog" EntitySet="tblFTOmnibusImportLogs" />
+    </AssociationSet>
+    <FunctionImport Name="ssp_ft_exp_log_list" ReturnType="Collection(Escrow.BOASModel.ssp_ft_exp_log_list_Result)">
+      <Parameter Name="file_type" Mode="In" Type="String" />
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="psp_upload_trade" ReturnType="Collection(Escrow.BOASModel.psp_upload_trade_Result)" />
+    <AssociationSet Name="FK_tblTradeData_DimDate" Association="Escrow.BOASModel.FK_tblTradeData_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblTradeData" EntitySet="tblTradeDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTradeData_tblConstantObjectValue1" Association="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblTradeData" EntitySet="tblTradeDatas" />
+    </AssociationSet>
+    <EntitySet Name="tblInitialTrades" EntityType="Escrow.BOASModel.tblInitialTrade" />
+    <EntitySet Name="tblInitialClientReceivablePayables" EntityType="Escrow.BOASModel.tblInitialClientReceivablePayable" />
+    <FunctionImport Name="psp_upload_initial_trade" ReturnType="Collection(Escrow.BOASModel.psp_upload_initial_trade_Result)" />
+  </EntityContainer>
+  <ComplexType Name="get_Trade_invalid_investor_Result">
+    <Property Type="String" Name="ClientCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="error" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="IsHolidayUSA" Type="Boolean" />
+    <Property Name="IsWeekday" Type="Boolean" />
+    <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHolidayUK" Type="Boolean" />
+    <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHoliday" Type="Boolean" />
+    <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblNonTradingMasters" Relationship="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate" FromRole="DimDate" ToRole="tblNonTradingMaster" />
+    <NavigationProperty Name="tblNonTradingMasters1" Relationship="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate1" FromRole="DimDate" ToRole="tblNonTradingMaster" />
+    <NavigationProperty Name="tblNonTradingDetails" Relationship="Escrow.BOASModel.FK_tblNonTradingDetail_DimDate" FromRole="DimDate" ToRole="tblNonTradingDetail" />
+    <NavigationProperty Name="tblFTOmnibusImportLogs" Relationship="Escrow.BOASModel.FK_tblFTImportLog_DimDate" FromRole="DimDate" ToRole="tblFTOmnibusImportLog" />
+    <NavigationProperty Name="tblTradeDatas" Relationship="Escrow.BOASModel.FK_tblTradeData_DimDate" FromRole="DimDate" ToRole="tblTradeData" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="sorting_order" Type="Int16" />
+    <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+    <NavigationProperty Name="tblNonTradingMasters" Relationship="Escrow.BOASModel.FK_tblNonTradeMaster_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblNonTradingMaster" />
+    <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblTradeDatas" Relationship="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblTradeData" />
+    <NavigationProperty Name="tblTradeDatas1" Relationship="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue1" FromRole="tblConstantObjectValue" ToRole="tblTradeData" />
+  </EntityType>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Type="Escrow.BOASModel.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblClosingPrice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="security_code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="open_price" Type="Decimal" Precision="9" Scale="4" />
+    <Property Name="high_price" Type="Decimal" Precision="9" Scale="4" />
+    <Property Name="low_price" Type="Decimal" Precision="9" Scale="4" />
+    <Property Name="closing_price" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
+    <Property Name="group_id" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="trans_dt" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="var" Type="Decimal" Precision="9" Scale="4" />
+    <Property Name="var_percent" Type="Decimal" Precision="9" Scale="4" />
+    <Property Name="active_status" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblNonTradingDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="10" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="non_trading_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="master_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblNonTradingDetail_DimDate" FromRole="tblNonTradingDetail" ToRole="DimDate" />
+  </EntityType>
+  <EntityType Name="tblNonTradingMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="10" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="from_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="to_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="non_trading_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="input_info" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate" FromRole="tblNonTradingMaster" ToRole="DimDate" />
+    <NavigationProperty Name="DimDate1" Relationship="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate1" FromRole="tblNonTradingMaster" ToRole="DimDate" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblNonTradeMaster_tblConstantObjectValue" FromRole="tblNonTradingMaster" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tmpTradeData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Action" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Isin" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="AssetClass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OrderId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ReOrderId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Side" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="BoId" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="SecurityCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Board" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="Decimal" Precision="8" Scale="0" />
+    <Property Name="Time" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Price" Type="Decimal" Precision="20" Scale="6" />
+    <Property Name="Value" Type="Decimal" Precision="20" Scale="6" />
+    <Property Name="ExecID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Session" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FillType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="CompulsorySpot" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TraderDealerID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerDealerID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TradeReportType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comission" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" />
+  </EntityType>
+  <Association Name="FK_tblNonTradeMaster_DimDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblNonTradingMaster" Role="tblNonTradingMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblNonTradingMaster">
+        <PropertyRef Name="from_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNonTradeMaster_DimDate1">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblNonTradingMaster" Role="tblNonTradingMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblNonTradingMaster">
+        <PropertyRef Name="to_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNonTradingDetail_DimDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblNonTradingDetail" Role="tblNonTradingDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblNonTradingDetail">
+        <PropertyRef Name="non_trading_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNonTradeMaster_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblNonTradingMaster" Role="tblNonTradingMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblNonTradingMaster">
+        <PropertyRef Name="non_trading_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblTradeData">
+    <Key>
+      <PropertyRef Name="trade_id" />
+    </Key>
+    <Property Name="trade_id" Type="Decimal" Nullable="false" Precision="10" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="instrument_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="AssetClass" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="transaction_type" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="stock_exchange_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="market_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="Date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="Time" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Decimal" Precision="15" Scale="0" />
+    <Property Name="Unit_Price" Type="Decimal" Precision="30" Scale="10" />
+    <Property Name="ExecID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FillType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="group_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="CompulsorySpot" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="TraderDealerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerDealerID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="commission_rate" Type="Decimal" Precision="30" Scale="10" />
+    <Property Name="commission_amount" Type="Decimal" Precision="30" Scale="10" />
+    <Property Name="transaction_fee" Type="Decimal" Precision="30" Scale="10" />
+    <Property Name="ait" Type="Decimal" Precision="30" Scale="10" />
+    <Property Name="trader_branch_id" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="client_branch_id" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue" FromRole="tblTradeData" ToRole="tblConstantObjectValue" />
+    <Property Name="settled_date" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="is_settled" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblTradeData_DimDate" FromRole="tblTradeData" ToRole="DimDate" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue1" FromRole="tblTradeData" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <Association Name="FK_tblTradeData_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOASModel.tblTradeData" Role="tblTradeData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblTradeData">
+        <PropertyRef Name="stock_exchange_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblFTOmnibusImportLog">
+    <Key>
+      <PropertyRef Name="log_id" />
+      <PropertyRef Name="file_type" />
+      <PropertyRef Name="file_name" />
+      <PropertyRef Name="import_dt" />
+      <PropertyRef Name="version_no" />
+    </Key>
+    <Property Name="log_id" Type="Decimal" Nullable="false" Precision="20" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="file_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="file_name" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="import_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="version_no" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="success" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="wrong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="export_st" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="export_log_id" Type="Decimal" Precision="20" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" />
+    <Property Name="omnibus_master_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblFTImportLog_DimDate" FromRole="tblFTOmnibusImportLog" ToRole="DimDate" />
+  </EntityType>
+  <Association Name="FK_tblFTImportLog_DimDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblFTOmnibusImportLog" Role="tblFTOmnibusImportLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblFTOmnibusImportLog">
+        <PropertyRef Name="import_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="ssp_ft_exp_log_list_Result">
+    <Property Type="Decimal" Name="log_id" Nullable="false" Precision="20" Scale="0" />
+    <Property Type="String" Name="file_type" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="file_name" Nullable="false" MaxLength="120" />
+    <Property Type="String" Name="control_name" Nullable="true" MaxLength="129" />
+    <Property Type="String" Name="import_dt" Nullable="true" MaxLength="10" />
+    <Property Type="Decimal" Name="version_no" Nullable="false" Precision="5" Scale="0" />
+    <Property Type="String" Name="success" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="wrong" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="psp_upload_trade_Result">
+    <Property Type="String" Name="ClientCode" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="error" Nullable="false" MaxLength="41" />
+  </ComplexType>
+  <Association Name="FK_tblTradeData_DimDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="0..1" />
+    <End Type="Escrow.BOASModel.tblTradeData" Role="tblTradeData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblTradeData">
+        <PropertyRef Name="settled_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTradeData_tblConstantObjectValue1">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblTradeData" Role="tblTradeData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblTradeData">
+        <PropertyRef Name="market_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblInitialTrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Action" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Isin" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="AssetClass" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OrderId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ReOrderId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Side" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="BoId" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="SecurityCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Board" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="Decimal" Precision="8" Scale="0" />
+    <Property Name="Time" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Price" Type="Decimal" Precision="20" Scale="6" />
+    <Property Name="Value" Type="Decimal" Precision="20" Scale="6" />
+    <Property Name="ExecID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Session" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FillType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="CompulsorySpot" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ClientCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TraderDealerID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerDealerID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TradeReportType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comission" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblInitialClientReceivablePayable">
+    <Key>
+      <PropertyRef Name="membership_id" />
+    </Key>
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+  </EntityType>
+  <ComplexType Name="psp_upload_initial_trade_Result">
+    <Property Type="String" Name="ClientCode" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="error" Nullable="false" MaxLength="41" />
+  </ComplexType>
+</Schema>

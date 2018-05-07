@@ -1,0 +1,108 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date:  13/1/2015
+    ///Reason: Sub Account Charges Edit View
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Sub Account Charges";
+    Layout = null;
+}
+
+<h2>Sub Account Charges</h2>
+<div @*class="container"*@ ng-controller="SubAccountChargesController" ng-init="loadDropdownsAndInfo()">
+    <form class="form-horizontal" ng-submit="" name="editSubAccChargeForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Sub Account Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editSubAccCharges.sub_account_id" class="dropdown form-control input-sm"
+                        ng-options="subAccount.value as subAccount.text for subAccount in subAccountList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Charges</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editSubAccCharges.global_charge_id" class="dropdown form-control input-sm"
+                        ng-options="charge.value as charge.text for charge in chargeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Minimum Charge</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editSubAccCharges.minimum_charge" positive-numbers-only enter-as-tab required />
+            </div>
+
+            <div class="col-md-2">
+                <label>Charge Amount</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editSubAccCharges.charge_amount" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="isPercentage" data-ng-model="editSubAccCharges.is_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isPercentage"> Percentage</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="checkbox" name="isSlab" data-ng-model="editSubAccCharges.is_slab" ng-true-value=1 ng-false-value=0 ng-change="showHideSlabForEdit()" enter-as-tab /><label for="isSlab"> Slab</label>
+            </div>
+        </div>
+
+        <fieldset ng-show="fldSlab">
+            <legend>Slab Details</legend>
+
+            <div class="col-md-3">
+                <input type="button" class="btn btn-default" value="Add" data-ng-click="AddSubAccSlabForEdit()" />
+            </div>
+            <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="amount_from">Amount From</th>
+                        <th st-sort="amount_to">Amount To</th>
+                        <th st-sort="charge_amount">Charge Amount</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td>{{row.amount_from}}</td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="row.amount_to" positive-numbers-only style="border:none; width:100px" /></td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="row.charge_amount" positive-numbers-only style="border:none; width:100px" /></td>
+                        <td><a ng-click="DeleteSubAccSlab(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="editCharge()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadDropdownsAndInfo()" />
+                <a href="/#SubAccountChargesList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

@@ -1,0 +1,76 @@
+﻿@*
+    Created By : Rifad
+    Date: 13-05-2017
+    Reason:
+*@
+
+@{
+    ViewBag.Title = "Introducer List";
+    Layout = null;
+}
+
+<h2>Introducer Information</h2>
+<div class="row" ng-controller="IntroducerController" ng-init="loadIntroducerList()">
+    <div class="col-md-12">
+        <a href="/#AddNewIntroducer" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="introducer_name">Introducer Name</th>
+                    <th st-sort="introducer_type">Introducer Type</th>
+                    <th st-sort="occupation">Occupation</th>
+                    <th st-sort="contact_no">Contact</th>
+                    <th st-sort="national_id">National ID</th>
+                    <th st-sort="tin">TIN</th>
+                    <th st-sort="commission_percentage">Commision</th>
+                    <th st-sort="valid_from">Valid From</th>
+                    <th st-sort="valid_to">Valid To</th>
+                    <th st-sort="active_status_id">Active Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="10"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{ row.introducer_name }}</td>
+                    <td>{{ row.introducer_type }}</td>
+                    <td>{{ row.occupation }}</td>
+                    <td>{{ row.contact_no }}</td>
+                    <td>{{ row.national_id }}</td>
+                    <td>{{ row.tin }}</td>
+                    <td>{{ row.commission_percentage }}</td>
+                    <td>{{ row.valid_from }}</td>
+                    <td>{{ row.valid_to }}</td>
+                    <td>{{ row.active_status_id }}</td>
+                     <td><a href="/#UpdateIntroducerInfomation/{{row.id}}" class="btn btn-link">&#@Escrow.Utility.Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteIntroducer($index)" class="btn btn-link">&#@Escrow.Utility.Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+
+}
+
+
+
+

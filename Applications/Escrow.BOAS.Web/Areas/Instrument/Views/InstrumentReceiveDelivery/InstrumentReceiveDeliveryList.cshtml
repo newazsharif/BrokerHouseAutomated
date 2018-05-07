@@ -1,0 +1,67 @@
+﻿
+@*
+    ///Created by: Shohid
+    ///Edit date: 24/02/2016
+    ///Reason: Instrument Receive Delivery List view
+*@
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+@{
+    ViewBag.Title = "Instrument Receive Delivery";
+    Layout = null;
+}
+<h2>Instrument Receive Delivery List</h2>
+<hr />
+<div class="row" ng-controller="InstrumentReceiveDeliveryController" ng-init="loadInstrumentReceiveDeliveryList()">
+    <div class="col-md-12">
+        <a href="/#AddInstrumentReceiveDelivery" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" min="1" class="form-control input-sm" ng-model="itemsByPage" numbers-only style="width : 150px" />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="instrument_name">Client Id</th>
+                    <th st-sort="isin">Transection Date</th>
+                    <th st-sort="security_code">Transection Type</th>
+                    <th st-sort="lot">Quantiry</th>
+                    <th st-sort="face_value">Rate</th>
+                    <th st-sort="group">Instrument</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="8"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" style="width : 100%" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.client_id}}</td>
+                    <td>{{row.transection_date}}</td>
+                    <td>{{row.transection_type}}</td>
+                    <td>{{row.quantity}}</td>
+                    <td>{{row.rate}}</td>
+                    <td>{{row.instrument_name}}</td>
+                    <td><a href="/#EditInstrumentReceiveDelivery/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteInstrumentReceiveDelivery(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+
+

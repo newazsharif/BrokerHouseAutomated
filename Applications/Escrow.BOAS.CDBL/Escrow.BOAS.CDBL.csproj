@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Escrow.BOAS.CDBL</RootNamespace>
+    <AssemblyName>Escrow.BOAS.CDBL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factories\CDBLFileImportFactory.cs" />
+    <Compile Include="Factories\CDBLFileSearchFactory.cs" />
+    <Compile Include="Factories\CDBLProcessFactory.cs" />
+    <Compile Include="Factories\PayInOutFactory.cs" />
+    <Compile Include="Factories\TextFileReader.cs" />
+    <Compile Include="Factories\XsdDatasetMapper.cs" />
+    <Compile Include="Interfaces\ICDBLFileImportFactory.cs" />
+    <Compile Include="Interfaces\ICDBLFileSearchFactory.cs" />
+    <Compile Include="Interfaces\ICDBLProcessFactory.cs" />
+    <Compile Include="Interfaces\ITextFileReader.cs" />
+    <Compile Include="Interfaces\IXsdDatasetMapper.cs" />
+    <Compile Include="Models\CDBLEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CDBLEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CDBLEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CDBLEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CDBLEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CDBLEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CDBLFileModel.cs" />
+    <Compile Include="Models\psp_export_pay_in_pay_out_Result.cs">
+      <DependentUpon>CDBLEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_CDBL_invalid_data_list_process_Result.cs">
+      <DependentUpon>CDBLEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_CDBL_invalid_data_list_Result.cs">
+      <DependentUpon>CDBLEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCdblIpo.cs">
+      <DependentUpon>CDBLEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Escrow.Utility\Escrow.Utility.csproj">
+      <Project>{1861170e-d78f-45e2-8b0c-325ddb9e6e46}</Project>
+      <Name>Escrow.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Models\CDBLEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CDBLEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\CDBLEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CDBLEntity.edmx</DependentUpon>
+      <LastGenOutput>CDBLEntity.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\CDBLEntity.edmx.diagram">
+      <DependentUpon>CDBLEntity.edmx</DependentUpon>
+    </None>
+    <None Include="Models\CDBLEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CDBLEntity.edmx</DependentUpon>
+      <LastGenOutput>CDBLEntity.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

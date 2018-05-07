@@ -1,0 +1,61 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 18/6/2016
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Pending Order";
+    Layout = null;
+}
+
+<h2>Pending Order</h2>
+<div class="row" ng-controller="PendingOrderController" ng-init="loadPendingOrderList()">
+    <div class="col-md-12">
+        <div>
+            <table style="overflow-x:scroll; width:136%; height:400px" st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped" fixed-header id="table-width-136">
+                <thead>
+                    <tr>
+                        <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                        <th st-sort="client_id">Investor Code</th>
+                        <th st-sort="first_holder_name">Name</th>
+                        <th st-sort="security_code">Instrument</th>
+                        <th st-sort="order_type">Buy/Sell</th>
+                        <th st-sort="quantity">Qty</th>
+                        <th st-sort="market_price">Market Price</th>
+                        <th st-sort="negotiable">Negotiable</th>
+                        <th st-sort="order_date">Order Date</th>
+                    </tr>
+                    <tr>
+                        <th colspan="9"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td row-select="row" ng-click="select(row.id)"></td>
+                        <td>{{ row.client_id }}</td>
+                        <td>{{ row.first_holder_name }}</td>
+                        <td>{{ row.security_code }}</td>
+                        <td>{{ row.order_type }}</td>
+                        <td>{{ row.quantity }}</td>
+                        <td>{{ row.market_price }}</td>
+                        <td>{{ row.negotiable }}</td>
+                        <td>{{ row.approve_date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <input type="submit" class="btn btn-default" value="Order Placed" data-ng-click="orderPlaced()" />
+                <input type="submit" class="btn btn-default" value="Order Cancel" data-ng-click="orderCancel()" />
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+}
+

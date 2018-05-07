@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="39f1e1a3b392415dbe086135abc79e9e" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBrokerBranch" Width="1.5" PointX="3" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblGlobalCharge" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.DimDate" Width="1.5" PointX="0.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObject" Width="1.5" PointX="1.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObjectValue" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorImage" Width="1.5" PointX="7.5" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblJoinHolder" Width="1.5" PointX="10.5" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblFundWithdrawalRequest" Width="1.5" PointX="13.5" PointY="25.125" IsExpanded="true" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_tblBrokerBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalCharge_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalCharge_tblConstantObjectValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_DimDate1" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_DimDate2" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_DimDate3" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_tblConstantObjectValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblJoinHolder_tblConstantObjectValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblJoinHolder_tblConstantObjectValue1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorFundBalance" Width="1.5" PointX="7.5" PointY="15.875" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFundBalance_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFundBalance_tblConstantObjectValue" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblForceChargeApply" Width="1.5" PointX="10.5" PointY="18.75" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblForceChargeApply_tblGlobalCharge" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblForceChargeApply_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblForceChargeApply_DimDate1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblForceChargeApply_DimDate2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblForceChargeApply_tblConstantObjectValue" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBankBranch" Width="1.5" PointX="3" PointY="31.875" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_tblBankBranch" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBank" Width="1.5" PointX="0.75" PointY="29.625" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblFundReceive" Width="1.5" PointX="19.5" PointY="21.5" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBankBranch_tblBank" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_tblBank" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_tblBrokerBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate4" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate5" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_DimDate6" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_tblConstantObjectValue" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.vw_InvestorFundBalance" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBrokerBankAccount" Width="1.5" PointX="5.25" PointY="35.5" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBrokerBankAccount_tblBankBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_tblFundReceive" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestor" Width="1.5" PointX="5.25" PointY="19.875" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblBank" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblBankBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblBrokerBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue4" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue5" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue6" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue7" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblClientFundBalance_tblInvestor" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblForceChargeApply_tblInvestor" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundReceive_tblInvestor" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_tblInvestor" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorImage_tblInvestor" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblJoinHolder_tblInvestor" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.vw_all_investors_account_type_setting" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblFundWithdraw" Width="1.5" PointX="7.5" PointY="24.25" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_tblBrokerBankAccount" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_tblBrokerBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_DimDate1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_DimDate2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_DimDate3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdraw_tblInvestor" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblFundTransfer" Width="1.5" PointX="10.5" PointY="25.125" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundTransfer_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundTransfer_DimDate1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundTransfer_DimDate2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundTransfer_tblInvestor" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundTransfer_tblInvestor1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFundWithdrawalRequest_tblBrokerBankAccount" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿@using Escrow.Utility
+
+@{
+    Layout = null;
+}
+
+<h2>User Report Permission Mapping</h2>
+<hr />
+<div @*class="container"*@ ng-controller="UserPermissionController" ng-init="LoadInitial()">
+
+    <form class="form-horizontal" ng-submit="" name="UserPermissionForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>User Name</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="User.user_id" class="dropdown form-control input-sm"
+                        ng-options="user.value as user.text for user in userList" ng-change="LoadReportListForUser(User.user_id)" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Filter Report</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="input-sm" ng-model="bagSearch" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div ivh-treeview="bag" style="max-height: 350px; overflow: auto;"
+                 ivh-treeview-filter="bagSearch">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <a ng-click="SaveUserReportPermission()" class="btn btn-default">Save</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+

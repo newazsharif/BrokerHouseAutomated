@@ -1,0 +1,211 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Escrow</title>
+    <meta name="description" content="My ASP.NET Application" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <link href="~/Content/jquery.fancybox-plus.css" rel="stylesheet" />
+    <link href="~/Content/angular-block-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/drawer.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-drawer-1.0.4/dist/css/bootstrap-drawer.css" rel="stylesheet" />
+    <link href="~/Content/ivh-treeview.css" rel="stylesheet" />
+    <link href="~/Content/table_fixed-header.css" rel="stylesheet" />
+    <link href="~/Content/textAngular.css" rel="stylesheet" />
+
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .navbar-right {
+            margin-right: 16px !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header" style="width: 150px;">
+            <a href="/#Index"><img class="img-responsive" src="/Content/images/escrow_logo.png" style="width: 191px; padding-top: 6px; padding-left: 15px; padding-right: 0px;" /></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="navbar-collapse collapse" id="loginPartial">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin: 0px;">
+        <div id="menuPartial">
+            @Html.Partial("_Menu")
+        </div>
+        <div class="container body-content">
+            <div class="panel panel-default">
+                <div class="panel-body" style="overflow: auto; width: 100%">
+                    <body ng-app="myApp">
+                        <ng-view class="reveal-animation">
+                            @RenderBody()
+                        </ng-view>
+                    </body>
+                </div>
+            </div>
+            <footer>
+                <p>
+                    &copy; @DateTime.Now.Year - <a href="http://www.subrasystems.com"> Subra Systems Ltd </a>
+                </p>
+            </footer>
+        </div>
+    </div>
+            @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/toastr")
+    <script src="~/Scripts/toword.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Content/bootstrap-drawer-1.0.4/dist/js/drawer.min.js"></script>
+    <script src="~/Scripts/drawer.js"></script>
+    <script src="~/Scripts/jquery.fancybox-plus.js"></script>
+    @*<script type="text/javascript" src="https://rawgit.com/igorlino/fancybox-plus/master/src/jquery.fancybox-plus.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/igorlino/fancybox-plus/master/css/jquery.fancybox-plus.css" media="screen" />*@
+    @*@Scripts.Render("~/bundles/appjs")*@
+        @Scripts.Render("~/bundles/angularjs")
+        <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+        <script src="signalr/hubs"></script>
+    <link href="~/Content/ng-tiny-scrollbar.css" rel="stylesheet" />
+
+    @*<script src="~/Scripts/datepicker.js"></script>*@
+    <script src="~/Scripts/ui-bootstrap-tpls-0.13.3.js"></script>
+    @Scripts.Render("~/bundles/smartTablejs")
+    <script src="~/Scripts/ng-file-upload.js"></script>
+    <script src="~/Scripts/ng-file-upload-shim.js"></script>
+    <script src="~/Scripts/ng-tiny-scrollbar.js"></script>
+    <script src="~/Scripts/angular-fancybox-plus.js"></script>
+
+
+    @Scripts.Render("~/bundles/routejs")
+    @Scripts.Render("~/bundles/configurationjs")
+    <script src="~/Scripts/ivh-treeview.min.js"></script>
+    <script src="~/Scripts/Areas/myApp.js"></script>
+    <script src="~/Scripts/Areas/BrokerManagement/Controllers/EmployeeInformationController.js"></script>
+    <script src="~/Scripts/Areas/BrokerManagement/Controllers/BankInformationController.js"></script>
+    <script src="~/Scripts/Areas/BrokerManagement/Controllers/TraderInvestorMappingController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/CashChequeReceiveController.js"></script>
+    <script src="~/Scripts/Areas/Instrument/Controllers/InstrumentController.js"></script>
+    <script src="~/Scripts/Areas/Instrument/Controllers/InstrumentReceiveDeliveryController.js"></script>
+    <script src="~/Scripts/Areas/Instrument/Controllers/InstrumentReceiveDeliveryApproveController.js"></script>
+    <script src="~/Scripts/Areas/InvestorManagemant/Controllers/InvestorController.js"></script>
+    <script src="~/Scripts/Areas/InvestorManagemant/Controllers/OmnibusController.js"></script>
+    <script src="~/Scripts/Areas/InvestorManagemant/Controllers/IntroducerController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/ReceiveApproveController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/ChequeDepositToBankController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/ChequeClearController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/ChequeDishonorController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/FundPaymentController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/PaymentApproveController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/FundWithdrawalRequestController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/FundWithdrawalRequestApproveController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/FundWithdrawalRequestCancelController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/FundTransferController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/FundTransferApproveController.js"></script>
+    <script src="~/Scripts/Areas/InvestorManagemant/Controllers/JoinHolderController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/OnDemandChargeController.js"></script>
+    <script src="~/Scripts/Areas/Transaction/Controllers/OnDemandChargeApproveController.js"></script>
+    <script src="~/Scripts/Areas/BrokerManagement/Controllers/TraderInformationController.js"></script>
+    <script src="~/Scripts/Areas/BrokerManagement/Controllers/UserEmployeeMappingController.js"></script>
+    <script src="~/Scripts/Areas/CDBL/Controllers/ImportCDBLController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/NonTradingDayController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/PriceFileController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/TradeFileController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/ImportCashLimitController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/ImportShareLimitController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/ExportCashLimitController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/ExportShareLimitController.js"></script>
+    <script src="~/Scripts/Areas/CDBL/Controllers/SearchCDBLController.js"></script>
+    <script src="~/Scripts/Areas/CDBL/Controllers/ProcessCDBLController.js"></script>
+    <script src="~/Scripts/Areas/ProcessManagement/DayProcessController.js"></script>
+    <script src="~/Scripts/Areas/Trade/Controllers/ExportOmnibusTradeController.js"></script>
+    <script src="~/Scripts/Areas/ProcessManagement/ActivityProcessController.js"></script>
+    <script src="~/Scripts/Areas/CDBL/Controllers/PayInOutController.js"></script>
+    <script src="~/Scripts/Areas/Reports/Controllers/ReportController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/RegisterController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/ChangePasswordController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/UserListController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/EditUserController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/GetPendingOnlineUserListController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/ChargeInformationController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/InvestorChargesController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/SubAccountChargesController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/BranchWiseChargesController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/ExchangeWiseChargesController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/AccountTypeSettingController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/InvestorAccountTypeSettingController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/BranchAccountTypeSettingController.js"></script>
+    <script src="~/Scripts/Areas/Charge/Controllers/SubAccountAccountTypeSettingController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/ResetPasswordController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/UserMenuPermissionController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/ForceLogOffController.js"></script>
+    <script src="~/Scripts/Areas/SecurityManagement/ApprovedOnlineUsersController.js"></script>
+    <script src="~/Scripts/Areas/SystemManagement/ModuleController.js"></script>
+    <script src="~/Scripts/Areas/SystemManagement/BrokerModuleMappingController.js"></script>
+    <script src="~/Scripts/Areas/SystemManagement/ContollerController.js"></script>
+    <script src="~/Scripts/Areas/SystemManagement/BrokerController.js"></script>
+    <script src="~/Scripts/Areas/HomeManagement/HomeController.js"></script>
+    <script src="~/Scripts/Areas/MenuController.js"></script>
+    <script src="~/Scripts/Areas/SystemManagement/ActionController.js"></script>
+    <script src="~/Scripts/Areas/Service/EmailController.js"></script>
+    <script src="~/Scripts/Areas/Service/ExportExcelForSMSController.js"></script>
+    <script src="~/Scripts/Areas/ErrorController.js"></script>
+    <script src="~/Scripts/Areas/Order/Controller/OrderPlacedController.js"></script>
+    <script src="~/Scripts/Areas/Order/Controller/PendingOrderController.js"></script>
+    <script src="~/Scripts/Areas/ProcessManagement/ImageUploadProcessController.js"></script>
+    <script src="~/Scripts/Areas/_PendingOrderNotificationController.js"></script>
+    <script src="~/Scripts/Areas/Configuration/Controllers/AccountMappingController.js"></script>
+    
+    <script src="~/Scripts/angular-block-ui.js"></script>
+    <script src="~/Scripts/angular-block-ui.min.js"></script>
+    <script src="~/Scripts/angu-fixed-header-table.js"></script>
+    <script src="~/Scripts/textAngular-rangy.min.js"></script>
+    <script src="~/Scripts/textAngular-sanitize.js"></script>
+    <script src="~/Scripts/textAngular-sanitize.min.js"></script>
+    <script src="~/Scripts/textAngular.js"></script>
+    <script src="~/Scripts/textAngularSetup.js"></script>
+
+    @Scripts.Render("~/bundles/service")
+    @Scripts.Render("~/bundles/directive")
+    @RenderSection("scripts", required: false)
+</body>
+
+<script>
+    $(document).mouseup(function (e) {
+
+        var container = $("#menuDrawer");
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) {
+            var _opened = $("#menuDrawer").hasClass("open");
+            if (_opened === true) {
+                $('#draw').click();
+            }
+        }
+
+    });
+
+    $('#draw').hover(function() {
+        //var _opened = $("#menuDrawer").hasClass("open");
+        //if (_opened === true) {
+            $('#draw').click();
+        
+    });
+</script>
+
+
+</html>

@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.SecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblModule">
+    <Key>
+      <PropertyRef Name="module_id" />
+    </Key>
+    <Property Name="module_id" Type="Decimal" Precision="4" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="module_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblView">
+    <Key>
+      <PropertyRef Name="view_id" />
+    </Key>
+    <Property Name="view_id" Type="Decimal" Precision="9" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="module_id" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="view_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="router_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="action_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="area_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblBrokerUserModules" Relationship="Escrow.SecurityModel.tblBrokerUserView" FromRole="tblView" ToRole="tblBrokerUserModule" />
+  </EntityType>
+  <EntityContainer Name="SecurityConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblModules" EntityType="Self.tblModule" />
+    <EntitySet Name="tblViews" EntityType="Self.tblView" />
+    <EntitySet Name="tblBrokerModuleMappings" EntityType="Escrow.SecurityModel.tblBrokerModuleMapping" />
+    <EntitySet Name="tblControllers" EntityType="Escrow.SecurityModel.tblController" />
+    <EntitySet Name="tblUIModules" EntityType="Escrow.SecurityModel.tblUIModule" />
+    <AssociationSet Name="FK_tblBrokerModuleMapping_tblBrokerModuleMapping" Association="Escrow.SecurityModel.FK_tblBrokerModuleMapping_tblBrokerModuleMapping">
+      <End Role="tblUIModule" EntitySet="tblUIModules" />
+      <End Role="tblBrokerModuleMapping" EntitySet="tblBrokerModuleMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblController_tblUIModule" Association="Escrow.SecurityModel.FK_tblController_tblUIModule">
+      <End Role="tblUIModule" EntitySet="tblUIModules" />
+      <End Role="tblController" EntitySet="tblControllers" />
+    </AssociationSet>
+    <EntitySet Name="tblActions" EntityType="Escrow.SecurityModel.tblAction" />
+    <AssociationSet Name="FK_tblAction_tblController" Association="Escrow.SecurityModel.FK_tblAction_tblController">
+      <End Role="tblController" EntitySet="tblControllers" />
+      <End Role="tblAction" EntitySet="tblActions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAction_tblUIModule" Association="Escrow.SecurityModel.FK_tblAction_tblUIModule">
+      <End Role="tblUIModule" EntitySet="tblUIModules" />
+      <End Role="tblAction" EntitySet="tblActions" />
+    </AssociationSet>
+    <EntitySet Name="tblUserActionMappings" EntityType="Escrow.SecurityModel.tblUserActionMapping" />
+    <AssociationSet Name="FK_tblUserActionMapping_tblAction" Association="Escrow.SecurityModel.FK_tblUserActionMapping_tblAction">
+      <End Role="tblAction" EntitySet="tblActions" />
+      <End Role="tblUserActionMapping" EntitySet="tblUserActionMappings" />
+    </AssociationSet>
+    <EntitySet Name="AspNetUsers" EntityType="Escrow.SecurityModel.AspNetUser" />
+    <EntitySet Name="tblBrokerInformations" EntityType="Escrow.SecurityModel.tblBrokerInformation" />
+    <EntitySet Name="tblBrokerUsers" EntityType="Escrow.SecurityModel.tblBrokerUser" />
+    <EntitySet Name="tblBrokerUserModules" EntityType="Escrow.SecurityModel.tblBrokerUserModule" />
+    <AssociationSet Name="FK_tblBrokerUser_AspNetUsers" Association="Escrow.SecurityModel.FK_tblBrokerUser_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="tblBrokerUser" EntitySet="tblBrokerUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserActionMapping_AspNetUsers" Association="Escrow.SecurityModel.FK_tblUserActionMapping_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="tblUserActionMapping" EntitySet="tblUserActionMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerModuleMapping_tblBrokerInformation" Association="Escrow.SecurityModel.FK_tblBrokerModuleMapping_tblBrokerInformation">
+      <End Role="tblBrokerInformation" EntitySet="tblBrokerInformations" />
+      <End Role="tblBrokerModuleMapping" EntitySet="tblBrokerModuleMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUser_tblBrokerInformation" Association="Escrow.SecurityModel.FK_tblBrokerUser_tblBrokerInformation">
+      <End Role="tblBrokerInformation" EntitySet="tblBrokerInformations" />
+      <End Role="tblBrokerUser" EntitySet="tblBrokerUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUserModule_tblBrokerUser" Association="Escrow.SecurityModel.FK_tblBrokerUserModule_tblBrokerUser">
+      <End Role="tblBrokerUser" EntitySet="tblBrokerUsers" />
+      <End Role="tblBrokerUserModule" EntitySet="tblBrokerUserModules" />
+    </AssociationSet>
+    <AssociationSet Name="tblBrokerModule" Association="Escrow.SecurityModel.tblBrokerModule">
+      <End Role="tblUIModule" EntitySet="tblUIModules" />
+      <End Role="tblBrokerInformation" EntitySet="tblBrokerInformations" />
+    </AssociationSet>
+    <AssociationSet Name="tblBrokerUserView" Association="Escrow.SecurityModel.tblBrokerUserView">
+      <End Role="tblBrokerUserModule" EntitySet="tblBrokerUserModules" />
+      <End Role="tblView" EntitySet="tblViews" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblBrokerModuleMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ui_module_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <NavigationProperty Name="tblUIModule" Relationship="Escrow.SecurityModel.FK_tblBrokerModuleMapping_tblBrokerModuleMapping" FromRole="tblBrokerModuleMapping" ToRole="tblUIModule" />
+    <NavigationProperty Name="tblBrokerInformation" Relationship="Escrow.SecurityModel.FK_tblBrokerModuleMapping_tblBrokerInformation" FromRole="tblBrokerModuleMapping" ToRole="tblBrokerInformation" />
+  </EntityType>
+  <EntityType Name="tblController">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ui_module_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <NavigationProperty Name="tblUIModule" Relationship="Escrow.SecurityModel.FK_tblController_tblUIModule" FromRole="tblController" ToRole="tblUIModule" />
+    <NavigationProperty Name="tblActions" Relationship="Escrow.SecurityModel.FK_tblAction_tblController" FromRole="tblController" ToRole="tblAction" />
+  </EntityType>
+  <EntityType Name="tblUIModule">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sort_id" Type="Decimal" Precision="4" Scale="0" />
+    <NavigationProperty Name="tblBrokerModuleMappings" Relationship="Escrow.SecurityModel.FK_tblBrokerModuleMapping_tblBrokerModuleMapping" FromRole="tblUIModule" ToRole="tblBrokerModuleMapping" />
+    <NavigationProperty Name="tblControllers" Relationship="Escrow.SecurityModel.FK_tblController_tblUIModule" FromRole="tblUIModule" ToRole="tblController" />
+    <NavigationProperty Name="tblActions" Relationship="Escrow.SecurityModel.FK_tblAction_tblUIModule" FromRole="tblUIModule" ToRole="tblAction" />
+    <NavigationProperty Name="tblBrokerInformations" Relationship="Escrow.SecurityModel.tblBrokerModule" FromRole="tblUIModule" ToRole="tblBrokerInformation" />
+  </EntityType>
+  <Association Name="FK_tblBrokerModuleMapping_tblBrokerModuleMapping">
+    <End Type="Escrow.SecurityModel.tblUIModule" Role="tblUIModule" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblBrokerModuleMapping" Role="tblBrokerModuleMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBrokerModuleMapping">
+        <PropertyRef Name="ui_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblController_tblUIModule">
+    <End Type="Escrow.SecurityModel.tblUIModule" Role="tblUIModule" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblController" Role="tblController" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblController">
+        <PropertyRef Name="ui_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblAction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="display_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="controller_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="ui_module_id" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="is_view" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_in_menu" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="class_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblController" Relationship="Escrow.SecurityModel.FK_tblAction_tblController" FromRole="tblAction" ToRole="tblController" />
+    <NavigationProperty Name="tblUIModule" Relationship="Escrow.SecurityModel.FK_tblAction_tblUIModule" FromRole="tblAction" ToRole="tblUIModule" />
+    <NavigationProperty Name="tblUserActionMappings" Relationship="Escrow.SecurityModel.FK_tblUserActionMapping_tblAction" FromRole="tblAction" ToRole="tblUserActionMapping" />
+  </EntityType>
+  <Association Name="FK_tblAction_tblController">
+    <End Type="Escrow.SecurityModel.tblController" Role="tblController" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblAction" Role="tblAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblController">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblAction">
+        <PropertyRef Name="controller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAction_tblUIModule">
+    <End Type="Escrow.SecurityModel.tblUIModule" Role="tblUIModule" Multiplicity="0..1" />
+    <End Type="Escrow.SecurityModel.tblAction" Role="tblAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblAction">
+        <PropertyRef Name="ui_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblUserActionMapping">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="action_id" />
+    </Key>
+    <Property Name="user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="action_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="is_permitted" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <NavigationProperty Name="tblAction" Relationship="Escrow.SecurityModel.FK_tblUserActionMapping_tblAction" FromRole="tblUserActionMapping" ToRole="tblAction" />
+    <NavigationProperty Name="AspNetUser" Relationship="Escrow.SecurityModel.FK_tblUserActionMapping_AspNetUsers" FromRole="tblUserActionMapping" ToRole="AspNetUser" />
+  </EntityType>
+  <Association Name="FK_tblUserActionMapping_tblAction">
+    <End Type="Escrow.SecurityModel.tblAction" Role="tblAction" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblUserActionMapping" Role="tblUserActionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAction">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUserActionMapping">
+        <PropertyRef Name="action_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblBrokerUsers" Relationship="Escrow.SecurityModel.FK_tblBrokerUser_AspNetUsers" FromRole="AspNetUser" ToRole="tblBrokerUser" />
+    <NavigationProperty Name="tblUserActionMappings" Relationship="Escrow.SecurityModel.FK_tblUserActionMapping_AspNetUsers" FromRole="AspNetUser" ToRole="tblUserActionMapping" />
+  </EntityType>
+  <EntityType Name="tblBrokerInformation">
+    <Key>
+      <PropertyRef Name="membership_id" />
+    </Key>
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="short_name" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="trec_number" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="mail_address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="registration_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="paid_up_capital" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="authorized_capital" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="compliance_authority" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="no_of_ar" Type="Int32" />
+    <Property Name="contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="registration_date" Type="DateTime" Precision="0" />
+    <Property Name="active_status_id" Type="Int32" />
+    <Property Name="changed_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Precision="3" />
+    <Property Name="is_dirty" Type="Boolean" />
+    <NavigationProperty Name="tblBrokerModuleMappings" Relationship="Escrow.SecurityModel.FK_tblBrokerModuleMapping_tblBrokerInformation" FromRole="tblBrokerInformation" ToRole="tblBrokerModuleMapping" />
+    <NavigationProperty Name="tblBrokerUsers" Relationship="Escrow.SecurityModel.FK_tblBrokerUser_tblBrokerInformation" FromRole="tblBrokerInformation" ToRole="tblBrokerUser" />
+    <NavigationProperty Name="tblUIModules" Relationship="Escrow.SecurityModel.tblBrokerModule" FromRole="tblBrokerInformation" ToRole="tblUIModule" />
+  </EntityType>
+  <EntityType Name="tblBrokerUser">
+    <Key>
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="is_admin" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_loggedIn" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="last_logged_time" Type="DateTime" Precision="3" />
+    <Property Name="approve_by" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="approve_date" Type="Decimal" Precision="9" Scale="0" />
+    <NavigationProperty Name="AspNetUser" Relationship="Escrow.SecurityModel.FK_tblBrokerUser_AspNetUsers" FromRole="tblBrokerUser" ToRole="AspNetUser" />
+    <NavigationProperty Name="tblBrokerInformation" Relationship="Escrow.SecurityModel.FK_tblBrokerUser_tblBrokerInformation" FromRole="tblBrokerUser" ToRole="tblBrokerInformation" />
+    <NavigationProperty Name="tblBrokerUserModules" Relationship="Escrow.SecurityModel.FK_tblBrokerUserModule_tblBrokerUser" FromRole="tblBrokerUser" ToRole="tblBrokerUserModule" />
+  </EntityType>
+  <EntityType Name="tblBrokerUserModule">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="module_id" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="module_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <NavigationProperty Name="tblBrokerUser" Relationship="Escrow.SecurityModel.FK_tblBrokerUserModule_tblBrokerUser" FromRole="tblBrokerUserModule" ToRole="tblBrokerUser" />
+    <NavigationProperty Name="tblViews" Relationship="Escrow.SecurityModel.tblBrokerUserView" FromRole="tblBrokerUserModule" ToRole="tblView" />
+  </EntityType>
+  <Association Name="FK_tblBrokerUser_AspNetUsers">
+    <End Type="Escrow.SecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblBrokerUser" Role="tblBrokerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblBrokerUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserActionMapping_AspNetUsers">
+    <End Type="Escrow.SecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblUserActionMapping" Role="tblUserActionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblUserActionMapping">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerModuleMapping_tblBrokerInformation">
+    <End Type="Escrow.SecurityModel.tblBrokerInformation" Role="tblBrokerInformation" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblBrokerModuleMapping" Role="tblBrokerModuleMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerInformation">
+        <PropertyRef Name="membership_id" />
+      </Principal>
+      <Dependent Role="tblBrokerModuleMapping">
+        <PropertyRef Name="membership_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUser_tblBrokerInformation">
+    <End Type="Escrow.SecurityModel.tblBrokerInformation" Role="tblBrokerInformation" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblBrokerUser" Role="tblBrokerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerInformation">
+        <PropertyRef Name="membership_id" />
+      </Principal>
+      <Dependent Role="tblBrokerUser">
+        <PropertyRef Name="membership_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUserModule_tblBrokerUser">
+    <End Type="Escrow.SecurityModel.tblBrokerUser" Role="tblBrokerUser" Multiplicity="1" />
+    <End Type="Escrow.SecurityModel.tblBrokerUserModule" Role="tblBrokerUserModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerUser">
+        <PropertyRef Name="membership_id" />
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblBrokerUserModule">
+        <PropertyRef Name="membership_id" />
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblBrokerModule">
+    <End Type="Escrow.SecurityModel.tblUIModule" Role="tblUIModule" Multiplicity="*" />
+    <End Type="Escrow.SecurityModel.tblBrokerInformation" Role="tblBrokerInformation" Multiplicity="*" />
+  </Association>
+  <Association Name="tblBrokerUserView">
+    <End Type="Escrow.SecurityModel.tblBrokerUserModule" Role="tblBrokerUserModule" Multiplicity="*" />
+    <End Type="Escrow.SecurityModel.tblView" Role="tblView" Multiplicity="*" />
+  </Association>
+</Schema>

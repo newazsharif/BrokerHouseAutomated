@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.SecurityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="url" Type="varchar" MaxLength="50" />
+    <Property Name="display_name" Type="varchar" MaxLength="50" />
+    <Property Name="controller_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="ui_module_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="is_view" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_in_menu" Type="numeric" Precision="1" Scale="0" />
+    <Property Name="class_name" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="tblBrokerInformation">
+    <Key>
+      <PropertyRef Name="membership_id" />
+    </Key>
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="short_name" Type="varchar" MaxLength="3" />
+    <Property Name="trec_number" Type="varchar" MaxLength="4" />
+    <Property Name="mail_address" Type="varchar" MaxLength="150" />
+    <Property Name="registration_no" Type="varchar" MaxLength="10" />
+    <Property Name="paid_up_capital" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="authorized_capital" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="compliance_authority" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="no_of_ar" Type="int" />
+    <Property Name="contact_no" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="registration_date" Type="date" />
+    <Property Name="active_status_id" Type="int" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" />
+    <Property Name="changed_date" Type="datetime" />
+    <Property Name="is_dirty" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblBrokerModule">
+    <Key>
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="module_id" />
+    </Key>
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="module_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBrokerModuleMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ui_module_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBrokerUser">
+    <Key>
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="is_admin" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_loggedIn" Type="numeric" Precision="1" Scale="0" />
+    <Property Name="last_logged_time" Type="datetime" />
+    <Property Name="approve_by" Type="varchar" MaxLength="128" />
+    <Property Name="approve_date" Type="numeric" Precision="9" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblBrokerUserModule">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="module_id" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="module_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBrokerUserView">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="module_id" />
+      <PropertyRef Name="veiw_id" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="module_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="veiw_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblController">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ui_module_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblModule">
+    <Key>
+      <PropertyRef Name="module_id" />
+    </Key>
+    <Property Name="module_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="module_name" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUIModule">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_name" Type="varchar" MaxLength="50" />
+    <Property Name="sort_id" Type="numeric" Precision="4" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblUserActionMapping">
+    <Key>
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="action_id" />
+    </Key>
+    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="action_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="is_permitted" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblView">
+    <Key>
+      <PropertyRef Name="view_id" />
+    </Key>
+    <Property Name="view_id" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="module_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="view_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="router_name" Type="varchar" MaxLength="50" />
+    <Property Name="action_name" Type="varchar" MaxLength="50" />
+    <Property Name="area_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tblAction_tblController">
+    <End Role="tblController" Type="Self.tblController" Multiplicity="1" />
+    <End Role="tblAction" Type="Self.tblAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblController">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblAction">
+        <PropertyRef Name="controller_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAction_tblUIModule">
+    <End Role="tblUIModule" Type="Self.tblUIModule" Multiplicity="0..1" />
+    <End Role="tblAction" Type="Self.tblAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblAction">
+        <PropertyRef Name="ui_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerModule_tblBrokerInformation">
+    <End Role="tblUIModule" Type="Self.tblUIModule" Multiplicity="1" />
+    <End Role="tblBrokerModule" Type="Self.tblBrokerModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBrokerModule">
+        <PropertyRef Name="module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerModule_tblBrokerInformation1">
+    <End Role="tblBrokerInformation" Type="Self.tblBrokerInformation" Multiplicity="1" />
+    <End Role="tblBrokerModule" Type="Self.tblBrokerModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerInformation">
+        <PropertyRef Name="membership_id" />
+      </Principal>
+      <Dependent Role="tblBrokerModule">
+        <PropertyRef Name="membership_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerModuleMapping_tblBrokerInformation">
+    <End Role="tblBrokerInformation" Type="Self.tblBrokerInformation" Multiplicity="1" />
+    <End Role="tblBrokerModuleMapping" Type="Self.tblBrokerModuleMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerInformation">
+        <PropertyRef Name="membership_id" />
+      </Principal>
+      <Dependent Role="tblBrokerModuleMapping">
+        <PropertyRef Name="membership_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerModuleMapping_tblBrokerModuleMapping">
+    <End Role="tblUIModule" Type="Self.tblUIModule" Multiplicity="1" />
+    <End Role="tblBrokerModuleMapping" Type="Self.tblBrokerModuleMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBrokerModuleMapping">
+        <PropertyRef Name="ui_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUser_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="tblBrokerUser" Type="Self.tblBrokerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblBrokerUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUser_tblBrokerInformation">
+    <End Role="tblBrokerInformation" Type="Self.tblBrokerInformation" Multiplicity="1" />
+    <End Role="tblBrokerUser" Type="Self.tblBrokerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerInformation">
+        <PropertyRef Name="membership_id" />
+      </Principal>
+      <Dependent Role="tblBrokerUser">
+        <PropertyRef Name="membership_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUserModule_tblBrokerUser">
+    <End Role="tblBrokerUser" Type="Self.tblBrokerUser" Multiplicity="1" />
+    <End Role="tblBrokerUserModule" Type="Self.tblBrokerUserModule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerUser">
+        <PropertyRef Name="membership_id" />
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tblBrokerUserModule">
+        <PropertyRef Name="membership_id" />
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUserView_tblBrokerUserModule">
+    <End Role="tblBrokerUserModule" Type="Self.tblBrokerUserModule" Multiplicity="1" />
+    <End Role="tblBrokerUserView" Type="Self.tblBrokerUserView" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerUserModule">
+        <PropertyRef Name="UserId" />
+        <PropertyRef Name="membership_id" />
+        <PropertyRef Name="module_id" />
+      </Principal>
+      <Dependent Role="tblBrokerUserView">
+        <PropertyRef Name="UserId" />
+        <PropertyRef Name="membership_id" />
+        <PropertyRef Name="module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerUserView_tblView">
+    <End Role="tblView" Type="Self.tblView" Multiplicity="1" />
+    <End Role="tblBrokerUserView" Type="Self.tblBrokerUserView" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblView">
+        <PropertyRef Name="view_id" />
+      </Principal>
+      <Dependent Role="tblBrokerUserView">
+        <PropertyRef Name="veiw_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblController_tblUIModule">
+    <End Role="tblUIModule" Type="Self.tblUIModule" Multiplicity="1" />
+    <End Role="tblController" Type="Self.tblController" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUIModule">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblController">
+        <PropertyRef Name="ui_module_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserActionMapping_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="tblUserActionMapping" Type="Self.tblUserActionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblUserActionMapping">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUserActionMapping_tblAction">
+    <End Role="tblAction" Type="Self.tblAction" Multiplicity="1" />
+    <End Role="tblUserActionMapping" Type="Self.tblUserActionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAction">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblUserActionMapping">
+        <PropertyRef Name="action_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EscrowSecurityModelStoreContainer">
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAction" EntityType="Self.tblAction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokerInformation" EntityType="Self.tblBrokerInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokerModule" EntityType="Self.tblBrokerModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokerModuleMapping" EntityType="Self.tblBrokerModuleMapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokerUser" EntityType="Self.tblBrokerUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokerUserModule" EntityType="Self.tblBrokerUserModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrokerUserView" EntityType="Self.tblBrokerUserView" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblController" EntityType="Self.tblController" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblModule" EntityType="Self.tblModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUIModule" EntityType="Self.tblUIModule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserActionMapping" EntityType="Self.tblUserActionMapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblView" EntityType="Self.tblView" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblAction_tblController" Association="Self.FK_tblAction_tblController">
+      <End Role="tblController" EntitySet="tblController" />
+      <End Role="tblAction" EntitySet="tblAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAction_tblUIModule" Association="Self.FK_tblAction_tblUIModule">
+      <End Role="tblUIModule" EntitySet="tblUIModule" />
+      <End Role="tblAction" EntitySet="tblAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerModule_tblBrokerInformation" Association="Self.FK_tblBrokerModule_tblBrokerInformation">
+      <End Role="tblUIModule" EntitySet="tblUIModule" />
+      <End Role="tblBrokerModule" EntitySet="tblBrokerModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerModule_tblBrokerInformation1" Association="Self.FK_tblBrokerModule_tblBrokerInformation1">
+      <End Role="tblBrokerInformation" EntitySet="tblBrokerInformation" />
+      <End Role="tblBrokerModule" EntitySet="tblBrokerModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerModuleMapping_tblBrokerInformation" Association="Self.FK_tblBrokerModuleMapping_tblBrokerInformation">
+      <End Role="tblBrokerInformation" EntitySet="tblBrokerInformation" />
+      <End Role="tblBrokerModuleMapping" EntitySet="tblBrokerModuleMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerModuleMapping_tblBrokerModuleMapping" Association="Self.FK_tblBrokerModuleMapping_tblBrokerModuleMapping">
+      <End Role="tblUIModule" EntitySet="tblUIModule" />
+      <End Role="tblBrokerModuleMapping" EntitySet="tblBrokerModuleMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUser_AspNetUsers" Association="Self.FK_tblBrokerUser_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="tblBrokerUser" EntitySet="tblBrokerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUser_tblBrokerInformation" Association="Self.FK_tblBrokerUser_tblBrokerInformation">
+      <End Role="tblBrokerInformation" EntitySet="tblBrokerInformation" />
+      <End Role="tblBrokerUser" EntitySet="tblBrokerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUserModule_tblBrokerUser" Association="Self.FK_tblBrokerUserModule_tblBrokerUser">
+      <End Role="tblBrokerUser" EntitySet="tblBrokerUser" />
+      <End Role="tblBrokerUserModule" EntitySet="tblBrokerUserModule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUserView_tblBrokerUserModule" Association="Self.FK_tblBrokerUserView_tblBrokerUserModule">
+      <End Role="tblBrokerUserModule" EntitySet="tblBrokerUserModule" />
+      <End Role="tblBrokerUserView" EntitySet="tblBrokerUserView" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerUserView_tblView" Association="Self.FK_tblBrokerUserView_tblView">
+      <End Role="tblView" EntitySet="tblView" />
+      <End Role="tblBrokerUserView" EntitySet="tblBrokerUserView" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblController_tblUIModule" Association="Self.FK_tblController_tblUIModule">
+      <End Role="tblUIModule" EntitySet="tblUIModule" />
+      <End Role="tblController" EntitySet="tblController" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserActionMapping_AspNetUsers" Association="Self.FK_tblUserActionMapping_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="tblUserActionMapping" EntitySet="tblUserActionMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUserActionMapping_tblAction" Association="Self.FK_tblUserActionMapping_tblAction">
+      <End Role="tblAction" EntitySet="tblAction" />
+      <End Role="tblUserActionMapping" EntitySet="tblUserActionMapping" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

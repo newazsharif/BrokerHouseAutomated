@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="short_name" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="bank_name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBrokerBranch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ipo_branch_code" Type="varchar" MaxLength="4" />
+          <Property Name="address" Type="varchar" MaxLength="250" />
+          <Property Name="contact_person" Type="varchar" MaxLength="100" />
+          <Property Name="contact_no" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="registration_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="investor_range" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="accMapping">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gl_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ledger_head_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="DimDate">
+          <Key>
+            <PropertyRef Name="DateKey" />
+          </Key>
+          <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="FullDateUK" Type="char" MaxLength="10" />
+          <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+          <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+          <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+          <Property Name="DayName" Type="varchar" MaxLength="9" />
+          <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+          <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+          <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+          <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+          <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+          <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+          <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+          <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+          <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+          <Property Name="Month" Type="varchar" MaxLength="2" />
+          <Property Name="MonthName" Type="varchar" MaxLength="9" />
+          <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+          <Property Name="Quarter" Type="char" MaxLength="1" />
+          <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+          <Property Name="Year" Type="char" MaxLength="4" />
+          <Property Name="YearName" Type="char" MaxLength="7" />
+          <Property Name="MonthYear" Type="char" MaxLength="10" />
+          <Property Name="MMYYYY" Type="char" MaxLength="6" />
+          <Property Name="FirstDayOfMonth" Type="date" />
+          <Property Name="LastDayOfMonth" Type="date" />
+          <Property Name="FirstDayOfQuarter" Type="date" />
+          <Property Name="LastDayOfQuarter" Type="date" />
+          <Property Name="FirstDayOfYear" Type="date" />
+          <Property Name="LastDayOfYear" Type="date" />
+          <Property Name="IsHolidayUSA" Type="bit" />
+          <Property Name="IsWeekday" Type="bit" />
+          <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+          <Property Name="IsHolidayUK" Type="bit" />
+          <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+          <Property Name="IsHoliday" Type="bit" />
+          <Property Name="Holiday" Type="varchar" MaxLength="50" />
+          <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+          <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+          <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+          <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+          <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+          <Property Name="FiscalYear" Type="char" MaxLength="4" />
+          <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+          <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+          <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+          <Property Name="FiscalFirstDayOfMonth" Type="date" />
+          <Property Name="FiscalLastDayOfMonth" Type="date" />
+          <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+          <Property Name="FiscalLastDayOfQuarter" Type="date" />
+          <Property Name="FiscalFirstDayOfYear" Type="date" />
+          <Property Name="FiscalLastDayOfYear" Type="date" />
+          <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="tblConstantObject">
+          <Key>
+            <PropertyRef Name="object_id" />
+          </Key>
+          <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Purpose" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tblConstantObjectValue">
+          <Key>
+            <PropertyRef Name="object_value_id" />
+          </Key>
+          <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="150" />
+          <Property Name="sorting_order" Type="smallint" />
+          <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblDailyWorkList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="work_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sort_order" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="is_done" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+          <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+          <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblBrokerBranch">
+              <PropertyRef Name="registration_dt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+          <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObject">
+              <PropertyRef Name="object_id" />
+            </Principal>
+            <Dependent Role="tblConstantObjectValue">
+              <PropertyRef Name="object_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="tfun_get_ledger_head" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ledger_id" Type="bigint" Nullable="false" />
+                <Property Name="ledger_code" Type="nvarchar" MaxLength="100" />
+                <Property Name="ledger_name" Type="nvarchar" MaxLength="100" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="EscrowBOASModelStoreContainer">
+          <EntitySet Name="tblBank" EntityType="Self.tblBank" Schema="Accounting" store:Type="Tables" />
+          <EntitySet Name="tblBrokerBranch" EntityType="Self.tblBrokerBranch" Schema="broker" store:Type="Tables" />
+          <EntitySet Name="accMapping" EntityType="Self.accMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDailyWorkList" EntityType="Self.tblDailyWorkList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Self.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+            <End Role="DimDate" EntitySet="DimDate" />
+            <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+            <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DimDate">
+          <Key>
+            <PropertyRef Name="DateKey" />
+          </Key>
+          <Property Name="DateKey" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="IsHolidayUSA" Type="Boolean" />
+          <Property Name="IsWeekday" Type="Boolean" />
+          <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsHolidayUK" Type="Boolean" />
+          <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsHoliday" Type="Boolean" />
+          <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblBrokerBranches" Relationship="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="DimDate" ToRole="tblBrokerBranch" />
+        </EntityType>
+        <EntityContainer Name="ConfigurationConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DimDates" EntityType="Self.DimDate" />
+          <EntitySet Name="tblBanks" EntityType="Escrow.BOASModel.tblBank" />
+          <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOASModel.tblConstantObject" />
+          <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOASModel.tblConstantObjectValue" />
+          <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects">
+            <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+          </AssociationSet>
+          <EntitySet Name="tblBrokerBranches" EntityType="Escrow.BOASModel.tblBrokerBranch" />
+          <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+            <End Role="DimDate" EntitySet="DimDates" />
+            <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+          </AssociationSet>
+          <EntitySet Name="tblDailyWorkLists" EntityType="Escrow.BOASModel.tblDailyWorkList" />
+          <EntitySet Name="accMappings" EntityType="Escrow.BOASModel.accMapping" />
+          <FunctionImport Name="tfun_get_ledger_head" IsComposable="true" ReturnType="Collection(Escrow.BOASModel.tfun_get_ledger_head_Result)" />
+        </EntityContainer>
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="short_name" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="bank_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblConstantObject">
+          <Key>
+            <PropertyRef Name="object_id" />
+          </Key>
+          <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+        </EntityType>
+        <EntityType Name="tblConstantObjectValue">
+          <Key>
+            <PropertyRef Name="object_value_id" />
+          </Key>
+          <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="sorting_order" Type="Int16" />
+          <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+          <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+        </EntityType>
+        <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+          <End Type="Escrow.BOASModel.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObject">
+              <PropertyRef Name="object_id" />
+            </Principal>
+            <Dependent Role="tblConstantObjectValue">
+              <PropertyRef Name="object_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblBrokerBranch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ipo_branch_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="contact_person" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contact_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="registration_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="tblBrokerBranch" ToRole="DimDate" />
+          <Property Name="investor_range" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+          <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblBrokerBranch">
+              <PropertyRef Name="registration_dt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblDailyWorkList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="work_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sort_order" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="is_done" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="accMapping">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gl_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ledger_head_id" Type="Int64" />
+        </EntityType>
+        <ComplexType Name="tfun_get_ledger_head_Result">
+          <Property Type="Int64" Name="ledger_id" Nullable="false" />
+          <Property Type="String" Name="ledger_code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ledger_name" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscrowBOASModelStoreContainer" CdmEntityContainer="ConfigurationConnection">
+          <EntitySetMapping Name="DimDates">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.DimDate">
+              <MappingFragment StoreEntitySet="DimDate">
+                <ScalarProperty Name="FullDateCDBL" ColumnName="FullDateCDBL" />
+                <ScalarProperty Name="DateKey" ColumnName="DateKey" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FullDateUK" ColumnName="FullDateUK" />
+                <ScalarProperty Name="FullDateUSA" ColumnName="FullDateUSA" />
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+                <ScalarProperty Name="DaySuffix" ColumnName="DaySuffix" />
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="DayOfWeekUSA" ColumnName="DayOfWeekUSA" />
+                <ScalarProperty Name="DayOfWeekUK" ColumnName="DayOfWeekUK" />
+                <ScalarProperty Name="DayOfWeekInMonth" ColumnName="DayOfWeekInMonth" />
+                <ScalarProperty Name="DayOfWeekInYear" ColumnName="DayOfWeekInYear" />
+                <ScalarProperty Name="DayOfQuarter" ColumnName="DayOfQuarter" />
+                <ScalarProperty Name="DayOfYear" ColumnName="DayOfYear" />
+                <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+                <ScalarProperty Name="WeekOfQuarter" ColumnName="WeekOfQuarter" />
+                <ScalarProperty Name="WeekOfYear" ColumnName="WeekOfYear" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="MonthOfQuarter" ColumnName="MonthOfQuarter" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="YearName" ColumnName="YearName" />
+                <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+                <ScalarProperty Name="MMYYYY" ColumnName="MMYYYY" />
+                <ScalarProperty Name="FirstDayOfMonth" ColumnName="FirstDayOfMonth" />
+                <ScalarProperty Name="LastDayOfMonth" ColumnName="LastDayOfMonth" />
+                <ScalarProperty Name="FirstDayOfQuarter" ColumnName="FirstDayOfQuarter" />
+                <ScalarProperty Name="LastDayOfQuarter" ColumnName="LastDayOfQuarter" />
+                <ScalarProperty Name="FirstDayOfYear" ColumnName="FirstDayOfYear" />
+                <ScalarProperty Name="LastDayOfYear" ColumnName="LastDayOfYear" />
+                <ScalarProperty Name="IsHolidayUSA" ColumnName="IsHolidayUSA" />
+                <ScalarProperty Name="IsWeekday" ColumnName="IsWeekday" />
+                <ScalarProperty Name="HolidayUSA" ColumnName="HolidayUSA" />
+                <ScalarProperty Name="IsHolidayUK" ColumnName="IsHolidayUK" />
+                <ScalarProperty Name="HolidayUK" ColumnName="HolidayUK" />
+                <ScalarProperty Name="IsHoliday" ColumnName="IsHoliday" />
+                <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+                <ScalarProperty Name="FiscalDayOfYear" ColumnName="FiscalDayOfYear" />
+                <ScalarProperty Name="FiscalWeekOfYear" ColumnName="FiscalWeekOfYear" />
+                <ScalarProperty Name="FiscalMonth" ColumnName="FiscalMonth" />
+                <ScalarProperty Name="FiscalQuarter" ColumnName="FiscalQuarter" />
+                <ScalarProperty Name="FiscalQuarterName" ColumnName="FiscalQuarterName" />
+                <ScalarProperty Name="FiscalYear" ColumnName="FiscalYear" />
+                <ScalarProperty Name="FiscalYearName" ColumnName="FiscalYearName" />
+                <ScalarProperty Name="FiscalMonthYear" ColumnName="FiscalMonthYear" />
+                <ScalarProperty Name="FiscalMMYYYY" ColumnName="FiscalMMYYYY" />
+                <ScalarProperty Name="FiscalFirstDayOfMonth" ColumnName="FiscalFirstDayOfMonth" />
+                <ScalarProperty Name="FiscalLastDayOfMonth" ColumnName="FiscalLastDayOfMonth" />
+                <ScalarProperty Name="FiscalFirstDayOfQuarter" ColumnName="FiscalFirstDayOfQuarter" />
+                <ScalarProperty Name="FiscalLastDayOfQuarter" ColumnName="FiscalLastDayOfQuarter" />
+                <ScalarProperty Name="FiscalFirstDayOfYear" ColumnName="FiscalFirstDayOfYear" />
+                <ScalarProperty Name="FiscalLastDayOfYear" ColumnName="FiscalLastDayOfYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBanks">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblBank">
+              <MappingFragment StoreEntitySet="tblBank">
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="short_name" ColumnName="short_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConstantObjects">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblConstantObject">
+              <MappingFragment StoreEntitySet="tblConstantObject">
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="object_name" ColumnName="object_name" />
+                <ScalarProperty Name="object_id" ColumnName="object_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConstantObjectValues">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblConstantObjectValue">
+              <MappingFragment StoreEntitySet="tblConstantObjectValue">
+                <ScalarProperty Name="is_default" ColumnName="is_default" />
+                <ScalarProperty Name="sorting_order" ColumnName="sorting_order" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="object_id" ColumnName="object_id" />
+                <ScalarProperty Name="display_value" ColumnName="display_value" />
+                <ScalarProperty Name="object_value_id" ColumnName="object_value_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBrokerBranches">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblBrokerBranch">
+              <MappingFragment StoreEntitySet="tblBrokerBranch">
+                <ScalarProperty Name="investor_range" ColumnName="investor_range" />
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="registration_dt" ColumnName="registration_dt" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+                <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="ipo_branch_code" ColumnName="ipo_branch_code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDailyWorkLists">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblDailyWorkList">
+              <MappingFragment StoreEntitySet="tblDailyWorkList">
+                <ScalarProperty Name="is_done" ColumnName="is_done" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="sort_order" ColumnName="sort_order" />
+                <ScalarProperty Name="work_name" ColumnName="work_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accMappings">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.accMapping">
+              <MappingFragment StoreEntitySet="accMapping">
+                <ScalarProperty Name="ledger_head_id" ColumnName="ledger_head_id" />
+                <ScalarProperty Name="gl_name" ColumnName="gl_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="tfun_get_ledger_head" FunctionName="Escrow.BOASModel.Store.tfun_get_ledger_head">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Escrow.BOASModel.tfun_get_ledger_head_Result">
+                <ScalarProperty Name="ledger_id" ColumnName="ledger_id" />
+                <ScalarProperty Name="ledger_code" ColumnName="ledger_code" />
+                <ScalarProperty Name="ledger_name" ColumnName="ledger_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

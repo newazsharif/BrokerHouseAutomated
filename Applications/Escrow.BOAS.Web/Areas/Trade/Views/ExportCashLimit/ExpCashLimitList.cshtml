@@ -1,0 +1,63 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 9/12/2015
+    ///Reason: Export Cash Limit List View
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Export Cash Limit List";
+    Layout = null;
+}
+
+<h2>Export Cash Limit List</h2>
+<hr />
+<div class="row" ng-controller="ExportCashLimitController" ng-init="loadExpCsLimitList()">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="file_type">File Type</th>
+                    <th st-sort="file_name">File Name</th>
+                    <th st-sort="control_name">Control</th>
+                    <th st-sort="import_dt">Export Date</th>
+                    <th st-sort="version_no">Version No</th>
+                </tr>
+                <tr>
+                    <th colspan="5"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.file_type}}</td>
+                    <td><a href="~/Files/ExportedFiles/{{row.file_name}}" class="btn btn-link">{{row.file_name}}</a></td>
+                    <td><a href="~/Files/ExportedFiles/{{row.control_name}}" class="btn btn-link">{{row.control_name}}</a></td>
+                    <td>{{row.import_dt}}</td>
+                    <td>{{row.version_no}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+@section Scripts {
+}
+

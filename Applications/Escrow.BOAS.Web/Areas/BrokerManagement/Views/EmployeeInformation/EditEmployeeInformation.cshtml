@@ -1,0 +1,219 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 18/8/2015
+    ///Reason: Employee Edit View
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Employee Information";
+    Layout = null;
+}
+
+<h2>Employee Information</h2>
+<div @*class="container"*@ ng-controller="EmployeeInformationController" ng-init="loadEmployeeAndDdlById()">
+    <form class="form-horizontal" ng-submit="" name="editEmpForm">
+        <input type="hidden" name="Id" data-ng-model="editEmployeeInformation.id" />
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Employee Code</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="editEmployeeInformation.employee_code" onload-focus="true" enter-as-tab required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="editEmployeeInformation.name" enter-as-tab required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Father Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="editEmployeeInformation.father_name" enter-as-tab />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Mother Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="editEmployeeInformation.mother_name" enter-as-tab />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Gender</label>
+                </div>
+                <div class="col-md-8">
+                    <select data-ng-model="editEmployeeInformation.gender_id" class="dropdown form-control input-sm"
+                            ng-options="gender.value as gender.text for gender in genderList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <img ngf-src="picFile || image" style="height: 150px; width: 200px;" />
+                    <input type="file" ngf-select ng-model="picFile" name="file"
+                           accept="image/*" ngf-max-size="2MB"><b>Picture</b><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>DOB</label>
+                </div>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editEmployeeInformation.dob" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Contact No</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" data-ng-model="editEmployeeInformation.contact_no" enter-as-tab />
+                </div>
+
+                <div class="col-md-2">
+                    <label>Email</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="email" class="form-control input-sm" data-ng-model="editEmployeeInformation.email_address" enter-as-tab />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Branch</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="editEmployeeInformation.branch_id" class="dropdown form-control input-sm"
+                            ng-options="branch.value as branch.text for branch in branchList" enter-as-tab required></select>
+                </div>
+
+                <div class="col-md-2">
+                    <label>NID</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" data-ng-model="editEmployeeInformation.national_id" enter-as-tab required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Designation</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="editEmployeeInformation.designation_id" class="dropdown form-control input-sm"
+                            ng-options="designation.value as designation.text for designation in designationList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Department</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="editEmployeeInformation.department_id" class="dropdown form-control input-sm"
+                            ng-options="department.value as department.text for department in departmentList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Joining Date</label>
+                </div>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editEmployeeInformation.joining_date" is-open="opened2" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Release Date</label>
+                </div>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editEmployeeInformation.release_date" is-open="opened3" min-date="minDate" max-date="'31/12/9999'" ng-required="false" show-weeks="false" show-button-bar="false" enter-as-tab />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'opened3')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Mailing Address</label>
+                </div>
+                <div class="col-md-4">
+                    <textarea class="form-control input-sm" data-ng-model="editEmployeeInformation.mailing_address" enter-as-tab></textarea>
+                    <input type="button" class="btn btn-default" value=">>" data-ng-click="copyNpasteForEdit()" enter-as-tab />
+                </div>
+
+                <div class="col-md-2">
+                    <label>Permanent Address</label>
+                </div>
+                <div class="col-md-4">
+                    <textarea class="form-control input-sm" data-ng-model="editEmployeeInformation.permanent_address" enter-as-tab></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Active Status</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="editEmployeeInformation.active_status_id" class="dropdown form-control input-sm"
+                            ng-options="activeStatus.value as activeStatus.text for activeStatus in activeStatusList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="editEmployee(picFile)" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadEmployeeAndDdlById()" />
+                <a href="/#EmployeeInformation" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

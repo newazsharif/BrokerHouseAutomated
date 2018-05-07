@@ -1,0 +1,1266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DimDate">
+          <Key>
+            <PropertyRef Name="DateKey" />
+          </Key>
+          <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="FullDateUK" Type="char" MaxLength="10" />
+          <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+          <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+          <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+          <Property Name="DayName" Type="varchar" MaxLength="9" />
+          <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+          <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+          <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+          <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+          <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+          <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+          <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+          <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+          <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+          <Property Name="Month" Type="varchar" MaxLength="2" />
+          <Property Name="MonthName" Type="varchar" MaxLength="9" />
+          <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+          <Property Name="Quarter" Type="char" MaxLength="1" />
+          <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+          <Property Name="Year" Type="char" MaxLength="4" />
+          <Property Name="YearName" Type="char" MaxLength="7" />
+          <Property Name="MonthYear" Type="char" MaxLength="10" />
+          <Property Name="MMYYYY" Type="char" MaxLength="6" />
+          <Property Name="FirstDayOfMonth" Type="date" />
+          <Property Name="LastDayOfMonth" Type="date" />
+          <Property Name="FirstDayOfQuarter" Type="date" />
+          <Property Name="LastDayOfQuarter" Type="date" />
+          <Property Name="FirstDayOfYear" Type="date" />
+          <Property Name="LastDayOfYear" Type="date" />
+          <Property Name="IsHolidayUSA" Type="bit" />
+          <Property Name="IsWeekday" Type="bit" />
+          <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+          <Property Name="IsHolidayUK" Type="bit" />
+          <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+          <Property Name="IsHoliday" Type="bit" />
+          <Property Name="Holiday" Type="varchar" MaxLength="50" />
+          <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+          <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+          <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+          <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+          <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+          <Property Name="FiscalYear" Type="char" MaxLength="4" />
+          <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+          <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+          <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+          <Property Name="FiscalFirstDayOfMonth" Type="date" />
+          <Property Name="FiscalLastDayOfMonth" Type="date" />
+          <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+          <Property Name="FiscalLastDayOfQuarter" Type="date" />
+          <Property Name="FiscalFirstDayOfYear" Type="date" />
+          <Property Name="FiscalLastDayOfYear" Type="date" />
+          <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="tblConstantObject">
+          <Key>
+            <PropertyRef Name="object_id" />
+          </Key>
+          <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Purpose" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tblConstantObjectValue">
+          <Key>
+            <PropertyRef Name="object_value_id" />
+          </Key>
+          <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="150" />
+          <Property Name="sorting_order" Type="smallint" />
+          <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblInstrument">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isin" Type="varchar" MaxLength="12" />
+          <Property Name="security_code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="instrument_name" Type="varchar" MaxLength="150" />
+          <Property Name="sector_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="instument_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="depository_company_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="face_value" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="discount" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="premium" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="lot" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="is_marginable" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="group_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="closed_price" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="is_foreign" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="authorized_capital" Type="numeric" Precision="24" Scale="4" />
+          <Property Name="paid_up_capital" Type="numeric" Precision="24" Scale="4" />
+          <Property Name="current_eps" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="current_nav" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="current_pe" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="market_type_id" Type="numeric" Precision="4" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblInstrumentFundamentalInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="effective_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="eps" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="pe" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="nav" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="total_asset" Type="numeric" Precision="24" Scale="4" Nullable="false" />
+          <Property Name="total_liability" Type="numeric" Precision="24" Scale="4" Nullable="false" />
+          <Property Name="total_share" Type="numeric" Precision="24" Scale="0" Nullable="false" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblInstrumentManualInOut">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="20" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="transaction_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="reference_no" Type="varchar" MaxLength="50" />
+          <Property Name="transaction_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="rate" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="500" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="approve_by" Type="varchar" MaxLength="128" />
+          <Property Name="approve_date" Type="numeric" Precision="9" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblInstrumentMarginabilityHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="effective_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="is_marginable" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="highest_rate" Type="numeric" Precision="12" Scale="4" />
+          <Property Name="percentage" Type="numeric" Precision="8" Scale="4" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Escrow.BOAS.Charge.vw_all_investors_account_type_setting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_all_investors_account_type_setting">
+          <Key>
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="account_type_name" />
+            <PropertyRef Name="initial_deposit" />
+            <PropertyRef Name="minimum_balance_on" />
+            <PropertyRef Name="minimun_balance_on_name" />
+            <PropertyRef Name="minimum_balance" />
+            <PropertyRef Name="minimum_balance_is_percentage" />
+            <PropertyRef Name="withdraw_limit_on" />
+            <PropertyRef Name="withdraw_limit_on_name" />
+            <PropertyRef Name="withdraw_limit" />
+            <PropertyRef Name="withdraw_limit_percentage" />
+            <PropertyRef Name="loan_ratio" />
+            <PropertyRef Name="loan_max" />
+            <PropertyRef Name="loan_on" />
+            <PropertyRef Name="loan_on_name" />
+            <PropertyRef Name="profit_on" />
+            <PropertyRef Name="profit_on_name" />
+            <PropertyRef Name="available_balance" />
+            <PropertyRef Name="ledger_balance" />
+            <PropertyRef Name="purchase_power" />
+            <PropertyRef Name="withdrawable_amount" />
+          </Key>
+          <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="account_type_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="initial_deposit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="minimum_balance_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="minimun_balance_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="minimum_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="minimum_balance_is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="withdraw_limit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="withdraw_limit_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="withdraw_limit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="withdraw_limit_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="loan_ratio" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="loan_max" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="loan_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="loan_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="profit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="profit_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="available_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="ledger_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="purchase_power" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="withdrawable_amount" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Escrow.BOAS.Investor.vw_InvestorShareBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_InvestorShareBalance">
+          <Key>
+            <PropertyRef Name="transaction_date" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="instrument_id" />
+            <PropertyRef Name="ledger_quantity" />
+            <PropertyRef Name="salable_quantity" />
+            <PropertyRef Name="ipo_receivable_quantity" />
+            <PropertyRef Name="bonus_receivable_quantity" />
+            <PropertyRef Name="lock_quantity" />
+            <PropertyRef Name="pledge_quantity" />
+            <PropertyRef Name="cost_average" />
+            <PropertyRef Name="cost_value" />
+            <PropertyRef Name="market_price" />
+            <PropertyRef Name="market_value" />
+            <PropertyRef Name="active_status_id" />
+            <PropertyRef Name="membership_id" />
+            <PropertyRef Name="changed_user_id" />
+            <PropertyRef Name="changed_date" />
+            <PropertyRef Name="is_dirty" />
+          </Key>
+          <Property Name="transaction_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="ledger_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="salable_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="ipo_receivable_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="bonus_receivable_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="lock_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="pledge_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="cost_average" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="cost_value" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="market_price" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="market_value" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+          <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObject">
+              <PropertyRef Name="object_id" />
+            </Principal>
+            <Dependent Role="tblConstantObjectValue">
+              <PropertyRef Name="object_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentDepositoryCompany">
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="depository_company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentGroup">
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentSector">
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="sector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentType">
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="instument_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate">
+          <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+          <End Role="tblInstrumentFundamentalInfo" Type="Self.tblInstrumentFundamentalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblInstrumentFundamentalInfo">
+              <PropertyRef Name="effective_dt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentFundamentalInfo_tblInstrument">
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="1" />
+          <End Role="tblInstrumentFundamentalInfo" Type="Self.tblInstrumentFundamentalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInstrument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblInstrumentFundamentalInfo">
+              <PropertyRef Name="instrument_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentManualInOut_DimDate">
+          <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+          <End Role="tblInstrumentManualInOut" Type="Self.tblInstrumentManualInOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblInstrumentManualInOut">
+              <PropertyRef Name="transaction_date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentManualInOut_tblConstantObjectValue">
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+          <End Role="tblInstrumentManualInOut" Type="Self.tblInstrumentManualInOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrumentManualInOut">
+              <PropertyRef Name="transaction_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentManualInOut_tblInstrument">
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="1" />
+          <End Role="tblInstrumentManualInOut" Type="Self.tblInstrumentManualInOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInstrument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblInstrumentManualInOut">
+              <PropertyRef Name="instrument_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate">
+          <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+          <End Role="tblInstrumentMarginabilityHistory" Type="Self.tblInstrumentMarginabilityHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblInstrumentMarginabilityHistory">
+              <PropertyRef Name="effective_dt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentMarginabilityHistory_tblInstrument">
+          <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="1" />
+          <End Role="tblInstrumentMarginabilityHistory" Type="Self.tblInstrumentMarginabilityHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInstrument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblInstrumentMarginabilityHistory">
+              <PropertyRef Name="instrument_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="psp_investor_share_transaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Investor">
+          <Parameter Name="id" Type="varchar(max)" Mode="In" />
+          <Parameter Name="SHARE_LEDGER_TYPE_ID" Type="numeric" Mode="In" />
+          <Parameter Name="membership_id" Type="numeric" Mode="In" />
+          <Parameter Name="changed_user_id" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="EscrowBOASModelStoreContainer">
+          <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInstrument" EntityType="Self.tblInstrument" Schema="Instrument" store:Type="Tables" />
+          <EntitySet Name="tblInstrumentFundamentalInfo" EntityType="Self.tblInstrumentFundamentalInfo" Schema="Instrument" store:Type="Tables" />
+          <EntitySet Name="tblInstrumentManualInOut" EntityType="Self.tblInstrumentManualInOut" Schema="Instrument" store:Type="Tables" />
+          <EntitySet Name="tblInstrumentMarginabilityHistory" EntityType="Self.tblInstrumentMarginabilityHistory" Schema="Instrument" store:Type="Tables" />
+          <EntitySet Name="vw_all_investors_account_type_setting" EntityType="Self.vw_all_investors_account_type_setting" store:Type="Views" store:Schema="Charge">
+            <DefiningQuery>SELECT 
+    [vw_all_investors_account_type_setting].[client_id] AS [client_id], 
+    [vw_all_investors_account_type_setting].[account_type_id] AS [account_type_id], 
+    [vw_all_investors_account_type_setting].[account_type_name] AS [account_type_name], 
+    [vw_all_investors_account_type_setting].[initial_deposit] AS [initial_deposit], 
+    [vw_all_investors_account_type_setting].[minimum_balance_on] AS [minimum_balance_on], 
+    [vw_all_investors_account_type_setting].[minimun_balance_on_name] AS [minimun_balance_on_name], 
+    [vw_all_investors_account_type_setting].[minimum_balance] AS [minimum_balance], 
+    [vw_all_investors_account_type_setting].[minimum_balance_is_percentage] AS [minimum_balance_is_percentage], 
+    [vw_all_investors_account_type_setting].[withdraw_limit_on] AS [withdraw_limit_on], 
+    [vw_all_investors_account_type_setting].[withdraw_limit_on_name] AS [withdraw_limit_on_name], 
+    [vw_all_investors_account_type_setting].[withdraw_limit] AS [withdraw_limit], 
+    [vw_all_investors_account_type_setting].[withdraw_limit_percentage] AS [withdraw_limit_percentage], 
+    [vw_all_investors_account_type_setting].[loan_ratio] AS [loan_ratio], 
+    [vw_all_investors_account_type_setting].[loan_max] AS [loan_max], 
+    [vw_all_investors_account_type_setting].[loan_on] AS [loan_on], 
+    [vw_all_investors_account_type_setting].[loan_on_name] AS [loan_on_name], 
+    [vw_all_investors_account_type_setting].[profit_on] AS [profit_on], 
+    [vw_all_investors_account_type_setting].[profit_on_name] AS [profit_on_name], 
+    [vw_all_investors_account_type_setting].[available_balance] AS [available_balance], 
+    [vw_all_investors_account_type_setting].[ledger_balance] AS [ledger_balance], 
+    [vw_all_investors_account_type_setting].[purchase_power] AS [purchase_power], 
+    [vw_all_investors_account_type_setting].[withdrawable_amount] AS [withdrawable_amount]
+    FROM [Charge].[vw_all_investors_account_type_setting] AS [vw_all_investors_account_type_setting]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_InvestorShareBalance" EntityType="Self.vw_InvestorShareBalance" store:Type="Views" store:Schema="Investor">
+            <DefiningQuery>SELECT 
+    [vw_InvestorShareBalance].[transaction_date] AS [transaction_date], 
+    [vw_InvestorShareBalance].[client_id] AS [client_id], 
+    [vw_InvestorShareBalance].[instrument_id] AS [instrument_id], 
+    [vw_InvestorShareBalance].[ledger_quantity] AS [ledger_quantity], 
+    [vw_InvestorShareBalance].[salable_quantity] AS [salable_quantity], 
+    [vw_InvestorShareBalance].[ipo_receivable_quantity] AS [ipo_receivable_quantity], 
+    [vw_InvestorShareBalance].[bonus_receivable_quantity] AS [bonus_receivable_quantity], 
+    [vw_InvestorShareBalance].[lock_quantity] AS [lock_quantity], 
+    [vw_InvestorShareBalance].[pledge_quantity] AS [pledge_quantity], 
+    [vw_InvestorShareBalance].[cost_average] AS [cost_average], 
+    [vw_InvestorShareBalance].[cost_value] AS [cost_value], 
+    [vw_InvestorShareBalance].[market_price] AS [market_price], 
+    [vw_InvestorShareBalance].[market_value] AS [market_value], 
+    [vw_InvestorShareBalance].[active_status_id] AS [active_status_id], 
+    [vw_InvestorShareBalance].[membership_id] AS [membership_id], 
+    [vw_InvestorShareBalance].[changed_user_id] AS [changed_user_id], 
+    [vw_InvestorShareBalance].[changed_date] AS [changed_date], 
+    [vw_InvestorShareBalance].[is_dirty] AS [is_dirty]
+    FROM [Investor].[vw_InvestorShareBalance] AS [vw_InvestorShareBalance]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+            <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentDepositoryCompany" Association="Self.FK_tblInstrument_InstrumentDepositoryCompany">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentGroup" Association="Self.FK_tblInstrument_InstrumentGroup">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentSector" Association="Self.FK_tblInstrument_InstrumentSector">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentType" Association="Self.FK_tblInstrument_InstrumentType">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate" Association="Self.FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate">
+            <End Role="DimDate" EntitySet="DimDate" />
+            <End Role="tblInstrumentFundamentalInfo" EntitySet="tblInstrumentFundamentalInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentFundamentalInfo_tblInstrument" Association="Self.FK_tblInstrumentFundamentalInfo_tblInstrument">
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+            <End Role="tblInstrumentFundamentalInfo" EntitySet="tblInstrumentFundamentalInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentManualInOut_DimDate" Association="Self.FK_tblInstrumentManualInOut_DimDate">
+            <End Role="DimDate" EntitySet="DimDate" />
+            <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentManualInOut_tblConstantObjectValue" Association="Self.FK_tblInstrumentManualInOut_tblConstantObjectValue">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+            <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentManualInOut_tblInstrument" Association="Self.FK_tblInstrumentManualInOut_tblInstrument">
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+            <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate" Association="Self.FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate">
+            <End Role="DimDate" EntitySet="DimDate" />
+            <End Role="tblInstrumentMarginabilityHistory" EntitySet="tblInstrumentMarginabilityHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentMarginabilityHistory_tblInstrument" Association="Self.FK_tblInstrumentMarginabilityHistory_tblInstrument">
+            <End Role="tblInstrument" EntitySet="tblInstrument" />
+            <End Role="tblInstrumentMarginabilityHistory" EntitySet="tblInstrumentMarginabilityHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InstrumentManagementConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DimDates" EntityType="Escrow.BOASModel.DimDate" />
+          <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOASModel.tblConstantObject" />
+          <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOASModel.tblConstantObjectValue" />
+          <EntitySet Name="tblInstruments" EntityType="Escrow.BOASModel.tblInstrument" />
+          <EntitySet Name="tblInstrumentFundamentalInfoes" EntityType="Escrow.BOASModel.tblInstrumentFundamentalInfo" />
+          <EntitySet Name="tblInstrumentMarginabilityHistories" EntityType="Escrow.BOASModel.tblInstrumentMarginabilityHistory" />
+          <AssociationSet Name="FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate" Association="Escrow.BOASModel.FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate">
+            <End Role="DimDate" EntitySet="DimDates" />
+            <End Role="tblInstrumentFundamentalInfo" EntitySet="tblInstrumentFundamentalInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate" Association="Escrow.BOASModel.FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate">
+            <End Role="DimDate" EntitySet="DimDates" />
+            <End Role="tblInstrumentMarginabilityHistory" EntitySet="tblInstrumentMarginabilityHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects">
+            <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentDepositoryCompany" Association="Escrow.BOASModel.FK_tblInstrument_InstrumentDepositoryCompany">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentGroup" Association="Escrow.BOASModel.FK_tblInstrument_InstrumentGroup">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentSector" Association="Escrow.BOASModel.FK_tblInstrument_InstrumentSector">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrument_InstrumentType" Association="Escrow.BOASModel.FK_tblInstrument_InstrumentType">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentFundamentalInfo_tblInstrument" Association="Escrow.BOASModel.FK_tblInstrumentFundamentalInfo_tblInstrument">
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+            <End Role="tblInstrumentFundamentalInfo" EntitySet="tblInstrumentFundamentalInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentMarginabilityHistory_tblInstrument" Association="Escrow.BOASModel.FK_tblInstrumentMarginabilityHistory_tblInstrument">
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+            <End Role="tblInstrumentMarginabilityHistory" EntitySet="tblInstrumentMarginabilityHistories" />
+          </AssociationSet>
+          <EntitySet Name="tblInstrumentManualInOuts" EntityType="Escrow.BOASModel.tblInstrumentManualInOut" />
+          <AssociationSet Name="FK_tblInstrumentManualInOut_DimDate" Association="Escrow.BOASModel.FK_tblInstrumentManualInOut_DimDate">
+            <End Role="DimDate" EntitySet="DimDates" />
+            <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentManualInOut_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblInstrumentManualInOut_tblConstantObjectValue">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+            <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInstrumentManualInOut_tblInstrument" Association="Escrow.BOASModel.FK_tblInstrumentManualInOut_tblInstrument">
+            <End Role="tblInstrument" EntitySet="tblInstruments" />
+            <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOuts" />
+          </AssociationSet>
+          <FunctionImport Name="psp_investor_share_transaction">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="SHARE_LEDGER_TYPE_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+            <Parameter Name="changed_user_id" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="vw_InvestorShareBalance" EntityType="Escrow.BOASModel.vw_InvestorShareBalance" />
+          <EntitySet Name="vw_all_investors_account_type_setting" EntityType="Escrow.BOASModel.vw_all_investors_account_type_setting" />
+        </EntityContainer>
+        <EntityType Name="DimDate">
+          <Key>
+            <PropertyRef Name="DateKey" />
+          </Key>
+          <Property Name="DateKey" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="IsHolidayUSA" Type="Boolean" />
+          <Property Name="IsWeekday" Type="Boolean" />
+          <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsHolidayUK" Type="Boolean" />
+          <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsHoliday" Type="Boolean" />
+          <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+          <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+          <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+          <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblInstrumentFundamentalInfoes" Relationship="Escrow.BOASModel.FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate" FromRole="DimDate" ToRole="tblInstrumentFundamentalInfo" />
+          <NavigationProperty Name="tblInstrumentMarginabilityHistories" Relationship="Escrow.BOASModel.FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate" FromRole="DimDate" ToRole="tblInstrumentMarginabilityHistory" />
+          <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblInstrumentManualInOuts" Relationship="Escrow.BOASModel.FK_tblInstrumentManualInOut_DimDate" FromRole="DimDate" ToRole="tblInstrumentManualInOut" />
+        </EntityType>
+        <EntityType Name="tblConstantObject">
+          <Key>
+            <PropertyRef Name="object_id" />
+          </Key>
+          <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+        </EntityType>
+        <EntityType Name="tblConstantObjectValue">
+          <Key>
+            <PropertyRef Name="object_value_id" />
+          </Key>
+          <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="sorting_order" Type="Int16" />
+          <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+          <NavigationProperty Name="tblInstruments" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentDepositoryCompany" FromRole="tblConstantObjectValue" ToRole="tblInstrument" />
+          <NavigationProperty Name="tblInstruments1" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentGroup" FromRole="tblConstantObjectValue" ToRole="tblInstrument" />
+          <NavigationProperty Name="tblInstruments2" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentSector" FromRole="tblConstantObjectValue" ToRole="tblInstrument" />
+          <NavigationProperty Name="tblInstruments3" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentType" FromRole="tblConstantObjectValue" ToRole="tblInstrument" />
+          <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+          <NavigationProperty Name="tblInstrumentManualInOuts" Relationship="Escrow.BOASModel.FK_tblInstrumentManualInOut_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblInstrumentManualInOut" />
+        </EntityType>
+        <EntityType Name="tblInstrument">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isin" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="security_code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="instrument_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="sector_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="instument_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="depository_company_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="face_value" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="discount" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="premium" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="lot" Type="Decimal" Nullable="false" Precision="5" Scale="0" />
+          <Property Name="is_marginable" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="group_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="closed_price" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="is_foreign" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="authorized_capital" Type="Decimal" Precision="24" Scale="4" />
+          <Property Name="paid_up_capital" Type="Decimal" Precision="24" Scale="4" />
+          <Property Name="current_eps" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="current_nav" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="current_pe" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentDepositoryCompany" FromRole="tblInstrument" ToRole="tblConstantObjectValue" />
+          <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentGroup" FromRole="tblInstrument" ToRole="tblConstantObjectValue" />
+          <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentSector" FromRole="tblInstrument" ToRole="tblConstantObjectValue" />
+          <NavigationProperty Name="tblConstantObjectValue3" Relationship="Escrow.BOASModel.FK_tblInstrument_InstrumentType" FromRole="tblInstrument" ToRole="tblConstantObjectValue" />
+          <NavigationProperty Name="tblInstrumentFundamentalInfoes" Relationship="Escrow.BOASModel.FK_tblInstrumentFundamentalInfo_tblInstrument" FromRole="tblInstrument" ToRole="tblInstrumentFundamentalInfo" />
+          <NavigationProperty Name="tblInstrumentMarginabilityHistories" Relationship="Escrow.BOASModel.FK_tblInstrumentMarginabilityHistory_tblInstrument" FromRole="tblInstrument" ToRole="tblInstrumentMarginabilityHistory" />
+          <Property Name="market_type_id" Type="Decimal" Precision="4" Scale="0" />
+          <NavigationProperty Name="tblInstrumentManualInOuts" Relationship="Escrow.BOASModel.FK_tblInstrumentManualInOut_tblInstrument" FromRole="tblInstrument" ToRole="tblInstrumentManualInOut" />
+        </EntityType>
+        <EntityType Name="tblInstrumentFundamentalInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="instrument_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="effective_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="eps" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="pe" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="nav" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="total_asset" Type="Decimal" Nullable="false" Precision="24" Scale="4" />
+          <Property Name="total_liability" Type="Decimal" Nullable="false" Precision="24" Scale="4" />
+          <Property Name="total_share" Type="Decimal" Nullable="false" Precision="24" Scale="0" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate" FromRole="tblInstrumentFundamentalInfo" ToRole="DimDate" />
+          <NavigationProperty Name="tblInstrument" Relationship="Escrow.BOASModel.FK_tblInstrumentFundamentalInfo_tblInstrument" FromRole="tblInstrumentFundamentalInfo" ToRole="tblInstrument" />
+        </EntityType>
+        <EntityType Name="tblInstrumentMarginabilityHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="instrument_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="effective_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="is_marginable" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="highest_rate" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="percentage" Type="Decimal" Precision="8" Scale="4" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate" FromRole="tblInstrumentMarginabilityHistory" ToRole="DimDate" />
+          <NavigationProperty Name="tblInstrument" Relationship="Escrow.BOASModel.FK_tblInstrumentMarginabilityHistory_tblInstrument" FromRole="tblInstrumentMarginabilityHistory" ToRole="tblInstrument" />
+        </EntityType>
+        <Association Name="FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate">
+          <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentFundamentalInfo" Role="tblInstrumentFundamentalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblInstrumentFundamentalInfo">
+              <PropertyRef Name="effective_dt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate">
+          <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentMarginabilityHistory" Role="tblInstrumentMarginabilityHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblInstrumentMarginabilityHistory">
+              <PropertyRef Name="effective_dt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+          <End Type="Escrow.BOASModel.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObject">
+              <PropertyRef Name="object_id" />
+            </Principal>
+            <Dependent Role="tblConstantObjectValue">
+              <PropertyRef Name="object_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentDepositoryCompany">
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="depository_company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentGroup">
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentSector">
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="sector_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrument_InstrumentType">
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrument">
+              <PropertyRef Name="instument_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentFundamentalInfo_tblInstrument">
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentFundamentalInfo" Role="tblInstrumentFundamentalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInstrument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblInstrumentFundamentalInfo">
+              <PropertyRef Name="instrument_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentMarginabilityHistory_tblInstrument">
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentMarginabilityHistory" Role="tblInstrumentMarginabilityHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInstrument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblInstrumentMarginabilityHistory">
+              <PropertyRef Name="instrument_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblInstrumentManualInOut">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="20" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="instrument_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="transaction_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="reference_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="transaction_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="rate" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="approve_by" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="approve_date" Type="Decimal" Precision="9" Scale="0" />
+          <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblInstrumentManualInOut_DimDate" FromRole="tblInstrumentManualInOut" ToRole="DimDate" />
+          <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblInstrumentManualInOut_tblConstantObjectValue" FromRole="tblInstrumentManualInOut" ToRole="tblConstantObjectValue" />
+          <NavigationProperty Name="tblInstrument" Relationship="Escrow.BOASModel.FK_tblInstrumentManualInOut_tblInstrument" FromRole="tblInstrumentManualInOut" ToRole="tblInstrument" />
+        </EntityType>
+        <Association Name="FK_tblInstrumentManualInOut_DimDate">
+          <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentManualInOut" Role="tblInstrumentManualInOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimDate">
+              <PropertyRef Name="DateKey" />
+            </Principal>
+            <Dependent Role="tblInstrumentManualInOut">
+              <PropertyRef Name="transaction_date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentManualInOut_tblConstantObjectValue">
+          <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentManualInOut" Role="tblInstrumentManualInOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblInstrumentManualInOut">
+              <PropertyRef Name="transaction_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInstrumentManualInOut_tblInstrument">
+          <End Type="Escrow.BOASModel.tblInstrument" Role="tblInstrument" Multiplicity="1" />
+          <End Type="Escrow.BOASModel.tblInstrumentManualInOut" Role="tblInstrumentManualInOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInstrument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblInstrumentManualInOut">
+              <PropertyRef Name="instrument_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_InvestorShareBalance">
+          <Key>
+            <PropertyRef Name="transaction_date" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="instrument_id" />
+            <PropertyRef Name="ledger_quantity" />
+            <PropertyRef Name="salable_quantity" />
+            <PropertyRef Name="ipo_receivable_quantity" />
+            <PropertyRef Name="bonus_receivable_quantity" />
+            <PropertyRef Name="lock_quantity" />
+            <PropertyRef Name="pledge_quantity" />
+            <PropertyRef Name="cost_average" />
+            <PropertyRef Name="cost_value" />
+            <PropertyRef Name="market_price" />
+            <PropertyRef Name="market_value" />
+            <PropertyRef Name="active_status_id" />
+            <PropertyRef Name="membership_id" />
+            <PropertyRef Name="changed_user_id" />
+            <PropertyRef Name="changed_date" />
+            <PropertyRef Name="is_dirty" />
+          </Key>
+          <Property Name="transaction_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="instrument_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="ledger_quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="salable_quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="ipo_receivable_quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="bonus_receivable_quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="lock_quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="pledge_quantity" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="cost_average" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="cost_value" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="market_price" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="market_value" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="vw_all_investors_account_type_setting">
+          <Key>
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="account_type_name" />
+            <PropertyRef Name="initial_deposit" />
+            <PropertyRef Name="minimum_balance_on" />
+            <PropertyRef Name="minimun_balance_on_name" />
+            <PropertyRef Name="minimum_balance" />
+            <PropertyRef Name="minimum_balance_is_percentage" />
+            <PropertyRef Name="withdraw_limit_on" />
+            <PropertyRef Name="withdraw_limit_on_name" />
+            <PropertyRef Name="withdraw_limit" />
+            <PropertyRef Name="withdraw_limit_percentage" />
+            <PropertyRef Name="loan_ratio" />
+            <PropertyRef Name="loan_max" />
+            <PropertyRef Name="loan_on" />
+            <PropertyRef Name="loan_on_name" />
+            <PropertyRef Name="profit_on" />
+            <PropertyRef Name="profit_on_name" />
+            <PropertyRef Name="available_balance" />
+            <PropertyRef Name="ledger_balance" />
+            <PropertyRef Name="purchase_power" />
+            <PropertyRef Name="withdrawable_amount" />
+          </Key>
+          <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="account_type_id" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="account_type_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="initial_deposit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="minimum_balance_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="minimun_balance_on_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="minimum_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="minimum_balance_is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="withdraw_limit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="withdraw_limit_on_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="withdraw_limit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="withdraw_limit_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="loan_ratio" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="loan_max" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="loan_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="loan_on_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="profit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="profit_on_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="available_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="ledger_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="purchase_power" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+          <Property Name="withdrawable_amount" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscrowBOASModelStoreContainer" CdmEntityContainer="InstrumentManagementConnection">
+          <EntitySetMapping Name="DimDates">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.DimDate">
+              <MappingFragment StoreEntitySet="DimDate">
+                <ScalarProperty Name="FullDateCDBL" ColumnName="FullDateCDBL" />
+                <ScalarProperty Name="FiscalLastDayOfYear" ColumnName="FiscalLastDayOfYear" />
+                <ScalarProperty Name="FiscalFirstDayOfYear" ColumnName="FiscalFirstDayOfYear" />
+                <ScalarProperty Name="FiscalLastDayOfQuarter" ColumnName="FiscalLastDayOfQuarter" />
+                <ScalarProperty Name="FiscalFirstDayOfQuarter" ColumnName="FiscalFirstDayOfQuarter" />
+                <ScalarProperty Name="FiscalLastDayOfMonth" ColumnName="FiscalLastDayOfMonth" />
+                <ScalarProperty Name="FiscalFirstDayOfMonth" ColumnName="FiscalFirstDayOfMonth" />
+                <ScalarProperty Name="FiscalMMYYYY" ColumnName="FiscalMMYYYY" />
+                <ScalarProperty Name="FiscalMonthYear" ColumnName="FiscalMonthYear" />
+                <ScalarProperty Name="FiscalYearName" ColumnName="FiscalYearName" />
+                <ScalarProperty Name="FiscalYear" ColumnName="FiscalYear" />
+                <ScalarProperty Name="FiscalQuarterName" ColumnName="FiscalQuarterName" />
+                <ScalarProperty Name="FiscalQuarter" ColumnName="FiscalQuarter" />
+                <ScalarProperty Name="FiscalMonth" ColumnName="FiscalMonth" />
+                <ScalarProperty Name="FiscalWeekOfYear" ColumnName="FiscalWeekOfYear" />
+                <ScalarProperty Name="FiscalDayOfYear" ColumnName="FiscalDayOfYear" />
+                <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+                <ScalarProperty Name="IsHoliday" ColumnName="IsHoliday" />
+                <ScalarProperty Name="HolidayUK" ColumnName="HolidayUK" />
+                <ScalarProperty Name="IsHolidayUK" ColumnName="IsHolidayUK" />
+                <ScalarProperty Name="HolidayUSA" ColumnName="HolidayUSA" />
+                <ScalarProperty Name="IsWeekday" ColumnName="IsWeekday" />
+                <ScalarProperty Name="IsHolidayUSA" ColumnName="IsHolidayUSA" />
+                <ScalarProperty Name="LastDayOfYear" ColumnName="LastDayOfYear" />
+                <ScalarProperty Name="FirstDayOfYear" ColumnName="FirstDayOfYear" />
+                <ScalarProperty Name="LastDayOfQuarter" ColumnName="LastDayOfQuarter" />
+                <ScalarProperty Name="FirstDayOfQuarter" ColumnName="FirstDayOfQuarter" />
+                <ScalarProperty Name="LastDayOfMonth" ColumnName="LastDayOfMonth" />
+                <ScalarProperty Name="FirstDayOfMonth" ColumnName="FirstDayOfMonth" />
+                <ScalarProperty Name="MMYYYY" ColumnName="MMYYYY" />
+                <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+                <ScalarProperty Name="YearName" ColumnName="YearName" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="MonthOfQuarter" ColumnName="MonthOfQuarter" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="WeekOfYear" ColumnName="WeekOfYear" />
+                <ScalarProperty Name="WeekOfQuarter" ColumnName="WeekOfQuarter" />
+                <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+                <ScalarProperty Name="DayOfYear" ColumnName="DayOfYear" />
+                <ScalarProperty Name="DayOfQuarter" ColumnName="DayOfQuarter" />
+                <ScalarProperty Name="DayOfWeekInYear" ColumnName="DayOfWeekInYear" />
+                <ScalarProperty Name="DayOfWeekInMonth" ColumnName="DayOfWeekInMonth" />
+                <ScalarProperty Name="DayOfWeekUK" ColumnName="DayOfWeekUK" />
+                <ScalarProperty Name="DayOfWeekUSA" ColumnName="DayOfWeekUSA" />
+                <ScalarProperty Name="DayName" ColumnName="DayName" />
+                <ScalarProperty Name="DaySuffix" ColumnName="DaySuffix" />
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+                <ScalarProperty Name="FullDateUSA" ColumnName="FullDateUSA" />
+                <ScalarProperty Name="FullDateUK" ColumnName="FullDateUK" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DateKey" ColumnName="DateKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConstantObjects">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblConstantObject">
+              <MappingFragment StoreEntitySet="tblConstantObject">
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="object_name" ColumnName="object_name" />
+                <ScalarProperty Name="object_id" ColumnName="object_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConstantObjectValues">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblConstantObjectValue">
+              <MappingFragment StoreEntitySet="tblConstantObjectValue">
+                <ScalarProperty Name="is_default" ColumnName="is_default" />
+                <ScalarProperty Name="sorting_order" ColumnName="sorting_order" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="object_id" ColumnName="object_id" />
+                <ScalarProperty Name="display_value" ColumnName="display_value" />
+                <ScalarProperty Name="object_value_id" ColumnName="object_value_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInstruments">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblInstrument">
+              <MappingFragment StoreEntitySet="tblInstrument">
+                <ScalarProperty Name="market_type_id" ColumnName="market_type_id" />
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="current_pe" ColumnName="current_pe" />
+                <ScalarProperty Name="current_nav" ColumnName="current_nav" />
+                <ScalarProperty Name="current_eps" ColumnName="current_eps" />
+                <ScalarProperty Name="paid_up_capital" ColumnName="paid_up_capital" />
+                <ScalarProperty Name="authorized_capital" ColumnName="authorized_capital" />
+                <ScalarProperty Name="is_foreign" ColumnName="is_foreign" />
+                <ScalarProperty Name="closed_price" ColumnName="closed_price" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="is_marginable" ColumnName="is_marginable" />
+                <ScalarProperty Name="lot" ColumnName="lot" />
+                <ScalarProperty Name="premium" ColumnName="premium" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="face_value" ColumnName="face_value" />
+                <ScalarProperty Name="depository_company_id" ColumnName="depository_company_id" />
+                <ScalarProperty Name="instument_type_id" ColumnName="instument_type_id" />
+                <ScalarProperty Name="sector_id" ColumnName="sector_id" />
+                <ScalarProperty Name="instrument_name" ColumnName="instrument_name" />
+                <ScalarProperty Name="security_code" ColumnName="security_code" />
+                <ScalarProperty Name="isin" ColumnName="isin" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInstrumentFundamentalInfoes">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblInstrumentFundamentalInfo">
+              <MappingFragment StoreEntitySet="tblInstrumentFundamentalInfo">
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="total_share" ColumnName="total_share" />
+                <ScalarProperty Name="total_liability" ColumnName="total_liability" />
+                <ScalarProperty Name="total_asset" ColumnName="total_asset" />
+                <ScalarProperty Name="nav" ColumnName="nav" />
+                <ScalarProperty Name="pe" ColumnName="pe" />
+                <ScalarProperty Name="eps" ColumnName="eps" />
+                <ScalarProperty Name="effective_dt" ColumnName="effective_dt" />
+                <ScalarProperty Name="instrument_id" ColumnName="instrument_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInstrumentMarginabilityHistories">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblInstrumentMarginabilityHistory">
+              <MappingFragment StoreEntitySet="tblInstrumentMarginabilityHistory">
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+                <ScalarProperty Name="highest_rate" ColumnName="highest_rate" />
+                <ScalarProperty Name="is_marginable" ColumnName="is_marginable" />
+                <ScalarProperty Name="effective_dt" ColumnName="effective_dt" />
+                <ScalarProperty Name="instrument_id" ColumnName="instrument_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInstrumentManualInOuts">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblInstrumentManualInOut">
+              <MappingFragment StoreEntitySet="tblInstrumentManualInOut">
+                <ScalarProperty Name="approve_date" ColumnName="approve_date" />
+                <ScalarProperty Name="approve_by" ColumnName="approve_by" />
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="transaction_type_id" ColumnName="transaction_type_id" />
+                <ScalarProperty Name="reference_no" ColumnName="reference_no" />
+                <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+                <ScalarProperty Name="instrument_id" ColumnName="instrument_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="psp_investor_share_transaction" FunctionName="Escrow.BOASModel.Store.psp_investor_share_transaction" />
+          <EntitySetMapping Name="vw_InvestorShareBalance">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.vw_InvestorShareBalance">
+              <MappingFragment StoreEntitySet="vw_InvestorShareBalance">
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="market_value" ColumnName="market_value" />
+                <ScalarProperty Name="market_price" ColumnName="market_price" />
+                <ScalarProperty Name="cost_value" ColumnName="cost_value" />
+                <ScalarProperty Name="cost_average" ColumnName="cost_average" />
+                <ScalarProperty Name="pledge_quantity" ColumnName="pledge_quantity" />
+                <ScalarProperty Name="lock_quantity" ColumnName="lock_quantity" />
+                <ScalarProperty Name="bonus_receivable_quantity" ColumnName="bonus_receivable_quantity" />
+                <ScalarProperty Name="ipo_receivable_quantity" ColumnName="ipo_receivable_quantity" />
+                <ScalarProperty Name="salable_quantity" ColumnName="salable_quantity" />
+                <ScalarProperty Name="ledger_quantity" ColumnName="ledger_quantity" />
+                <ScalarProperty Name="instrument_id" ColumnName="instrument_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_all_investors_account_type_setting">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.vw_all_investors_account_type_setting">
+              <MappingFragment StoreEntitySet="vw_all_investors_account_type_setting">
+                <ScalarProperty Name="withdrawable_amount" ColumnName="withdrawable_amount" />
+                <ScalarProperty Name="purchase_power" ColumnName="purchase_power" />
+                <ScalarProperty Name="ledger_balance" ColumnName="ledger_balance" />
+                <ScalarProperty Name="available_balance" ColumnName="available_balance" />
+                <ScalarProperty Name="profit_on_name" ColumnName="profit_on_name" />
+                <ScalarProperty Name="profit_on" ColumnName="profit_on" />
+                <ScalarProperty Name="loan_on_name" ColumnName="loan_on_name" />
+                <ScalarProperty Name="loan_on" ColumnName="loan_on" />
+                <ScalarProperty Name="loan_max" ColumnName="loan_max" />
+                <ScalarProperty Name="loan_ratio" ColumnName="loan_ratio" />
+                <ScalarProperty Name="withdraw_limit_percentage" ColumnName="withdraw_limit_percentage" />
+                <ScalarProperty Name="withdraw_limit" ColumnName="withdraw_limit" />
+                <ScalarProperty Name="withdraw_limit_on_name" ColumnName="withdraw_limit_on_name" />
+                <ScalarProperty Name="withdraw_limit_on" ColumnName="withdraw_limit_on" />
+                <ScalarProperty Name="minimum_balance_is_percentage" ColumnName="minimum_balance_is_percentage" />
+                <ScalarProperty Name="minimum_balance" ColumnName="minimum_balance" />
+                <ScalarProperty Name="minimun_balance_on_name" ColumnName="minimun_balance_on_name" />
+                <ScalarProperty Name="minimum_balance_on" ColumnName="minimum_balance_on" />
+                <ScalarProperty Name="initial_deposit" ColumnName="initial_deposit" />
+                <ScalarProperty Name="account_type_name" ColumnName="account_type_name" />
+                <ScalarProperty Name="account_type_id" ColumnName="account_type_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

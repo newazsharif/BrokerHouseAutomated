@@ -1,0 +1,222 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+
+<h2>Create Instrument</h2>
+<hr />
+
+<div @*class="container"*@ ng-controller="InstrumentController" ng-init="LoadAllDropDown()">
+
+    <form class="form-horizontal" ng-submit="" name="newInstrumentForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Name">Instrument Name</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="instrument.instrument_name" name="instrumentName" required onload-focus="true" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Sector">Sector</label>
+            </div>
+
+            <div class="col-md-4">
+                <select data-ng-model="instrument.sector_id" class="dropdown form-control input-sm"
+                        ng-options="Sector.value as Sector.text for Sector in SectorList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-2">
+                <label for="Instrument Type">Instrument Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="instrument.instument_type_id" class="dropdown form-control input-sm"
+                        ng-options="Type.value as Type.text for Type in TypeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Security_code">Security Code</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.security_code" enter-as-tab ng-blur="CheckSecurityName(instrument.security_code)" required />
+            </div>
+
+            <div class="col-md-2">
+                <label for="Authorise Capital">Authorized Capital</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.authorized_capital" enter-as-tab numbers-only />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Paid_up_capital">Paid Up Capital</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.paid_up_capital" enter-as-tab numbers-only />
+            </div>
+
+            <div class="col-md-2">
+                <label for="Reserved Capital">Reserved Capital</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.reserved_capital" readonly enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="depository_company">Depository Company</label>
+            </div>
+
+            <div class="col-md-4">
+                <select data-ng-model="instrument.depository_company_id" class="dropdown form-control input-sm"
+                        ng-options="Company.value as Company.text for Company in CompanyList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="ISIN">ISIN</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.isin" ng-maxlength="12" ng-minlength="12" ng-blur="CheckIsin(instrument.isin)" enter-as-tab />
+                <p class="help-block" ng-show="form.isin.$error.minlength || form.isin.$error.maxlength || form.isin.$invalid">
+                    ISIN Should be 12 character
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Face_value">Face Value</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="FaceValue" ng-model="instrument.face_value" enter-as-tab numbers-only required />
+            </div>
+
+            <div class="col-md-2">
+                <label for="Market_lot">Market Lot</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.lot" enter-as-tab numbers-only required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <div class="radio">
+                    <input type="radio" name="discountPremium" value="Premium" style="margin-left : 0px" ng-model="premiumRadio"  enter-as-tab /><label for="Premium">Premium</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.premium" numbers-only enter-as-tab>
+            </div>
+            <div class="col-md-2">
+                <div class="radio">
+                    <input type="radio" name="discountPremium" value="Discount" style="margin-left : 0px" ng-model="premiumRadio" enter-as-tab /><label for="Discount">Discount</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="instrument.discount" numbers-only enter-as-tab>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Closed_price">Closed Price</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="ClosedPrice" ng-model ="instrument.closed_price"  enter-as-tab />
+            </div>
+
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="isMarginable" ng-model="instrument.is_marginable" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isMarginable"> Marginable</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="EPS">EPS</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="EPS" ng-model="instrument.current_eps" enter-as-tab numbers-only />
+            </div>
+
+            <div class="col-md-2">
+                <label for="NAV">NAV</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="NAV" ng-model="instrument.current_nav" enter-as-tab numbers-only />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="PE">PE</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="PE" ng-model="instrument.current_pe" enter-as-tab numbers-only />
+            </div>
+
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="isForeign" ng-model="instrument.is_foreign" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isForeign"> Foreign</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Group">Group</label>
+            </div>
+
+            <div class="col-md-4">
+                <select data-ng-model="instrument.group_id" class="dropdown form-control input-sm"
+                        ng-options="Group.value as Group.text for Group in GroupList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="Status">Status</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="instrument.active_status_id" class="dropdown form-control input-sm"
+                        ng-options="Status.value as Status.text for Status in StatusList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveNewInstrument()" />
+                    <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadNewInsrument()" />
+                    <a href="/#InstrumentList" class="btn btn-default">List</a>
+                    </div>
+                </div>
+        
+    </form>
+</div>
+

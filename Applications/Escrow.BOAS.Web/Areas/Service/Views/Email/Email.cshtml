@@ -1,0 +1,244 @@
+﻿@{
+    Layout = null;
+}
+<h2>Email Module</h2>
+<hr/>
+
+<div class="row" ng-controller="EmailController" ng-init="init()">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="personalHeading" style="height:40px">
+                <div class="col-sm-4">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapsePersonalInformation" aria-expanded="false" aria-controls="collapsePersonalInformation">
+                            Others Information
+                        </a>
+                    </h4>
+                </div>                
+                <div class="col-sm-offset-5 col-sm-3" style="margin-top:-5px">
+                    <input type="text" class="input-sm" ng-model="investors" placeholder="Investor Search" />
+                    <input type="button" class="btn btn-default btn-sm" ng-click="SearchInvestor()" value="Search" />
+                </div>
+            </div>
+            <div id="collapsePersonalInformation" class="panel-collapse collapse " role="tabpanel" aria-labelledby="personalHeading">
+                <div class="panel-body">
+                    <div class="form-group col-sm-12">
+                        <div class="col-sm-3">
+                            <table st-table="displayedBranchCollection" st-safe-src="rowBranchCollection" class="table table-striped" fixed-header style="width:240px">
+                                <thead>
+                                <tr>
+                                    <th> <input type="checkbox" ng-checked="allBranchSelect" ng-model="allBranchSelect" ng-click="selectAll(displayedBranchCollection,allBranchSelect)"/></th>
+                                    <th>Branch</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody class="tbodyStyle" style="max-height:500px; overflow-y:auto scroll">
+                                <tr ng-repeat="row in displayedBranchCollection">
+                                    <td><input type="checkbox" ng-checked="row.selected" ng-model="row.selected" @*ng-click="changeSelectAll(row.selected,displayedBranchCollection)"*@/></td>
+                                    <td>{{row.name}}</td>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>                                    
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-3">
+                            <table st-table="displayedTraderCollection" st-safe-src="rowTraderCollection" class="table table-striped" fixed-header style="width:240px">
+                                <thead>
+                                    <tr>
+                                        <th> <input type="checkbox" ng-checked="allTraderSelect" ng-model="allTraderSelect" ng-click="selectAll(displayedTraderCollection,allTraderSelect)" /></th>
+                                        <th>Trader</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyStyle" style="max-height:500px; overflow-y:auto scroll">
+                                    <tr ng-repeat="row in displayedTraderCollection">
+                                        <td><input type="checkbox" ng-checked="row.selected" ng-model="row.selected" @*ng-click="changeSelectAll(row.selected,displayedTraderCollection)"*@ /></td>
+                                        <td>{{row.trader_code}}</td>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-3">
+                            <table st-table="displayedSubAccCollection" st-safe-src="rowSubAccCollection" class="table table-striped" fixed-header style="width:240px">
+                                <thead>
+                                    <tr>
+                                        <th> <input type="checkbox" ng-checked="allSubAccSelect" ng-model="allSubAccSelect" ng-click="selectAll(displayedSubAccCollection,allSubAccSelect)" /></th>
+                                        <th>Sub Account</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyStyle" style="max-height:500px; overflow-y:auto scroll">
+                                    <tr ng-repeat="row in displayedSubAccCollection">
+                                        <td><input type="checkbox" ng-checked="row.selected" ng-model="row.selected" @*ng-click="changeSelectAll(row.selected,displayedSubAccCollection)"*@ /></td>
+                                        <td>{{row.display_value}}</td>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            @*<div class="col-sm-4">
+                <input type="text" class="input-sm" ng-model="investors" placeholder="Investor Search"/>
+                <input type="button" class="btn btn-default" ng-click="SearchInvestor()" value="Search"/>
+            </div>*@
+            <div class="col-sm-4">
+                <table st-table="displayInvestorCollection" st-safe-src="rowInvestorCollection" class="table table-hover" fixed-header id="table-width-136">
+                    <thead>
+                        <tr>
+                            <th> <input type="checkbox" ng-checked="allInvestorSelect" ng-model="allInvestorSelect" ng-click="selectAll(displayInvestorCollection,allInvestorSelect)" /></th>
+                            <th>Investors</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyStyle" style="max-height:680px; overflow-y:auto scroll">
+                        <tr ng-repeat="row in displayInvestorCollection">
+                            <td><input type="checkbox" ng-checked="row.selected" ng-model="row.selected" @*ng-click="changeSelectAll(row.selected,displayedSubAccCollection)"*@ /></td>
+                            <td>{{row.client_id}}</td>
+                            <td>{{row.email_address}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-8">
+                <br />
+                <form>
+                    <div class="input-group col-sm-12">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm" type="submit">&nbsp;CC&nbsp;</button>
+                        </span>
+                        <input type="text" class="form-control input-sm" ng-model="dataCC" />
+                    </div><br />
+                    <div class="input-group col-sm-12">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm" style="margin-top:-10px" type="submit">BCC</button>
+                        </span>
+                        <input type="text" class="form-control input-sm" ng-model="dataBCC"/>
+                        <div class=" col-sm-offset-1 col-sm-2">
+                            <label class="col-sm-2 control-label">From Date</label>
+                        </div>
+                        <div class="">
+                            <p class="input-group">
+                                <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="from_date" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div><br />
+                    <div class="input-group col-sm-12">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-sm" style="margin-top:-12px" type="submit">SUB</button>
+                        </span>
+                        <input type="text" class="form-control input-sm" ng-model="dataSUB" />
+                        <div class="col-sm-offset-1 col-sm-2">
+                            <label class="col-sm-2 control-label">To Date</label>
+                        </div>
+                        <div class="">
+                            <p class="input-group">
+                                <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="to_date" is-open="opened2" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div></br>
+                    <div class="input-group col-sm-12">
+                        <span class="input-group-btn" >
+                            <button class="btn btn-default btn-sm" style="margin-top:-21px" type="submit">Attach File</button>
+                        </span>
+                        <input type="file" style="margin-left:1px" ngf-select ng-model="pdfFile" class="btn btn-default btn-sm" id="attachFileUpload" value="Upload" name="file" ngf-pattern="application/pdf" accept="application/pdf" ngf-max-size="20MB"><br />
+                       
+                    </div>
+                    <div class="input-group col-sm-12" style="padding-top:5px">
+                        <div class="col-sm-3">
+                            <input type="checkbox" value="Portfolio" data-ng-model="rptPortfolio" ng-checked="false" /> Portflolio report
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="checkbox" value="ClientLedger" data-ng-model="rptClientLedger" ng-checked="false" /> Client Ledger
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="checkbox" value="InstrumentLedger" data-ng-model="rptInstrumentLedger" ng-checked="false" /> Instrument Ledger
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="checkbox" value="TrdConfirmationStatement" data-ng-model="rptTrdConfirmationStatementClientWise" ng-checked="false" /> Trade Confirmation Statement
+                        </div>
+                        @*<div class="col-sm-3">
+                            <input type="checkbox" value="" data-ng-model="rptPayable" ng-checked="false" /> Instrument Ledger
+                        </div>*@
+                    </div>
+                </form>               
+                 <br />
+                    <text-angular name="textBox" ng-model="dataMsg" required></text-angular>
+                <br />
+              
+                <div class="col-sm-offset-5 col-sm-2">
+                    <button class="btn btn-default" type="submit" ng-click="SendMail(pdfFile)">Send Mail</button>
+                </div>
+                </div>
+           
+            <div class="col-sm-12">
+                <br />
+                <table st-table="displayMailResultCollection" st-safe-src="rowMailResultCollection" class="table table-hover" fixed-header id="table-width-136" style="margin-top:5px">
+                    <thead>
+                        <tr>
+                            <th st-sort="client_id">Client Id</th>
+                            <th st-sort="email_address">Email</th>
+                            <th st-sort="status">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyStyle" style="max-height:655px; overflow-y:auto scroll">
+                        <tr ng-repeat="row in rowMailResultCollection">
+                            <td>{{row.client_id}}</td>
+                            <td>{{row.email_address}}</td>
+                            <td>{{row.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                </div>
+
+            </div>
+        </div>

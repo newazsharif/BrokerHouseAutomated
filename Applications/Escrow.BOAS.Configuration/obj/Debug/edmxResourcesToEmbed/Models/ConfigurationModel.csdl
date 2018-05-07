@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="IsHolidayUSA" Type="Boolean" />
+    <Property Name="IsWeekday" Type="Boolean" />
+    <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHolidayUK" Type="Boolean" />
+    <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHoliday" Type="Boolean" />
+    <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblBrokerBranches" Relationship="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="DimDate" ToRole="tblBrokerBranch" />
+  </EntityType>
+  <EntityContainer Name="ConfigurationConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DimDates" EntityType="Self.DimDate" />
+    <EntitySet Name="tblBanks" EntityType="Escrow.BOASModel.tblBank" />
+    <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOASModel.tblConstantObject" />
+    <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOASModel.tblConstantObjectValue" />
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+    </AssociationSet>
+    <EntitySet Name="tblBrokerBranches" EntityType="Escrow.BOASModel.tblBrokerBranch" />
+    <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+    </AssociationSet>
+    <EntitySet Name="tblDailyWorkLists" EntityType="Escrow.BOASModel.tblDailyWorkList" />
+    <EntitySet Name="accMappings" EntityType="Escrow.BOASModel.accMapping" />
+    <FunctionImport Name="tfun_get_ledger_head" IsComposable="true" ReturnType="Collection(Escrow.BOASModel.tfun_get_ledger_head_Result)" />
+  </EntityContainer>
+  <EntityType Name="tblBank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="short_name" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="bank_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="sorting_order" Type="Int16" />
+    <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+  </EntityType>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Type="Escrow.BOASModel.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblBrokerBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ipo_branch_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="registration_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="tblBrokerBranch" ToRole="DimDate" />
+    <Property Name="investor_range" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblBrokerBranch">
+        <PropertyRef Name="registration_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblDailyWorkList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="work_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sort_order" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="is_done" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+  </EntityType>
+  <EntityType Name="accMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="gl_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ledger_head_id" Type="Int64" />
+  </EntityType>
+  <ComplexType Name="tfun_get_ledger_head_Result">
+    <Property Type="Int64" Name="ledger_id" Nullable="false" />
+    <Property Type="String" Name="ledger_code" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ledger_name" Nullable="true" MaxLength="100" />
+  </ComplexType>
+</Schema>

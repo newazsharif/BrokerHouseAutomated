@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOAS.AccountingManagement.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AccountingConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBanks" EntityType="Escrow.BOAS.AccountingManagement.Model.tblBank" />
+    <EntitySet Name="tblBankBranches" EntityType="Escrow.BOAS.AccountingManagement.Model.tblBankBranch" />
+    <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOAS.AccountingManagement.Model.tblConstantObject" />
+    <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue" />
+    <AssociationSet Name="FK_tblBankBranch_tblBank" Association="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblBank">
+      <End Role="tblBank" EntitySet="tblBanks" />
+      <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBankBranch_tblConstantObjectValue" Association="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOAS.AccountingManagement.Model.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblBank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="short_name" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="bank_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBankBranches" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblBank" FromRole="tblBank" ToRole="tblBankBranch" />
+  </EntityType>
+  <EntityType Name="tblBankBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branch_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="routing_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="bank_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="contact_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="district_id" Type="Decimal" Precision="4" Scale="0" />
+    <NavigationProperty Name="tblBank" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblBank" FromRole="tblBankBranch" ToRole="tblBank" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblConstantObjectValue" FromRole="tblBankBranch" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="sorting_order" Type="Int16" />
+    <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBankBranches" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblBankBranch" />
+    <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+  </EntityType>
+  <Association Name="FK_tblBankBranch_tblBank">
+    <End Type="Escrow.BOAS.AccountingManagement.Model.tblBank" Role="tblBank" Multiplicity="1" />
+    <End Type="Escrow.BOAS.AccountingManagement.Model.tblBankBranch" Role="tblBankBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBankBranch">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBankBranch_tblConstantObjectValue">
+    <End Type="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+    <End Type="Escrow.BOAS.AccountingManagement.Model.tblBankBranch" Role="tblBankBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBankBranch">
+        <PropertyRef Name="district_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Type="Escrow.BOAS.AccountingManagement.Model.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

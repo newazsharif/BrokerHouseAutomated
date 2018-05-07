@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5ce1dfa0445b41e3bd77a69a33dfcfce" Name="Diagram1" ZoomLevel="48">
+        <EntityTypeShape EntityType="Escrow.BOAS.Service.Models.DimDate" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="Escrow.BOAS.Service.Models.tblInstrument" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="Escrow.BOAS.Service.Models.tblInvestor" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="Escrow.BOAS.Service.Models.tblPlaceOrder" Width="1.5" PointX="5.25" PointY="5" />
+        <AssociationConnector Association="Escrow.BOAS.Service.Models.FK_tblInvestor_DimDate" />
+        <AssociationConnector Association="Escrow.BOAS.Service.Models.FK_tblPlaceOrder_DimDate" />
+        <AssociationConnector Association="Escrow.BOAS.Service.Models.FK_tblPlaceOrder_DimDate1" />
+        <AssociationConnector Association="Escrow.BOAS.Service.Models.FK_tblPlaceOrder_tblInstrument" />
+        <AssociationConnector Association="Escrow.BOAS.Service.Models.FK_tblPlaceOrder_tblInvestor" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

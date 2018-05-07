@@ -1,0 +1,75 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 19/9/2015
+    ///Reason: On Demand Charge List View
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "On Demand Charge Approve";
+    Layout = null;
+}
+@*<link href="~/Content/smart-table-sticky-header.css" rel="stylesheet" />*@
+<h2>On Demand Charge Approve</h2>
+<hr />
+<div class="row" ng-controller="OnDemandChargeApproveController" ng-init="loadOnDemCharApproveList()">
+    <div class="col-md-12">
+
+        <div>
+            <table style="overflow-x:scroll; width:100%; height:400px" st-table="displayedCollection" st-safe-src="rowCollection" class="table" fixed-header>
+                <thead>
+                    <tr>
+                        <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                        <th st-sort="transaction_dt">Date</th>
+                        <th st-sort="charge_name">Charge</th>
+                        <th st-sort="investor_no">No of Investor</th>
+                        <th st-sort="transaction_type">Transaction Type</th>
+                        <th st-sort="amount">Amount</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td row-select="row" ng-click="select(row.id)"></td>
+                        <td>{{row.transaction_dt}}</td>
+                        <td>{{row.charge_name}}</td>
+                        <td>{{row.investor_no}}</td>
+                        <td>{{row.transaction_type}}</td>
+                        <td>{{row.amount}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"> Total Amount</td>
+                        <td>{{ totalAmount }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"> Total Selected Amount</td>
+                        <td>{{ totalSelectedAmount }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Approve" data-ng-click="approveOnDemChar()" />
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+}

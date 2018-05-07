@@ -1,0 +1,60 @@
+﻿@using Escrow.Utility
+
+@{
+    Layout = null;
+}
+<h2>Actions List</h2>
+<hr />
+
+<div class="row" ng-controller="ActionController" ng-init="GetReportsList()">
+    <div class="col-md-12">
+        <a href="/#NewReport" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" min="1" class="form-control input-sm" ng-model="itemsByPage" numbers-only style="width : 150px" />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="url">URL</th>
+                    <th st-sort="module">Module</th>
+                    @*<th st-sort="controller">Controller</th>
+                    <th st-sort="is_view">Is View</th>
+                    <th st-sort="is_in_menu">Is Menu</th>*@
+                    @*<th st-sort="status">Status</th>*@
+                    <th>Edit</th>
+                </tr>
+                <tr>
+                    <th colspan="7"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" style="width : 200px" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.name}}</td>
+                    <td>{{row.url}}</td>
+                    <td>{{row.module}}</td>
+                    @*<td>{{row.controller}}</td>
+                    <td>{{row.is_view}}</td>
+                    <td>{{row.is_in_menu}}</td>*@
+
+                    <td><a href="/#EditReport/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    @*<td><a ng-click="DeleteConstantObject(row)" class="btn btn-link">&#@Constant.Delete;</a></td>*@
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+

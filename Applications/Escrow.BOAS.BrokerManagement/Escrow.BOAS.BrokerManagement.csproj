@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Escrow.BOAS.BrokerManagement</RootNamespace>
+    <AssemblyName>Escrow.BOAS.BrokerManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factories\BrokerBankAccountFactory.cs" />
+    <Compile Include="Factories\BrokerBranchFactory.cs" />
+    <Compile Include="Factories\BrokerImagesFactory.cs" />
+    <Compile Include="Factories\DepositoryParticipateFactory.cs" />
+    <Compile Include="Factories\EmployeeInformationFactory.cs" />
+    <Compile Include="Factories\InvestorFactory.cs" />
+    <Compile Include="Factories\TraderFactory.cs" />
+    <Compile Include="Factories\UserEmployeeMappingFactory.cs" />
+    <Compile Include="Interfaces\IBrokerBranchFactory.cs" />
+    <Compile Include="Interfaces\IInvestorFactory.cs" />
+    <Compile Include="Models\BrokerManagementModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BrokerManagementModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BrokerManagementModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BrokerManagementModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BrokerManagementModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DimDate.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\psp_get_investor_info_Result.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_branches_by_user_id_Result.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_get_investor_info_Result.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_get_investor_info_Result1.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ssp_get_investor_info_Result2.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBank.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBankBranch.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerBankAccount.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerBranch.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBrokerImage.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObject.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblConstantObjectValue.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblDepositoryPerticipant.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEmployee.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEmployeeUserMapping.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInvestor.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTrader.cs">
+      <DependentUpon>BrokerManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Models\BrokerManagementModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BrokerManagementModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\BrokerManagementModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BrokerManagementModel.edmx</DependentUpon>
+      <LastGenOutput>BrokerManagementModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\BrokerManagementModel.edmx.diagram">
+      <DependentUpon>BrokerManagementModel.edmx</DependentUpon>
+    </None>
+    <None Include="Models\BrokerManagementModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BrokerManagementModel.edmx</DependentUpon>
+      <LastGenOutput>BrokerManagementModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Escrow.Utility\Escrow.Utility.csproj">
+      <Project>{1861170e-d78f-45e2-8b0c-325ddb9e6e46}</Project>
+      <Name>Escrow.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

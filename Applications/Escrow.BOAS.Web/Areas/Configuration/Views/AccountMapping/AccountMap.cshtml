@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+<h2>
+    Map Account
+</h2>
+<hr/>
+<div class="row" ng-controller="AccountMappingController" ng-init="init()">
+    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped table table-hover" fixed-header id="table-width-136">
+        <thead>
+            <tr>
+                <th>MIS Head</th>
+                <th>GL Head</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyStyle" style="max-height:370px; overflow-y:auto">
+
+            <tr ng-repeat="row in displayedCollection">
+                <td>{{row.gl_name}}</td>
+                <td>
+                    <select data-ng-model="row.ledger_head_id" class="dropdown form-control input-sm"
+                            ng-options="Head.value as Head.text for Head in headList" enter-as-tab>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="col-md-offset-5">
+        <input type="submit" class="btn btn-default" value="Map Account" ng-click="UpdateAccountMapping()" />
+    </div>
+</div>

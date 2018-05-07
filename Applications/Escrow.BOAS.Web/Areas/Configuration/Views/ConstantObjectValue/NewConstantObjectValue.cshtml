@@ -1,0 +1,75 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 16/8/2015
+    ///Reason: Constant Object Value Add View
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Create New Constant Object Value";
+    Layout = null;
+}
+
+<h2>Create New Constant Object Value</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ConstantObjectValueController" ng-init="loadConstantObject()">
+    <form class="form-horizontal" ng-submit="" name="newConsValForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Object</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="constantObjectValue.object_id" class="dropdown form-control input-sm"
+                        ng-options="constantObject.value as constantObject.text for constantObject in constantObjectList" ng-change="getDefaultValue(constantObjectValue.object_id)" onload-focus="true" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-4 control-label" ng-style="customStyle.style">{{default_value}}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Value</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="objectValue" class="form-control input-sm" data-ng-model="constantObjectValue.display_value" enter-as-tab required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Sort Order</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="sortingOrder" class="form-control input-sm" data-ng-model="constantObjectValue.sorting_order" enter-as-tab positive-numbers-only />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Remarks</label>
+            </div>
+            <div class="col-md-7">
+                <textarea name="remarks" class="form-control input-sm" data-ng-model="constantObjectValue.remarks" enter-as-tab></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <input type="checkbox" name="isDefault" data-ng-model="constantObjectValue.is_default" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isDefault"> Default</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveNewConstantObjectValue()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#ConstantObjectValue" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section Scripts {
+}
+

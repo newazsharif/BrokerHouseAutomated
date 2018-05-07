@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<h2>Declare Non Trading Day</h2>
+<hr />
+
+<div @*class="container"*@ ng-controller="NonTradingDayController">
+    <form class="form-horizontal" ng-submit="" name="newNonTradingDayForm" ng-init="LoadAllDropdown()">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Purpose">Purpose</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="nonTradingDayMaster.remarks" onload-focus="true" enter-as-tab />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Type">Type</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="type_id" data-ng-model="nonTradingDayMaster.non_trading_type_id" class="dropdown form-control input-sm"
+                            ng-options="non_trading_type.value as non_trading_type.text for non_trading_type in non_trading_typeList" ng-change="UploadPartial(nonTradingDayMaster.non_trading_type_id)" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="from_date">From Date</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="nonTradingDayMaster.frm_dt" is-open="opened1" min-date="minDate" max-date="nonTradingDayMaster.to_dt" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <button style="margin-left : -60px" type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="to_date">To Date</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="nonTradingDayMaster.to_dt" is-open="opened2" min-date="nonTradingDayMaster.frm_dt" max-date="maxDate" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <button style="margin-left : -60px" type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+
+            <div id="partialPlaceHolder" ng-include="dynamicTemplate">
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Save" data-ng-click="SaveNonTradingDay()" />
+                    
+                    <a href="/#NonTradingDayList" class="btn btn-default">List</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@*<script>
+    $('#type_id').change(function () {
+        debugger;
+        var selectedID = $(this).val();
+        if (selectedID == '0')
+        {
+            //$.get('/Trade/Trade/_OnDemandPartial', function (data) {
+            //    $('#partialPlaceHolder').html(data);
+            //    $('#partialPlaceHolder').fadeIn('slow');
+            //})
+            $("#partialPlaceHolder").show();
+        }
+        else if (selectedID == '1') {
+            //$.get('/Trade/Trade/_WeeklyPartial', function (data) {
+            //    $('#partialPlaceHolder').html(data);
+            //})
+            $("#partialPlaceHolder").hide();
+        }
+        
+    })
+</script>*@
+
+
+

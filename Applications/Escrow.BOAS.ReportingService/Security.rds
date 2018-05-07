@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Security">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=192.168.0.15;Initial Catalog=Escrow.Security</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>838bb115-7264-43a8-8fc2-58714fd14076</DataSourceID>
+</RptDataSource>

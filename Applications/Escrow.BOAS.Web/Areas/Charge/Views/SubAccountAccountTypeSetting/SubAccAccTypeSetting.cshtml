@@ -1,0 +1,157 @@
+﻿@*
+    ///==============================================
+    ///Created by: Shohid
+    ///Edit date: 31/01/2016
+    ///Reason: Sub Account Account Type Setting
+    ///==============================================
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Sub Account Account Type Setting";
+    Layout = null;
+}
+
+<h2>Add Sub Account Account Type Setting</h2>
+<div @*class="container"*@ ng-controller="SubAccountAccountTypeSettingController" ng-init="loadDropdowns()">
+    <form class="form-horizontal" ng-submit="" name="newAccTypeSettingForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Sub Account Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="accountTypeSetting.sub_account_id" class="dropdown form-control input-sm"
+                        ng-options="subAccount.value as subAccount.text for subAccount in subAccountList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Account Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="accountTypeSetting.account_type_id" class="dropdown form-control input-sm"
+                        ng-options="investorAccountType.value as investorAccountType.text for investorAccountType in investorAccountTypeList" onload-focus="true" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Initial Deposit</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="accountTypeSetting.initial_deposit" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Min Balance On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="accountTypeSetting.minimum_balance_on" class="dropdown form-control input-sm"
+                        ng-options="minimumBalanceOn.value as minimumBalanceOn.text for minimumBalanceOn in minimumBalanceOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Min Balance</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="accountTypeSetting.minimum_balance" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="minimumBalanceIsPercentage" data-ng-model="accountTypeSetting.minimum_balance_is_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="minimumBalanceIsPercentage"> Percentage</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Withdraw Limit On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="accountTypeSetting.withdraw_limit_on" class="dropdown form-control input-sm"
+                        ng-options="wthdrawLimitOn.value as wthdrawLimitOn.text for wthdrawLimitOn in wthdrawLimitOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Withdraw Limit</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="accountTypeSetting.withdraw_limit" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="withdrawLimitPercentage" data-ng-model="accountTypeSetting.withdraw_limit_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="withdrawLimitPercentage"> Percentage</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Loan On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="accountTypeSetting.loan_on" class="dropdown form-control input-sm"
+                        ng-options="loadOn.value as loadOn.text for loadOn in loadOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Max Loan</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="accountTypeSetting.loan_max" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="loanRatio" data-ng-model="editAccTypeSetting.loan_ratio" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="loanRatio"> Loan Ratio</label>
+            </div>
+
+            <div class="col-md-2">
+                <label>Profit On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="accountTypeSetting.profit_on" class="dropdown form-control input-sm"
+                        ng-options="profitOn.value as profitOn.text for profitOn in profitOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="addAccTypeSetting()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#SubAccountAccountTypeSettingList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

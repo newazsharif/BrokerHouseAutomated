@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>Escrow</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@user_id">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Object</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@membership_id">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Double</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>declare @is_admin numeric(1,0)
+
+select @is_admin =  is_admin from [Escrow.Security].dbo.tblBrokerUser where UserId = @user_id
+print @is_admin
+
+IF(@is_admin = 1)
+BEGIN
+	SELECT        NULL AS id, '--All--' AS name
+	UNION ALL
+
+	SELECT        id, name
+	FROM            broker.tblBrokerBranch
+	WHERE        (membership_id = @membership_id)
+	ORDER BY name
+END
+ELSE
+
+BEGIN
+	SELECT          distinct tbb.id as id, tbb.name as name
+	FROM            broker.tblBrokerBranch tbb
+	INNER JOIN	broker.tblEmployee te on tbb.id = te.branch_id and 						tbb.membership_id = te.membership_id
+	INNER JOIN	broker.tblEmployeeUserMapping teu on te.id = teu.employee_id 			and teu.membership_id = te.membership_id
+	WHERE        tbb.membership_id = 63 and teu.user_id = @user_id
+	ORDER BY name
+END</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="id">
+        <DataField>id</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="name">
+        <DataField>name</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

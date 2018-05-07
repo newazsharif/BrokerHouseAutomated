@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Flextrade-BOS-Control" version="0.7.10" elementFormDefault="qualified">
+  <xs:element nillable="false" name="Control">
+    <xs:complexType>
+      <xs:attribute name="Method" type="MethodType" default="MD5" />
+      <xs:attribute name="Hash">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="MethodType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MD5" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

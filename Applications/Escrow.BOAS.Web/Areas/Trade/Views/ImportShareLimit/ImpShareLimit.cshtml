@@ -1,0 +1,64 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 28/12/2015
+    ///Reason:
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Import Share Limits";
+    Layout = null;
+}
+
+<h2>Import Share Limits</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ImportShareLimitController" ng-init="loadDropdowns()">
+
+    <form class="form-horizontal" ng-submit="" name="newImpShareLimitForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Date</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="import_dt" enter-as-tab ng-readonly="true" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Omnibus Master</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="omnibus_master_id" class="dropdown form-control input-sm"
+                        ng-options="omnibusMaster.value as omnibusMaster.text for omnibusMaster in omnibusMasterList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <input type="file" ngf-select ng-model="txtFile" class="btn-primary" id="FileUpload" name="file" accept="text/plain" ngf-max-size="2MB"><br />
+            </div>
+
+            <div class="col-md-2">
+                <input type="submit" class="btn btn-default btn-sm" value="Upload" data-ng-click="uploadShareLimit(txtFile)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveImpShareLimit()" />
+                <a href="/#ImportShareLimitList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

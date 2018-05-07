@@ -1,0 +1,61 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 21/9/2015
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "User Employee Mapping";
+    Layout = null;
+}
+
+<h2>User Employee Mapping</h2>
+<div class="row" ng-controller="UserEmployeeMappingController" ng-init="loadUserEmpMapList()">
+    <div class="col-md-12">
+        <a href="/#NewUserEmployeeMapping" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th st-sort="user">User</th>
+                    <th st-sort="employee">Employee</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="4"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+
+                    <td>{{ row.user }}</td>
+                    <td>{{ row.employee }}</td>
+                    <td><a href="/#EditUserEmployeeMapping/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteUserEmployeeMapping(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            <tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+}
+

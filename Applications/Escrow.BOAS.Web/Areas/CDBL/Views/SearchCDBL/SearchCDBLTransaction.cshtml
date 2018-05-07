@@ -1,0 +1,144 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 10/10/2015
+    ///Reason: Search CDBL Transaction Add View
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Search CDBL Transaction";
+    Layout = null;
+}
+
+<h2>Search CDBL Transaction</h2>
+<div @*class="container"*@ ng-controller="SearchCDBLController" ng-init="loadDataAndDropdown()">
+    <div class="form-horizontal" ng-submit="" name="newSrhCdblForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>From</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="newSrhCdbl.from_date" is-open="opened1" min-date="minDate" max-date="newSrhCdbl.to_date" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+
+            <div class="col-md-2">
+                <label>To</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="newSrhCdbl.to_date" is-open="opened2" min-date="newSrhCdbl.from_date" max-date="'31/12/9999'" ng-required="false" show-weeks="false" show-button-bar="false" enter-as-tab />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Bo Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="newSrhCdbl.bo_code" enter-as-tab />
+            </div>
+
+            <div class="col-md-2">
+                <label>Client ID</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="newSrhCdbl.client_id" enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Transaction Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="newSrhCdbl.transaction_type_id" class="dropdown form-control input-sm"
+                        ng-options="transactionType.value as transactionType.text for transactionType in transactionTypeList" ng-change="showHide();" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <fieldset ng-show="newSrhCdbl.fldCompany">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Company</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="newSrhCdbl.instrument_id" class="dropdown form-control input-sm"
+                            ng-options="instrument.value as instrument.text for instrument in instrumentList" enter-as-tab>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Status</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="newSrhCdbl.active_status_id" class="dropdown form-control input-sm"
+                        ng-options="activeStatus.value as activeStatus.text for activeStatus in activeStatusList" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="button" class="btn btn-default" value="Search" data-ng-click="loadCdblTable()" />
+            </div>
+        </div>
+
+        <fieldset ng-show="newSrhCdbl.fldRate">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="radio" class="col-md-2" name="marketUnitPrice" value="Market Price" style="margin-left : 0px" data-ng-model="newSrhCdbl.market_unit_price" enter-as-tab /><label for="marketPrice">Market Price</label>
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="marketUnitPrice" value="Unit Price" style="margin-left : 0px" data-ng-model="newSrhCdbl.market_unit_price" enter-as-tab /><label for="unitPrice">Unit Price</label>
+                </div>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" data-ng-model="newSrhCdbl.unit_price" ng-if="newSrhCdbl.market_unit_price=='Unit Price'" enter-as-tab />
+                </div>
+                <div class="col-md-2">
+                    <input type="button" class="btn btn-default" value="Update" data-ng-click="updateTable()" />
+                </div>
+            </div>
+        </fieldset>
+
+        <div>
+            <table @*style="height:350px; width:420%"*@ st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped" fixed-header id="table-width-420">
+                <thead style="width:420%">
+                    <tr>
+                        <th ng-repeat="col in collCollection">{{col}}</th>
+                    </tr>
+                </thead>
+                <tbody style="overflow-x:scroll; height:350px; width:420%">
+                    <tr ng-repeat="row in displayedCollection">
+                        <td ng-repeat="col in collCollection">
+                            {{ row[col] }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+}
+

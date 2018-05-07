@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Flextrade-BOS-Positions" version="0.7.10" elementFormDefault="qualified">
+  <xs:element nillable="false" name="Positions">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- Delete all positions for all clients (for that broker) -->
+        <xs:element name="DeleteAllPositions" minOccurs="0" maxOccurs="1" />
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <!-- Delete all positions for that client account -->
+          <xs:element name="Delete" type="DeletePositions" />
+          <!-- Insert one position for that client account -->
+          <xs:element name="InsertOne" type="InsertOnePosition" />
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="ProcessingMode" type="ProcessingMode" default="BatchInsertOrUpdate" use="optional" />
+      <xs:attribute name="BrokerID" type="BrokerID" use="optional" />
+    </xs:complexType>
+    <xs:unique name="DeleteUniqueKey">
+      <xs:selector xpath="Delete" />
+      <xs:field xpath="ClientCode" />
+    </xs:unique>
+    <xs:unique name="InsertOneUniqueKey">
+      <xs:selector xpath="InsertOne" />
+      <xs:field xpath="ClientCode" />
+      <xs:field xpath="SecurityCode" />
+      <xs:field xpath="PositionType" />
+    </xs:unique>
+  </xs:element>
+  <!-- Processing must take the following value
+      - BatchInsert (default) : for initial sending of huge transactions number. 
+      - IncrementQuantity: by adding the new transaction to the old one  
+  -->
+  <xs:simpleType name="ProcessingMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BatchInsertOrUpdate" />
+      <xs:enumeration value="IncrementQuantity" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Delete all positions for that client account -->
+  <xs:complexType name="DeletePositions">
+    <xs:all minOccurs="1" maxOccurs="1">
+      <xs:element name="ClientCode" type="ClientCode" />
+    </xs:all>
+  </xs:complexType>
+  <!-- Insert one position for that client account -->
+  <xs:complexType name="InsertOnePosition">
+    <xs:all minOccurs="1" maxOccurs="1">
+      <xs:element name="ClientCode" type="ClientCode" />
+      <!-- Note: only Security Code is processed by Mottai / not ISIN -->
+      <xs:element name="SecurityCode" type="SecurityCode" />
+      <xs:element name="ISIN" type="ISIN" minOccurs="0" />
+      <xs:element name="Quantity" type="xs:long" />
+      <xs:element name="TotalCost" type="xs:double" />
+      <xs:element name="PositionType" type="PositionType" default="Long" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="BrokerID">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ClientCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Security Code, sole instrument identifier as processed by Mottai -->
+  <xs:simpleType name="SecurityCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- ISIN: indicative, i.e. not processed by Mottai -->
+  <xs:simpleType name="ISIN">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="12" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PositionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Long" />
+      <xs:enumeration value="Short" />
+      <xs:enumeration value="Borrowed" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

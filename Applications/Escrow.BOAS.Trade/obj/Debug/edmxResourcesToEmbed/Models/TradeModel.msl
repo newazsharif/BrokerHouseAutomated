@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EscrowBOASModelStoreContainer" CdmEntityContainer="TradeEntities">
+    <EntitySetMapping Name="DimDates">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.DimDate">
+        <MappingFragment StoreEntitySet="DimDate">
+          <ScalarProperty Name="FullDateCDBL" ColumnName="FullDateCDBL" />
+          <ScalarProperty Name="FiscalLastDayOfYear" ColumnName="FiscalLastDayOfYear" />
+          <ScalarProperty Name="FiscalFirstDayOfYear" ColumnName="FiscalFirstDayOfYear" />
+          <ScalarProperty Name="FiscalLastDayOfQuarter" ColumnName="FiscalLastDayOfQuarter" />
+          <ScalarProperty Name="FiscalFirstDayOfQuarter" ColumnName="FiscalFirstDayOfQuarter" />
+          <ScalarProperty Name="FiscalLastDayOfMonth" ColumnName="FiscalLastDayOfMonth" />
+          <ScalarProperty Name="FiscalFirstDayOfMonth" ColumnName="FiscalFirstDayOfMonth" />
+          <ScalarProperty Name="FiscalMMYYYY" ColumnName="FiscalMMYYYY" />
+          <ScalarProperty Name="FiscalMonthYear" ColumnName="FiscalMonthYear" />
+          <ScalarProperty Name="FiscalYearName" ColumnName="FiscalYearName" />
+          <ScalarProperty Name="FiscalYear" ColumnName="FiscalYear" />
+          <ScalarProperty Name="FiscalQuarterName" ColumnName="FiscalQuarterName" />
+          <ScalarProperty Name="FiscalQuarter" ColumnName="FiscalQuarter" />
+          <ScalarProperty Name="FiscalMonth" ColumnName="FiscalMonth" />
+          <ScalarProperty Name="FiscalWeekOfYear" ColumnName="FiscalWeekOfYear" />
+          <ScalarProperty Name="FiscalDayOfYear" ColumnName="FiscalDayOfYear" />
+          <ScalarProperty Name="Holiday" ColumnName="Holiday" />
+          <ScalarProperty Name="IsHoliday" ColumnName="IsHoliday" />
+          <ScalarProperty Name="HolidayUK" ColumnName="HolidayUK" />
+          <ScalarProperty Name="IsHolidayUK" ColumnName="IsHolidayUK" />
+          <ScalarProperty Name="HolidayUSA" ColumnName="HolidayUSA" />
+          <ScalarProperty Name="IsWeekday" ColumnName="IsWeekday" />
+          <ScalarProperty Name="IsHolidayUSA" ColumnName="IsHolidayUSA" />
+          <ScalarProperty Name="LastDayOfYear" ColumnName="LastDayOfYear" />
+          <ScalarProperty Name="FirstDayOfYear" ColumnName="FirstDayOfYear" />
+          <ScalarProperty Name="LastDayOfQuarter" ColumnName="LastDayOfQuarter" />
+          <ScalarProperty Name="FirstDayOfQuarter" ColumnName="FirstDayOfQuarter" />
+          <ScalarProperty Name="LastDayOfMonth" ColumnName="LastDayOfMonth" />
+          <ScalarProperty Name="FirstDayOfMonth" ColumnName="FirstDayOfMonth" />
+          <ScalarProperty Name="MMYYYY" ColumnName="MMYYYY" />
+          <ScalarProperty Name="MonthYear" ColumnName="MonthYear" />
+          <ScalarProperty Name="YearName" ColumnName="YearName" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+          <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+          <ScalarProperty Name="MonthOfQuarter" ColumnName="MonthOfQuarter" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="WeekOfYear" ColumnName="WeekOfYear" />
+          <ScalarProperty Name="WeekOfQuarter" ColumnName="WeekOfQuarter" />
+          <ScalarProperty Name="WeekOfMonth" ColumnName="WeekOfMonth" />
+          <ScalarProperty Name="DayOfYear" ColumnName="DayOfYear" />
+          <ScalarProperty Name="DayOfQuarter" ColumnName="DayOfQuarter" />
+          <ScalarProperty Name="DayOfWeekInYear" ColumnName="DayOfWeekInYear" />
+          <ScalarProperty Name="DayOfWeekInMonth" ColumnName="DayOfWeekInMonth" />
+          <ScalarProperty Name="DayOfWeekUK" ColumnName="DayOfWeekUK" />
+          <ScalarProperty Name="DayOfWeekUSA" ColumnName="DayOfWeekUSA" />
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
+          <ScalarProperty Name="DaySuffix" ColumnName="DaySuffix" />
+          <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
+          <ScalarProperty Name="FullDateUSA" ColumnName="FullDateUSA" />
+          <ScalarProperty Name="FullDateUK" ColumnName="FullDateUK" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="DateKey" ColumnName="DateKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblConstantObjects">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblConstantObject">
+        <MappingFragment StoreEntitySet="tblConstantObject">
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="object_name" ColumnName="object_name" />
+          <ScalarProperty Name="object_id" ColumnName="object_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblConstantObjectValues">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblConstantObjectValue">
+        <MappingFragment StoreEntitySet="tblConstantObjectValue">
+          <ScalarProperty Name="is_default" ColumnName="is_default" />
+          <ScalarProperty Name="sorting_order" ColumnName="sorting_order" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="object_id" ColumnName="object_id" />
+          <ScalarProperty Name="display_value" ColumnName="display_value" />
+          <ScalarProperty Name="object_value_id" ColumnName="object_value_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="psp_execute_close_price_file" FunctionName="Escrow.BOASModel.Store.psp_execute_close_price_file" />
+    <FunctionImportMapping FunctionImportName="isp_non_trading_day" FunctionName="Escrow.BOASModel.Store.isp_non_trading_day" />
+    <EntitySetMapping Name="tblClosingPrices">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblClosingPrice">
+        <MappingFragment StoreEntitySet="tblClosingPrice">
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="var_percent" ColumnName="var_percent" />
+          <ScalarProperty Name="var" ColumnName="var" />
+          <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+          <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="trans_dt" ColumnName="trans_dt" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="closing_price" ColumnName="closing_price" />
+          <ScalarProperty Name="low_price" ColumnName="low_price" />
+          <ScalarProperty Name="high_price" ColumnName="high_price" />
+          <ScalarProperty Name="open_price" ColumnName="open_price" />
+          <ScalarProperty Name="security_code" ColumnName="security_code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNonTradingDetails">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblNonTradingDetail">
+        <MappingFragment StoreEntitySet="tblNonTradingDetail">
+          <ScalarProperty Name="master_id" ColumnName="master_id" />
+          <ScalarProperty Name="non_trading_date" ColumnName="non_trading_date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNonTradingMasters">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblNonTradingMaster">
+        <MappingFragment StoreEntitySet="tblNonTradingMaster">
+          <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+          <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+          <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="input_info" ColumnName="input_info" />
+          <ScalarProperty Name="non_trading_type_id" ColumnName="non_trading_type_id" />
+          <ScalarProperty Name="to_date" ColumnName="to_date" />
+          <ScalarProperty Name="from_date" ColumnName="from_date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tmpTradeDatas">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tmpTradeData">
+        <MappingFragment StoreEntitySet="tmpTradeData">
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="Comission" ColumnName="Comission" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TradeReportType" ColumnName="TradeReportType" />
+          <ScalarProperty Name="OwnerDealerID" ColumnName="OwnerDealerID" />
+          <ScalarProperty Name="TraderDealerID" ColumnName="TraderDealerID" />
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="CompulsorySpot" ColumnName="CompulsorySpot" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="FillType" ColumnName="FillType" />
+          <ScalarProperty Name="Session" ColumnName="Session" />
+          <ScalarProperty Name="ExecID" ColumnName="ExecID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Board" ColumnName="Board" />
+          <ScalarProperty Name="SecurityCode" ColumnName="SecurityCode" />
+          <ScalarProperty Name="BoId" ColumnName="BoId" />
+          <ScalarProperty Name="Side" ColumnName="Side" />
+          <ScalarProperty Name="ReOrderId" ColumnName="ReOrderId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="AssetClass" ColumnName="AssetClass" />
+          <ScalarProperty Name="Isin" ColumnName="Isin" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTradeDatas">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblTradeData">
+        <MappingFragment StoreEntitySet="tblTradeData">
+          <ScalarProperty Name="is_settled" ColumnName="is_settled" />
+          <ScalarProperty Name="settled_date" ColumnName="settled_date" />
+          <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+          <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="client_branch_id" ColumnName="client_branch_id" />
+          <ScalarProperty Name="trader_branch_id" ColumnName="trader_branch_id" />
+          <ScalarProperty Name="ait" ColumnName="ait" />
+          <ScalarProperty Name="transaction_fee" ColumnName="transaction_fee" />
+          <ScalarProperty Name="commission_amount" ColumnName="commission_amount" />
+          <ScalarProperty Name="commission_rate" ColumnName="commission_rate" />
+          <ScalarProperty Name="OwnerDealerID" ColumnName="OwnerDealerID" />
+          <ScalarProperty Name="TraderDealerID" ColumnName="TraderDealerID" />
+          <ScalarProperty Name="CompulsorySpot" ColumnName="CompulsorySpot" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="FillType" ColumnName="FillType" />
+          <ScalarProperty Name="ExecID" ColumnName="ExecID" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="market_type_id" ColumnName="market_type_id" />
+          <ScalarProperty Name="stock_exchange_id" ColumnName="stock_exchange_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="AssetClass" ColumnName="AssetClass" />
+          <ScalarProperty Name="instrument_id" ColumnName="instrument_id" />
+          <ScalarProperty Name="trade_id" ColumnName="trade_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="psp_execute_trade_file" FunctionName="Escrow.BOASModel.Store.psp_execute_trade_file" />
+    <FunctionImportMapping FunctionImportName="psp_reverse_trade_file" FunctionName="Escrow.BOASModel.Store.psp_reverse_trade_file" />
+    <FunctionImportMapping FunctionImportName="psp_export_omnibus_trade" FunctionName="Escrow.BOASModel.Store.psp_export_omnibus_trade" />
+    <EntitySetMapping Name="tblFTOmnibusImportLogs">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblFTOmnibusImportLog">
+        <MappingFragment StoreEntitySet="tblFTOmnibusImportLog">
+          <ScalarProperty Name="omnibus_master_id" ColumnName="omnibus_master_id" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="export_log_id" ColumnName="export_log_id" />
+          <ScalarProperty Name="export_st" ColumnName="export_st" />
+          <ScalarProperty Name="wrong" ColumnName="wrong" />
+          <ScalarProperty Name="success" ColumnName="success" />
+          <ScalarProperty Name="version_no" ColumnName="version_no" />
+          <ScalarProperty Name="import_dt" ColumnName="import_dt" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="file_type" ColumnName="file_type" />
+          <ScalarProperty Name="log_id" ColumnName="log_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ssp_ft_exp_log_list" FunctionName="Escrow.BOASModel.Store.ssp_ft_exp_log_list">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Escrow.BOASModel.ssp_ft_exp_log_list_Result">
+          <ScalarProperty Name="log_id" ColumnName="log_id" />
+          <ScalarProperty Name="file_type" ColumnName="file_type" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="control_name" ColumnName="control_name" />
+          <ScalarProperty Name="import_dt" ColumnName="import_dt" />
+          <ScalarProperty Name="version_no" ColumnName="version_no" />
+          <ScalarProperty Name="success" ColumnName="success" />
+          <ScalarProperty Name="wrong" ColumnName="wrong" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="psp_upload_trade" FunctionName="Escrow.BOASModel.Store.psp_upload_trade">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Escrow.BOASModel.psp_upload_trade_Result">
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="error" ColumnName="error" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblInitialTrades">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblInitialTrade">
+        <MappingFragment StoreEntitySet="tblInitialTrade">
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="Comission" ColumnName="Comission" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TradeReportType" ColumnName="TradeReportType" />
+          <ScalarProperty Name="OwnerDealerID" ColumnName="OwnerDealerID" />
+          <ScalarProperty Name="TraderDealerID" ColumnName="TraderDealerID" />
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="CompulsorySpot" ColumnName="CompulsorySpot" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="FillType" ColumnName="FillType" />
+          <ScalarProperty Name="Session" ColumnName="Session" />
+          <ScalarProperty Name="ExecID" ColumnName="ExecID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Board" ColumnName="Board" />
+          <ScalarProperty Name="SecurityCode" ColumnName="SecurityCode" />
+          <ScalarProperty Name="BoId" ColumnName="BoId" />
+          <ScalarProperty Name="Side" ColumnName="Side" />
+          <ScalarProperty Name="ReOrderId" ColumnName="ReOrderId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="AssetClass" ColumnName="AssetClass" />
+          <ScalarProperty Name="Isin" ColumnName="Isin" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInitialClientReceivablePayables">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblInitialClientReceivablePayable">
+        <MappingFragment StoreEntitySet="tblInitialClientReceivablePayable">
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="psp_upload_initial_trade" FunctionName="Escrow.BOASModel.Store.psp_upload_initial_trade">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Escrow.BOASModel.psp_upload_initial_trade_Result">
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="error" ColumnName="error" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

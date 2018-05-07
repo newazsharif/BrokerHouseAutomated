@@ -1,0 +1,151 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 3/1/2015
+    ///Reason: Investor Charges Add View
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Investor Charges";
+    Layout = null;
+}
+
+<h2>Investor Charges</h2>
+<div @*class="container"*@ ng-controller="InvestorChargesController" ng-init="loadDropdowns()">
+    <form class="form-horizontal" ng-submit="" name="newInvChargeForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Investor Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="invCharges.client_id" ng-blur="getInvestorInfoForAdd()" onload-focus="true" enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyle.style">{{invCharges.first_holder_name}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Charges</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="invCharges.global_charge_id" class="dropdown form-control input-sm"
+                        ng-options="charge.value as charge.text for charge in chargeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Minimum Charge</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="invCharges.minimum_charge" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Charge Amount</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="invCharges.charge_amount" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="isPercentage" data-ng-model="invCharges.is_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isPercentage"> Percentage</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="checkbox" name="isSlab" data-ng-model="invCharges.is_slab" ng-true-value=1 ng-false-value=0 ng-change="showHideSlab()" enter-as-tab /><label for="isSlab"> Slab</label>
+            </div>
+        </div>
+
+        <fieldset ng-if="invCharges.is_slab == 1">
+            <legend>Slab Details</legend>
+
+            <div class="col-md-3">
+                <input type="button" class="btn btn-default" value="Add" data-ng-click="AddInvSlab()" />
+            </div>
+            <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="amount_from">Amount From</th>
+                        <th st-sort="amount_to">Amount To</th>
+                        <th st-sort="charge_amount">Charge Amount</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td>{{row.amount_from}}</td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="row.amount_to" positive-numbers-only style="border:none; width:100px" /></td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="row.charge_amount" positive-numbers-only style="border:none; width:100px" /></td>
+                        <td><a ng-click="DeleteInvSlab(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+        <fieldset ng-show="invCharges.fldInv">
+            <legend>Investor Information</legend>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Available Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{invCharges.available_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Ledger Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{invCharges.ledger_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Investor Photo</p>
+                    <img ngf-src="invCharges.invPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Investor Signature</p>
+                    <img ngf-src="invCharges.invSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Joint Holders Photo</p>
+                    <img ngf-src="invCharges.invJoinHolderPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Joint Holders Signature</p>
+                    <img ngf-src="invCharges.invJoinHolderSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="addCharge()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#InvestorChargesList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

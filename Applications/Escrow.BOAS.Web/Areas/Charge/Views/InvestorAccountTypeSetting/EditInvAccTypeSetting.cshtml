@@ -1,0 +1,195 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 31/01/2016
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Investor Account Type Setting";
+    Layout = null;
+}
+
+<h2>Investor Account Type Setting</h2>
+<div @*class="container"*@ ng-controller="InvestorAccountTypeSettingController" ng-init="loadDropdownsAndInfo()">
+    <form class="form-horizontal" ng-submit="" name="editInvAccTypeSettingForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Investor Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editInvAccTypeSetting.client_id" ng-blur="getInvestorInfoForEdit()" onload-focus="true" enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyle.style">{{editInvAccTypeSetting.first_holder_name}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Account Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editInvAccTypeSetting.account_type_id" class="dropdown form-control input-sm"
+                        ng-options="investorAccountType.value as investorAccountType.text for investorAccountType in investorAccountTypeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Initial Deposit</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editInvAccTypeSetting.initial_deposit" onload-focus="true" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Min Balance On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editInvAccTypeSetting.minimum_balance_on" class="dropdown form-control input-sm"
+                        ng-options="minimumBalanceOn.value as minimumBalanceOn.text for minimumBalanceOn in minimumBalanceOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Min Balance</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editInvAccTypeSetting.minimum_balance" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="minimumBalanceIsPercentage" data-ng-model="editInvAccTypeSetting.minimum_balance_is_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="minimumBalanceIsPercentage"> Percentage</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Withdraw Limit On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editInvAccTypeSetting.withdraw_limit_on" class="dropdown form-control input-sm"
+                        ng-options="wthdrawLimitOn.value as wthdrawLimitOn.text for wthdrawLimitOn in wthdrawLimitOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Withdraw Limit</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editInvAccTypeSetting.withdraw_limit" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="withdrawLimitPercentage" data-ng-model="editInvAccTypeSetting.withdraw_limit_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="withdrawLimitPercentage"> Percentage</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Loan On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editInvAccTypeSetting.loan_on" class="dropdown form-control input-sm"
+                        ng-options="loadOn.value as loadOn.text for loadOn in loadOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Max Loan</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editInvAccTypeSetting.loan_max" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="loanRatio" data-ng-model="editInvAccTypeSetting.loan_ratio" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="loanRatio"> Loan Ratio</label>
+            </div>
+
+            <div class="col-md-2">
+                <label>Profit On</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editInvAccTypeSetting.profit_on" class="dropdown form-control input-sm"
+                        ng-options="profitOn.value as profitOn.text for profitOn in profitOnList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <fieldset ng-show="editInvAccTypeSetting.fldInv">
+            <legend>Investor Information</legend>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Available Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{editInvAccTypeSetting.available_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Ledger Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{editInvAccTypeSetting.ledger_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Investor Photo</p>
+                    <img ngf-src="editInvAccTypeSetting.invPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Investor Signature</p>
+                    <img ngf-src="editInvAccTypeSetting.invSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Joint Holders Photo</p>
+                    <img ngf-src="editInvAccTypeSetting.invJoinHolderPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Joint Holders Signature</p>
+                    <img ngf-src="editInvAccTypeSetting.invJoinHolderSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="updateInvAccTypeSetting()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadDropdownsAndInfo()" />
+                <a href="/#InvestorAccountTypeSettingList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

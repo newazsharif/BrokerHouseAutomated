@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@using Escrow.BOAS.Utility
+@if (Request.IsAuthenticated && !SessionManger.IsSessionNull(Session) && SessionManger.isUserLoggedIn())
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right",@style="margin-right:0px !important;" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right" style="margin-right:16px !important;">
+        <li>@if (DateTime.Now.ToString("dd/MM/yyyy") != SessionManger.LoggedInTime(Session).ToString("dd/MM/yyyy"))
+        {
+            <b class="alert alert-warning" style="padding-top: 5px;">System Date and Process is not same</b>
+        }
+        </li>
+        <li>
+           
+            @*@Html.ActionLink("Logged In User: ''" + User.Identity.GetUserName() + "'' of ''" + 
+                SessionManger.BrokerOfLoggedInUser(Session).Name
+            + "'' At ''" + SessionManger.LoggedInTime(Session).ToString("dd/MM/yyyy") + "''", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@ 
+            <input type="hidden" id="processDate" value="@SessionManger.LoggedInTime(Session).ToString("dd/MM/yyyy")" />
+            <input type="hidden" id="BrokerName" value="@SessionManger.BrokerOfLoggedInUser(Session).Name" />
+            <input type="hidden" id="UserName" value="@User.Identity.GetUserName()" />
+            <a href="/#ChangePassword">Logged In User: "@User.Identity.GetUserName()" of "@SessionManger.BrokerOfLoggedInUser(Session).Name" At "@SessionManger.LoggedInTime(Session).ToString("dd/MM/yyyy")"</a></li>
+        @*<li><a href="/#PendingOrder">Log in</a></li>*@
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>        
+        @Html.Partial("_PendingOrderNotification")
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="/#Index">Log in</a></li>
+        <li><a href="/#NewBroker">Register</a></li>
+    </ul>
+}

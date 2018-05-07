@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblCdblIpo">
+    <Key>
+      <PropertyRef Name="ipo_id" />
+    </Key>
+    <Property Name="ipo_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isin" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="company_name" Type="varchar" MaxLength="150" />
+    <Property Name="trans_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="bo_code" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="bo_name" Type="varchar" MaxLength="150" />
+    <Property Name="qty" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="lock_qty" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="transaction_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="unloak_date" Type="numeric" Precision="9" Scale="0" />
+    <Property Name="sold_qty" Type="numeric" Precision="15" Scale="0" />
+  </EntityType>
+  <Function Name="psp_export_pay_in_pay_out" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDBL">
+    <Parameter Name="is_payin_payout" Type="varchar" Mode="In" />
+    <Parameter Name="trd_dt" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="ssp_CDBL_invalid_data_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDBL">
+    <Parameter Name="display_names" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="ssp_CDBL_invalid_data_list_process" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDBL">
+    <Parameter Name="display_names" Type="varchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="EscrowBOASModelStoreContainer">
+    <EntitySet Name="tblCdblIpo" EntityType="Self.tblCdblIpo" Schema="CDBL" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

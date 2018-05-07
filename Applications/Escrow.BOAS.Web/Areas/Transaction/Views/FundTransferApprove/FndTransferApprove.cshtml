@@ -1,0 +1,90 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 1/9/2015
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Fund Transfer Approve";
+    Layout = null;
+}
+
+<h2>Fund Transfer Approve</h2>
+<div class="row" ng-controller="FundTransferApproveController" ng-init="loadFndTransferApproveList()">
+    <div class="col-md-12">
+        <div>
+            <table style="overflow-x:scroll; width:136%; height:400px" st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped" fixed-header id="table-width-136">
+                <thead>
+                    <tr>
+                        <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                        <th st-sort="transferor_id">Transferor Code</th>
+                        <th st-sort="transferor_balance">Balance</th>
+                        <th st-sort="tranferee_id">Transferee Code</th>
+                        <th st-sort="transferee_balance">Balance</th>
+                        <th st-sort="transfer_dt">Trans. Date</th>
+                        <th st-sort="value_dt">Value Date</th>
+                        <th st-sort="remarks">Remarks</th>
+                        <th st-sort="charge_amount">Charge Amount</th>
+                        <th st-sort="amount">Amount</th>
+                    </tr>
+                    <tr>
+                        <th colspan="10"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td row-select="row" ng-click="select(row.id)" ng-if="row.withdraw_limit_on_name == 'NOT APPLICABLE'"></td>
+                        <td row-select="row" ng-click="select(row.id)" ng-if="row.withdraw_limit_on_name != 'NOT APPLICABLE' && row.withdrawable_amount >= row.amount"></td>
+                        <td ng-if="row.withdraw_limit_on_name != 'NOT APPLICABLE' && row.withdrawable_amount < row.amount" ng-init="changeRowIdVal(row)">Not enough balance: {{row.withdrawable_amount}}</td>
+                        <td>{{ row.transferor_id }}</td>
+                        <td>{{ row.transferor_balance }}</td>
+                        <td>{{ row.tranferee_id }}</td>
+                        <td>{{ row.transferee_balance }}</td>
+                        <td>{{ row.transfer_dt }}</td>
+                        <td>{{ row.value_dt }}</td>
+                        <td>{{ row.remarks }}</td>
+                        <td>{{ row.charge_amount }}</td>
+                        <td>{{ row.amount }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"> Total Amount</td>
+                        <td>{{ totalAmount }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"> Total Selected Amount</td>
+                        <td>{{ totalSelectedAmount }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Approve" data-ng-click="approveFundTransfer()" />
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+}
+

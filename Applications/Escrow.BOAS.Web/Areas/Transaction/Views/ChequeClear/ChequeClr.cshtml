@@ -1,0 +1,105 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 30/8/2015
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Cheque Clear";
+    Layout = null;
+}
+
+<h2>Cheque Clear</h2>
+<div class="row" ng-controller="ChequeClearController" ng-init="loadCheqClrList()">
+    <div class="col-md-12">
+        <div>
+            <table style="overflow-x:scroll; width:152%; height:400px" st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped" fixed-header  id="table-width-152">
+                <thead>
+                    <tr>
+                        <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                        <th st-sort="receive_dt">Date</th>
+                        <th st-sort="voucher_no">Voucher No</th>
+                        <th st-sort="branch">Branch</th>
+                        <th st-sort="client_id">Investor Code</th>
+                        <th st-sort="bo_code">BO Code</th>
+                        <th st-sort="first_holder_name">Investor Name</th>
+                        <th st-sort="transaction_mode">Transaction Mode</th>
+                        <th st-sort="bank_name">Bank</th>
+                        <th st-sort="cheque_dt">Cheque Date</th>
+                        <th st-sort="cheque_no">Cheque No</th>
+                        <th st-sort="approve_dt">Approve Date</th>
+                        <th st-sort="deposit_dt">Deposit Date</th>
+                        <th st-sort="amount">Amount</th>
+                    </tr>
+                    <tr>
+                        <th colspan="14"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td row-select="row" ng-click="select(row.id)"></td>
+                        <td>{{ row.receive_dt }}</td>
+                        <td>{{ row.voucher_no }}</td>
+                        <td>{{ row.branch }}</td>
+                        <td>{{ row.client_id }}</td>
+                        <td>{{ row.bo_code }}</td>
+                        <td>{{ row.first_holder_name }}</td>
+                        <td>{{ row.transaction_mode }}</td>
+                        <td>{{ row.bank_name }}</td>
+                        <td>{{ row.cheque_dt }}</td>
+                        <td>{{ row.cheque_no }}</td>
+                        <td>{{ row.approve_dt }}</td>
+                        <td>{{ row.deposit_dt }}</td>
+                        <td>{{ row.amount }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td  class="text-right"> Total Amount</td>
+                        <td>{{ totalAmount }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"> Total Selected Amount</td>
+                        <td>{{ totalSelectedAmount }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Clear" data-ng-click="clearCheque()" />
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+}
+

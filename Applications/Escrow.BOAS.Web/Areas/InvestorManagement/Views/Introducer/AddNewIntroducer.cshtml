@@ -1,0 +1,174 @@
+﻿@*
+    Created By : Rifad
+    Date: 15-05-2017
+    Reason:
+
+*@
+
+@{
+    ViewBag.Title = "New Introducer Information";
+    Layout = null;
+
+}
+
+<h2>New Introducer Information</h2>
+<div class="row" ng-controller="IntroducerController" ng-init="loadDropDown()">
+    <form class="form-horizontal" ng-submit="" name="newIntroducerForm">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Reference Code</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" data-ng-model="introducerInformation.ref_code" onload-focus="true" enter-as-tab required />
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Contact Number</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" data-ng-model="introducerInformation.contact_no" onload-focus="true" enter-as-tab />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Introducer Name</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" data-ng-model="introducerInformation.introducer_name" enter-as-tab required />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label for="Status">Introducer Type</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select data-ng-model="introducerInformation.introducer_type_id" class="dropdown form-control input-sm"
+                                ng-options="Status.value as Status.text for Status in IntroducerList" enter-as-tab required>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>National Id</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" data-ng-model="introducerInformation.national_id" enter-as-tab />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>TIN</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" data-ng-model="introducerInformation.tin" enter-as-tab />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Valid From</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" is-open="opened1" min-date="minDate" max-date="to_date" show-weeks="false" show-button-bar="false" data-ng-model="introducerInformation.valid_from" enter-as-tab required />
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Valid To</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" is-open="opened2" min-date="minDate" max-date="to_date" show-weeks="false" show-button-bar="false" data-ng-model="introducerInformation.valid_to" enter-as-tab required />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label for="Status">Occupation</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select data-ng-model="introducerInformation.occupation_id" class="dropdown form-control input-sm"
+                                ng-options="Status.value as Status.text for Status in occupationList" enter-as-tab>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label for="Status">Active Status</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select data-ng-model="introducerInformation.active_status_id" class="dropdown form-control input-sm"
+                                ng-options="Status.value as Status.text for Status in statusList" enter-as-tab required>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Commission Percentage</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="number" class="form-control input-sm" name="commissionPercentage"
+                                data-ng-model="introducerInformation.commission_percentage" ng-min="0" ng-max=".99" enter-as-tab required />
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        <input type="submit" class="btn btn-default" value="Save" data-ng-click="addNewIntroducer()" />
+                        <a href="/#IntroducerList" class="btn btn-default">List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+
+

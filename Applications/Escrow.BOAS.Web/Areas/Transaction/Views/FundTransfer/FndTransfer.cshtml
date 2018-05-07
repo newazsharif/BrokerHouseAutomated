@@ -1,0 +1,215 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 6/1/2016
+    ///Reason: Fund Transfer Add View
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Fund Transfer";
+    Layout = null;
+}
+
+<h2>Fund Transfer</h2>
+<div @*class="container"*@ ng-controller="FundTransferController" ng-init="loadProcessDate()">
+    <form class="form-horizontal" ng-submit="" name="newFndTransferForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Transferor Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="fundTransfer.transferor_id" ng-blur="getTransferorInfoForAdd()" onload-focus="true" enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyle.style">{{fundTransfer.transferor_name}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Transferee Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="fundTransfer.tranferee_id" ng-blur="getTransfereeInfoForAdd()" enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyle.style">{{fundTransfer.transferee_name}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Transfer Date</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="fundTransfer.transfer_dt" enter-as-tab ng-readonly="true" />
+            </div>
+
+            <div class="col-md-2">
+                <label>Value Date</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="fundTransfer.value_dt" is-open="opened2" min-date="minDate" max-date="'31/12/9999'" ng-required="false" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Transfer Amount</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="fundTransfer.amount" ng-blur="amountInWord(fundTransfer.amount); setChargeAmountForAdd()" positive-numbers-only enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyleAmountInWord.style">{{amount_in_word}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Remarks</label>
+            </div>
+            <div class="col-md-4">
+                <textarea class="form-control input-sm" data-ng-model="fundTransfer.remarks" enter-as-tab></textarea>
+            </div>
+        </div>
+
+        <fieldset ng-show="fundTransfer.fldTransferor">
+            <legend>Transferor Information</legend>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Available Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.transferor_available_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Ledger Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.transferor_ledger_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Purchase Power</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.transferor_purchase_power}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Withdrawable Amount</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label" ng-if="withdraw_limit_on_name != 'NOT APPLICABLE'">{{fundTransfer.transferor_withdrawable_amount}}</label>
+                    <label id="lbl" class="col-md-4 control-label" ng-if="withdraw_limit_on_name == 'NOT APPLICABLE'">Any</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Transfer Charge</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.charge_amount}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Investor Photo</p>
+                    <img ngf-src="fundTransfer.transferor_invPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Investor Signature</p>
+                    <img ngf-src="fundTransfer.transferor_invSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Joint Holders Photo</p>
+                    <img ngf-src="fundTransfer.transferor_invJoinHolderPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Joint Holders Signature</p>
+                    <img ngf-src="fundTransfer.transferor_invJoinHolderSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset ng-show="fundTransfer.fldTransferee">
+            <legend>Transferee Information</legend>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Available Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.transferee_available_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Ledger Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.transferee_ledger_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Purchase Power</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{fundTransfer.transferee_purchase_power}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Investor Photo</p>
+                    <img ngf-src="fundTransfer.transferee_invPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Investor Signature</p>
+                    <img ngf-src="fundTransfer.transferee_invSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Joint Holders Photo</p>
+                    <img ngf-src="fundTransfer.transferee_invJoinHolderPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Joint Holders Signature</p>
+                    <img ngf-src="fundTransfer.transferee_invJoinHolderSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveNewFundTransfer()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#FundTransferList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

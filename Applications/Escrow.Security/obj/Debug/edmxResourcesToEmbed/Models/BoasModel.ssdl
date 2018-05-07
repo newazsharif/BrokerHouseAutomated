@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FullDateUK" Type="char" MaxLength="10" />
+    <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+    <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+    <Property Name="DayName" Type="varchar" MaxLength="9" />
+    <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+    <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+    <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="MonthName" Type="varchar" MaxLength="9" />
+    <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="Quarter" Type="char" MaxLength="1" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="Year" Type="char" MaxLength="4" />
+    <Property Name="YearName" Type="char" MaxLength="7" />
+    <Property Name="MonthYear" Type="char" MaxLength="10" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FirstDayOfMonth" Type="date" />
+    <Property Name="LastDayOfMonth" Type="date" />
+    <Property Name="FirstDayOfQuarter" Type="date" />
+    <Property Name="LastDayOfQuarter" Type="date" />
+    <Property Name="FirstDayOfYear" Type="date" />
+    <Property Name="LastDayOfYear" Type="date" />
+    <Property Name="IsHolidayUSA" Type="bit" />
+    <Property Name="IsWeekday" Type="bit" />
+    <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+    <Property Name="IsHolidayUK" Type="bit" />
+    <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+    <Property Name="IsHoliday" Type="bit" />
+    <Property Name="Holiday" Type="varchar" MaxLength="50" />
+    <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+    <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="FiscalYear" Type="char" MaxLength="4" />
+    <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+    <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+    <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FiscalFirstDayOfMonth" Type="date" />
+    <Property Name="FiscalLastDayOfMonth" Type="date" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+    <Property Name="FiscalLastDayOfQuarter" Type="date" />
+    <Property Name="FiscalFirstDayOfYear" Type="date" />
+    <Property Name="FiscalLastDayOfYear" Type="date" />
+    <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="tbl_rpt_special_permission">
+    <Key>
+      <PropertyRef Name="Client_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="Client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDayProcess">
+    <Key>
+      <PropertyRef Name="process_date" />
+    </Key>
+    <Property Name="process_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="start_date" Type="datetime" Nullable="false" />
+    <Property Name="start_by" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="end_date" Type="datetime" />
+    <Property Name="end_by" Type="nvarchar" MaxLength="128" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblDayProcess_DimDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblDayProcess" Type="Self.tblDayProcess" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblDayProcess">
+        <PropertyRef Name="process_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EscrowBOASModelStoreContainer">
+    <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_rpt_special_permission" EntityType="Self.tbl_rpt_special_permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDayProcess" EntityType="Self.tblDayProcess" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblDayProcess_DimDate" Association="Self.FK_tblDayProcess_DimDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblDayProcess" EntitySet="tblDayProcess" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

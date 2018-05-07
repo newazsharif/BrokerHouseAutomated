@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b21e6b8f9ab44c50ab6354eb59fd5d13" Name="Diagram1" ZoomLevel="31">
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblDepositoryPerticipant" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblEmployeeUserMapping" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblTrader" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.DimDate" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblConstantObject" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblConstantObjectValue" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblTrader_TraderLicenseRenewDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblConstantObjectValue_ConstantObjects" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblEmployee" Width="1.5" PointX="5.25" PointY="5.375" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDepartment" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeDesignation" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeGender" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeJoiningDate" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_EmployeeReleaseDate" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployeeUserMapping_tblEmployee" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblTrader_tblEmployee" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblBank" Width="1.5" PointX="7.375" PointY="10.5" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblBankBranch" Width="1.5" PointX="9.625" PointY="10" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblBrokerBankAccount" Width="1.5" PointX="11.875" PointY="10.375" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblBankBranch_tblBank" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBankAccount_tblBankBranch" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblBrokerBranch" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblBrokerBranch_BrokerBranchRegistrationDate" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblEmployee_tblBrokerBranch" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblInvestor" Width="1.5" PointX="14.75" PointY="3" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBank" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBankBranch" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblBrokerBranch" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblDepositoryPerticipant" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblTrader" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_DimDate" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue2" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue3" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue4" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue5" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue6" />
+        <AssociationConnector Association="Escrow.BOAS.BrokerManagement.Models.FK_tblInvestor_tblConstantObjectValue7" />
+        <EntityTypeShape EntityType="Escrow.BOAS.BrokerManagement.Models.tblBrokerImage" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

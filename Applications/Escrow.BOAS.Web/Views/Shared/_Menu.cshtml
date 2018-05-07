@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@using Escrow.BOAS.Utility
+@if (Request.IsAuthenticated && !SessionManger.IsSessionNull(Session))
+{
+    <div class="col-sm-2 has-canvas" ng-controller="MenuController" ng-init="init()">
+        <div id="menuDrawer" class="myDrawer dw-xs-10 dw-sm-6 dw-md-4 fold drawer-inverse ..." aria-labelledby="menuDrawer">
+            <div class="drawer-controls">
+                <a data-toggle="drawer" data-target="#menuDrawer" aria-foldedopen="false" aria-controls="menuDrawer" class="btn btn-primary btn-sm" id="draw"><span class="glyphicon glyphicon-tasks" style="font-size:18pt;"></span></a>
+            </div>
+            <div id="menuDrawer" class="drawer-contents">
+                <div class="drawer-heading">
+                    <h3 class="drawer-title center-block"><b>Menu </b><input type="text" class="input-sm" placeholder="Search Menu" data-ng-model="menu_Key" ng-blur="GetFilteredMenu()" /></h3>
+                </div>
+
+                <ul class="drawer-fullnav">
+                    <li role="presentation" ng-repeat="row in module">
+                        <a href="" id="btn-1" data-toggle="collapse" class="mainMenu" data-target="{{'#'+row.id_name+'SubMenu'}}">{{row.name}}<span class="caret"></span></a>
+                        <ul class="drawer-fullnav collapse" id="{{row.id_name+'SubMenu'}}" role="menu" aria-labelledby="btn-1">
+                            <li class="submenuStyle" ng-repeat="action in row.action"><a href="{{action.url}}">{{action.display_name}}</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+                <div class="drawer-heading">
+                    <h3 class="drawer-title center-block"><b>Reports </b><input type="text" class="input-sm" placeholder="Search Report" data-ng-model="report_Key" ng-blur="GetFilteredReport()" /></h3>
+                </div>
+                <ul class="drawer-fullnav">
+                            <li role="presentation" ng-repeat="row in report">
+                                <a href="" id="btn-1" data-toggle="collapse" class="mainMenu" data-target="{{'#'+row.id_name+'SubMenu'}}">{{row.name}}<span class="caret"></span></a>
+                                <ul class="drawer-fullnav collapse" id="{{row.id_name+'SubMenu'}}" aria-labelledby="btn-1">
+                                    <li class="submenuStyle" ng-repeat="action in row.action"><a href="{{action.url}}">{{action.display_name}}</a></li>
+                                </ul>
+                            </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+
+}
+else
+{
+        <div class="col-sm-2"></div>
+        }

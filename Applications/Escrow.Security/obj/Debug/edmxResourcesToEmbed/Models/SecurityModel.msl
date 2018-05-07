@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EscrowSecurityModelStoreContainer" CdmEntityContainer="SecurityConnection">
+    <EntitySetMapping Name="tblModules">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblModule">
+        <MappingFragment StoreEntitySet="tblModule">
+          <ScalarProperty Name="module_id" ColumnName="module_id" />
+          <ScalarProperty Name="module_name" ColumnName="module_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblViews">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblView">
+        <MappingFragment StoreEntitySet="tblView">
+          <ScalarProperty Name="view_id" ColumnName="view_id" />
+          <ScalarProperty Name="module_id" ColumnName="module_id" />
+          <ScalarProperty Name="view_name" ColumnName="view_name" />
+          <ScalarProperty Name="router_name" ColumnName="router_name" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
+          <ScalarProperty Name="area_name" ColumnName="area_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBrokerModuleMappings">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblBrokerModuleMapping">
+        <MappingFragment StoreEntitySet="tblBrokerModuleMapping">
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="ui_module_id" ColumnName="ui_module_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblControllers">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblController">
+        <MappingFragment StoreEntitySet="tblController">
+          <ScalarProperty Name="ui_module_id" ColumnName="ui_module_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUIModules">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblUIModule">
+        <MappingFragment StoreEntitySet="tblUIModule">
+          <ScalarProperty Name="sort_id" ColumnName="sort_id" />
+          <ScalarProperty Name="id_name" ColumnName="id_name" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblActions">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblAction">
+        <MappingFragment StoreEntitySet="tblAction">
+          <ScalarProperty Name="class_name" ColumnName="class_name" />
+          <ScalarProperty Name="is_in_menu" ColumnName="is_in_menu" />
+          <ScalarProperty Name="is_view" ColumnName="is_view" />
+          <ScalarProperty Name="ui_module_id" ColumnName="ui_module_id" />
+          <ScalarProperty Name="controller_id" ColumnName="controller_id" />
+          <ScalarProperty Name="display_name" ColumnName="display_name" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserActionMappings">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblUserActionMapping">
+        <MappingFragment StoreEntitySet="tblUserActionMapping">
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="is_permitted" ColumnName="is_permitted" />
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBrokerInformations">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblBrokerInformation">
+        <MappingFragment StoreEntitySet="tblBrokerInformation">
+          <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+          <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+          <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+          <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="no_of_ar" ColumnName="no_of_ar" />
+          <ScalarProperty Name="compliance_authority" ColumnName="compliance_authority" />
+          <ScalarProperty Name="authorized_capital" ColumnName="authorized_capital" />
+          <ScalarProperty Name="paid_up_capital" ColumnName="paid_up_capital" />
+          <ScalarProperty Name="registration_no" ColumnName="registration_no" />
+          <ScalarProperty Name="mail_address" ColumnName="mail_address" />
+          <ScalarProperty Name="trec_number" ColumnName="trec_number" />
+          <ScalarProperty Name="short_name" ColumnName="short_name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBrokerUsers">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblBrokerUser">
+        <MappingFragment StoreEntitySet="tblBrokerUser">
+          <ScalarProperty Name="approve_date" ColumnName="approve_date" />
+          <ScalarProperty Name="approve_by" ColumnName="approve_by" />
+          <ScalarProperty Name="last_logged_time" ColumnName="last_logged_time" />
+          <ScalarProperty Name="is_loggedIn" ColumnName="is_loggedIn" />
+          <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBrokerUserModules">
+      <EntityTypeMapping TypeName="Escrow.SecurityModel.tblBrokerUserModule">
+        <MappingFragment StoreEntitySet="tblBrokerUserModule">
+          <ScalarProperty Name="module_id" ColumnName="module_id" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tblBrokerModule" TypeName="Escrow.SecurityModel.tblBrokerModule" StoreEntitySet="tblBrokerModule">
+      <EndProperty Name="tblBrokerInformation">
+        <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+      </EndProperty>
+      <EndProperty Name="tblUIModule">
+        <ScalarProperty Name="id" ColumnName="module_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="tblBrokerUserView" TypeName="Escrow.SecurityModel.tblBrokerUserView" StoreEntitySet="tblBrokerUserView">
+      <EndProperty Name="tblView">
+        <ScalarProperty Name="view_id" ColumnName="veiw_id" />
+      </EndProperty>
+      <EndProperty Name="tblBrokerUserModule">
+        <ScalarProperty Name="module_id" ColumnName="module_id" />
+        <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

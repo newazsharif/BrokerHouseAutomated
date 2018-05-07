@@ -1,0 +1,72 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 18/8/2015
+    ///Reason: applying smart table
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Employee Information";
+    Layout = null;
+}
+
+<h2>Employee Information</h2>
+<div class="row" ng-controller="EmployeeInformationController" ng-init="loadEmployeeList()">
+    <div class="col-md-12">
+        <a href="/#AddNewEmployeeInformation" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th st-sort="employee_code">Code</th>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="designation">Designation</th>
+                    <th st-sort="department">Department</th>
+                    <th st-sort="joining_date">Joining Date</th>
+                    <th st-sort="branch">Branch</th>
+                    <th st-sort="contact_no">Contact No</th>
+                    <th st-sort="email_address">Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="10"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+
+                    <td>{{ row.employee_code }}</td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.designation }}</td>
+                    <td>{{ row.department }}</td>
+                    <td>{{ row.joining_date }}</td>
+                    <td>{{ row.branch }}</td>
+                    <td>{{ row.contact_no }}</td>
+                    <td>{{ row.email_address }}</td>
+                    <td><a href="/#EditEmployee/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteEmployee(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+}

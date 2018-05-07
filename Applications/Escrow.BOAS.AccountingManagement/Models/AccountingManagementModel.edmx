@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Escrow.BOAS.AccountingManagement.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="short_name" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="bank_name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBankBranch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branch_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="routing_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="bank_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" />
+          <Property Name="contact_person" Type="varchar" MaxLength="150" />
+          <Property Name="contact_number" Type="varchar" MaxLength="30" />
+          <Property Name="email_address" Type="varchar" MaxLength="50" />
+          <Property Name="active_status_id" Type="int" Nullable="false" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="district_id" Type="numeric" Precision="4" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblConstantObject">
+          <Key>
+            <PropertyRef Name="object_id" />
+          </Key>
+          <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Purpose" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tblConstantObjectValue">
+          <Key>
+            <PropertyRef Name="object_value_id" />
+          </Key>
+          <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="150" />
+          <Property Name="sorting_order" Type="smallint" />
+          <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+        </EntityType>
+        <Association Name="FK_tblBankBranch_tblBank">
+          <End Role="tblBank" Type="Self.tblBank" Multiplicity="1" />
+          <End Role="tblBankBranch" Type="Self.tblBankBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblBankBranch">
+              <PropertyRef Name="bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBankBranch_tblConstantObjectValue">
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="0..1" />
+          <End Role="tblBankBranch" Type="Self.tblBankBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblBankBranch">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+          <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObject">
+              <PropertyRef Name="object_id" />
+            </Principal>
+            <Dependent Role="tblConstantObjectValue">
+              <PropertyRef Name="object_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EscrowBOASAccountingManagementModelStoreContainer">
+          <EntitySet Name="tblBank" EntityType="Self.tblBank" Schema="Accounting" store:Type="Tables" />
+          <EntitySet Name="tblBankBranch" EntityType="Self.tblBankBranch" Schema="Accounting" store:Type="Tables" />
+          <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBankBranch_tblBank" Association="Self.FK_tblBankBranch_tblBank">
+            <End Role="tblBank" EntitySet="tblBank" />
+            <End Role="tblBankBranch" EntitySet="tblBankBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBankBranch_tblConstantObjectValue" Association="Self.FK_tblBankBranch_tblConstantObjectValue">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+            <End Role="tblBankBranch" EntitySet="tblBankBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+            <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Escrow.BOAS.AccountingManagement.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AccountingConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblBanks" EntityType="Escrow.BOAS.AccountingManagement.Model.tblBank" />
+          <EntitySet Name="tblBankBranches" EntityType="Escrow.BOAS.AccountingManagement.Model.tblBankBranch" />
+          <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOAS.AccountingManagement.Model.tblConstantObject" />
+          <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue" />
+          <AssociationSet Name="FK_tblBankBranch_tblBank" Association="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblBank">
+            <End Role="tblBank" EntitySet="tblBanks" />
+            <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBankBranch_tblConstantObjectValue" Association="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblConstantObjectValue">
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+            <End Role="tblBankBranch" EntitySet="tblBankBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOAS.AccountingManagement.Model.FK_tblConstantObjectValue_ConstantObjects">
+            <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+            <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblBank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="short_name" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="bank_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <NavigationProperty Name="tblBankBranches" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblBank" FromRole="tblBank" ToRole="tblBankBranch" />
+        </EntityType>
+        <EntityType Name="tblBankBranch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branch_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="routing_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="bank_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="contact_person" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="contact_number" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active_status_id" Type="Int32" Nullable="false" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="district_id" Type="Decimal" Precision="4" Scale="0" />
+          <NavigationProperty Name="tblBank" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblBank" FromRole="tblBankBranch" ToRole="tblBank" />
+          <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblConstantObjectValue" FromRole="tblBankBranch" ToRole="tblConstantObjectValue" />
+        </EntityType>
+        <EntityType Name="tblConstantObject">
+          <Key>
+            <PropertyRef Name="object_id" />
+          </Key>
+          <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+        </EntityType>
+        <EntityType Name="tblConstantObjectValue">
+          <Key>
+            <PropertyRef Name="object_value_id" />
+          </Key>
+          <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="sorting_order" Type="Int16" />
+          <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+          <NavigationProperty Name="tblBankBranches" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblBankBranch_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblBankBranch" />
+          <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOAS.AccountingManagement.Model.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+        </EntityType>
+        <Association Name="FK_tblBankBranch_tblBank">
+          <End Type="Escrow.BOAS.AccountingManagement.Model.tblBank" Role="tblBank" Multiplicity="1" />
+          <End Type="Escrow.BOAS.AccountingManagement.Model.tblBankBranch" Role="tblBankBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblBankBranch">
+              <PropertyRef Name="bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBankBranch_tblConstantObjectValue">
+          <End Type="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="0..1" />
+          <End Type="Escrow.BOAS.AccountingManagement.Model.tblBankBranch" Role="tblBankBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObjectValue">
+              <PropertyRef Name="object_value_id" />
+            </Principal>
+            <Dependent Role="tblBankBranch">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+          <End Type="Escrow.BOAS.AccountingManagement.Model.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblConstantObject">
+              <PropertyRef Name="object_id" />
+            </Principal>
+            <Dependent Role="tblConstantObjectValue">
+              <PropertyRef Name="object_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscrowBOASAccountingManagementModelStoreContainer" CdmEntityContainer="AccountingConnection">
+          <EntitySetMapping Name="tblBanks">
+            <EntityTypeMapping TypeName="Escrow.BOAS.AccountingManagement.Model.tblBank">
+              <MappingFragment StoreEntitySet="tblBank">
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="short_name" ColumnName="short_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBankBranches">
+            <EntityTypeMapping TypeName="Escrow.BOAS.AccountingManagement.Model.tblBankBranch">
+              <MappingFragment StoreEntitySet="tblBankBranch">
+                <ScalarProperty Name="district_id" ColumnName="district_id" />
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+                <ScalarProperty Name="contact_number" ColumnName="contact_number" />
+                <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="bank_id" ColumnName="bank_id" />
+                <ScalarProperty Name="routing_no" ColumnName="routing_no" />
+                <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConstantObjects">
+            <EntityTypeMapping TypeName="Escrow.BOAS.AccountingManagement.Model.tblConstantObject">
+              <MappingFragment StoreEntitySet="tblConstantObject">
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="object_name" ColumnName="object_name" />
+                <ScalarProperty Name="object_id" ColumnName="object_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConstantObjectValues">
+            <EntityTypeMapping TypeName="Escrow.BOAS.AccountingManagement.Model.tblConstantObjectValue">
+              <MappingFragment StoreEntitySet="tblConstantObjectValue">
+                <ScalarProperty Name="is_default" ColumnName="is_default" />
+                <ScalarProperty Name="sorting_order" ColumnName="sorting_order" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="object_id" ColumnName="object_id" />
+                <ScalarProperty Name="display_value" ColumnName="display_value" />
+                <ScalarProperty Name="object_value_id" ColumnName="object_value_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

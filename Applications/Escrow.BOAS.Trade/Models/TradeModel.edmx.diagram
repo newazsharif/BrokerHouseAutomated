@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="25cebca1d2264a69866b247616e9c4d3" Name="Diagram1" ZoomLevel="39">
+        <EntityTypeShape EntityType="Escrow.BOASModel.DimDate" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObject" Width="1.5" PointX="3.875" PointY="19.5" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObjectValue" Width="1.5" PointX="0.75" PointY="15.375" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblClosingPrice" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblNonTradingDetail" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblNonTradingMaster" Width="1.5" PointX="6" PointY="6.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tmpTradeData" Width="1.5" PointX="8.375" PointY="7.75" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNonTradeMaster_DimDate1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNonTradingDetail_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNonTradeMaster_tblConstantObjectValue" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblTradeData" Width="1.5" PointX="3" PointY="22.875" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblFTOmnibusImportLog" Width="1.5" PointX="3" PointY="9.125" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblFTImportLog_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblTradeData_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblTradeData_tblConstantObjectValue1" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInitialTrade" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInitialClientReceivablePayable" Width="1.5" PointX="5.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

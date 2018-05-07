@@ -1,0 +1,62 @@
+﻿@*
+    Created By : Rifad
+    Date: 06-05-2017
+    Reason:
+
+*@
+
+@{
+    ViewBag.Title = "BankList";
+    Layout = null;
+}
+
+<h2>Bank Information</h2>
+<div class="row" ng-controller="BankInformationController" ng-init="loadBankList()">
+    <div class="col-md-12">
+        <a href="/#AddNewBankInformation" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th st-sort="short_name">Short Name</th>
+                    <th st-sort="name">Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="10"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+
+                    <td>{{ row.short_name }}</td>
+                    <td><a href="/#BranchList/{{row.id}}" class="btn btn-link">{{ row.bank_name }} </a></td>
+                    <td><a href="/#editBankInfomation/{{row.id}}" class="btn btn-link">&#@Escrow.Utility.Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteBank($index)" class="btn btn-link">&#@Escrow.Utility.Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+}
+
+
+
+

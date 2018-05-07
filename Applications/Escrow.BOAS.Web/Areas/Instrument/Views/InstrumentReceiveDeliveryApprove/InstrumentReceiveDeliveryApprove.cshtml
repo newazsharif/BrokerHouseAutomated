@@ -1,0 +1,55 @@
+﻿@*
+    ///Created by: Shohid
+    ///Edit date: 29/02/2016
+    ///Reason: Instrument Receive Delivery Approve
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Instrument Receive Delivery Approve";
+    Layout = null;
+}
+
+<h2>Instrument Receive Delivery Approve</h2>
+<div class="row" ng-controller="InstrumentReceiveDeliveryApproveController" ng-init="loadInsRecDelApproveList()">
+    <div class="col-md-12">
+        <div>
+            <table style="overflow-x:scroll; width:136%; height:400px" st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped" fixed-header id="table-width-136">
+                <thead>
+                    <tr>
+                        <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                        <th st-sort="client_id">Client Id</th>
+                        <th st-sort="transection_dt">Transection Date</th>
+                        <th st-sort="security_code">Instrument Name</th>
+                        <th st-sort="display_value">Transection Type</th>
+                        <th st-sort="quantity">Quantity</th>
+                        <th st-sort="rate">Rate</th>
+                    <tr>
+                        <th colspan="12"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td row-select="row" ng-click="select(row.id)"></td>
+                        <td>{{ row.client_id }}</td>
+                        <td>{{ row.transection_date }}</td>
+                        <td>{{ row.instrument_name }}</td>
+                        <td>{{ row.transection_type }}</td>
+                        <td>{{ row.quantity }}</td>
+                        <td>{{ row.rate }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Approve" data-ng-click="approveInsRecDelivery()" />
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+}
+

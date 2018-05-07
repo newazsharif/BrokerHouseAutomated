@@ -1,0 +1,82 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 6/1/2016
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Fund Transfer";
+    Layout = null;
+}
+
+<h2>Fund Transfer</h2>
+<div class="row" ng-controller="FundTransferController" ng-init="loadFndTransferList()">
+    <div class="col-md-12">
+        <a href="/#FundTransfer" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <div style="overflow-x:scroll; width:100%">
+            <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+
+                        <th st-sort="transferor_id">Transferor Code</th>
+                        <th st-sort="transferor_balance">Balance</th>
+                        <th st-sort="tranferee_id">Transferee Code</th>
+                        <th st-sort="transferee_balance">Balance</th>
+                        <th st-sort="transfer_dt">Transfer Date</th>
+                        <th st-sort="value_dt">Value Date</th>
+                        <th st-sort="remarks">Remarks</th>
+                        <th st-sort="charge_amount">Charge</th>
+                        <th st-sort="amount">Amount</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <th colspan="11"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+
+                        <td>{{ row.transferor_id }}</td>
+                        <td>{{ row.transferor_balance }}</td>
+                        <td>{{ row.tranferee_id }}</td>
+                        <td>{{ row.transferee_balance }}</td>
+                        <td>{{ row.transfer_dt }}</td>
+                        <td>{{ row.value_dt }}</td>
+                        <td>{{ row.remarks }}</td>
+                        <td>{{ row.charge_amount }}</td>
+                        <td>{{ row.amount }}</td>
+                        <td><a href="/#EditFundTransfer/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                        <td><a ng-click="DeleteFundTransfer(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                    </tr>
+                <tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td colspan="2" class="text-right"> Total Amount</td>
+                        <td>{{ totalAmount }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="11" class="text-center">
+                            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+}
+

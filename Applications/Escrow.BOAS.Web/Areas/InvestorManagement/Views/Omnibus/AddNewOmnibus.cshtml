@@ -1,0 +1,106 @@
+﻿@*
+    Created By : Rifad
+    Date: 17-05-2017
+    Reason:
+
+*@
+
+@{
+    ViewBag.Title = "New Omnibus Information";
+    Layout = null;
+
+}
+
+<h2>New Omnibus Information</h2>
+<div class="row" ng-controller="OmnibusController" ng-init="loadDropDown()">
+    <form class="form-horizontal" ng-submit="" name="newOmnibusForm">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Omnibus Id</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="OmnibusInformation.omnibus_id" onload-focus="true" enter-as-tab required />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Omnibus Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="OmnibusInformation.name" onload-focus="true" enter-as-tab required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Short Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" ng-maxlength="4" data-ng-model="OmnibusInformation.short_name" enter-as-tab required />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Contact Person</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="OmnibusInformation.contact_person" enter-as-tab />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Contact Number</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="OmnibusInformation.contact_no" enter-as-tab />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Addres</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" data-ng-model="OmnibusInformation.address" enter-as-tab />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Email</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="email" class="form-control input-sm" data-ng-model="OmnibusInformation.email" enter-as-tab  />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Status">Status</label>
+                </div>
+                <div class="col-md-8">
+                    <select data-ng-model="OmnibusInformation.active_status_id" class="dropdown form-control input-sm"
+                            ng-options="Status.value as Status.text for Status in statusList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-default" value="Add" data-ng-click="addNewOmnibus()" />
+                <a href="/#OmnibusList" class="btn btn-default">Omnibus List</a>
+            </div>
+        </div>
+
+
+
+    </form>
+</div>
+@section Scripts {
+}
+
+

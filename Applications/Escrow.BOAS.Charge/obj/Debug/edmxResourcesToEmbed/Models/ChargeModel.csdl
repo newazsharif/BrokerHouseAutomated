@@ -1,0 +1,1045 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ChargeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBranchCharges" EntityType="Escrow.BOASModel.tblBranchCharge" />
+    <EntitySet Name="tblBranchChargeSlabs" EntityType="Escrow.BOASModel.tblBranchChargeSlab" />
+    <EntitySet Name="tblGlobalCharges" EntityType="Escrow.BOASModel.tblGlobalCharge" />
+    <EntitySet Name="tblGlobalChargeSlabs" EntityType="Escrow.BOASModel.tblGlobalChargeSlab" />
+    <EntitySet Name="tblSubAccountCharges" EntityType="Escrow.BOASModel.tblSubAccountCharge" />
+    <EntitySet Name="tblSubAccountChargeSlabs" EntityType="Escrow.BOASModel.tblSubAccountChargeSlab" />
+    <EntitySet Name="DimDates" EntityType="Escrow.BOASModel.DimDate" />
+    <AssociationSet Name="FK_tblBranchCharge_tblGlobalCharge" Association="Escrow.BOASModel.FK_tblBranchCharge_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+      <End Role="tblBranchCharge" EntitySet="tblBranchCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchChargeSlab_tblBranchCharge" Association="Escrow.BOASModel.FK_tblBranchChargeSlab_tblBranchCharge">
+      <End Role="tblBranchCharge" EntitySet="tblBranchCharges" />
+      <End Role="tblBranchChargeSlab" EntitySet="tblBranchChargeSlabs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalCharge_DimDate" Association="Escrow.BOASModel.FK_tblGlobalCharge_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalChargeSlab_tblGlobalCharge" Association="Escrow.BOASModel.FK_tblGlobalChargeSlab_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+      <End Role="tblGlobalChargeSlab" EntitySet="tblGlobalChargeSlabs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountCharge_tblGlobalCharge" Association="Escrow.BOASModel.FK_tblSubAccountCharge_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+      <End Role="tblSubAccountCharge" EntitySet="tblSubAccountCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountChargeSlab_tblSubAccountCharge" Association="Escrow.BOASModel.FK_tblSubAccountChargeSlab_tblSubAccountCharge">
+      <End Role="tblSubAccountCharge" EntitySet="tblSubAccountCharges" />
+      <End Role="tblSubAccountChargeSlab" EntitySet="tblSubAccountChargeSlabs" />
+    </AssociationSet>
+    <EntitySet Name="tblInvestorCharges" EntityType="Escrow.BOASModel.tblInvestorCharge" />
+    <EntitySet Name="tblInvestorChargeSlabs" EntityType="Escrow.BOASModel.tblInvestorChargeSlab" />
+    <AssociationSet Name="FK_tblInvestorCharge_tblGlobalCharge" Association="Escrow.BOASModel.FK_tblInvestorCharge_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+      <End Role="tblInvestorCharge" EntitySet="tblInvestorCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorChargeSlab_tblInvestorCharge" Association="Escrow.BOASModel.FK_tblInvestorChargeSlab_tblInvestorCharge">
+      <End Role="tblInvestorCharge" EntitySet="tblInvestorCharges" />
+      <End Role="tblInvestorChargeSlab" EntitySet="tblInvestorChargeSlabs" />
+    </AssociationSet>
+    <EntitySet Name="tblConstantObjects" EntityType="Escrow.BOASModel.tblConstantObject" />
+    <EntitySet Name="tblConstantObjectValues" EntityType="Escrow.BOASModel.tblConstantObjectValue" />
+    <AssociationSet Name="FK_tblGlobalCharge_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblGlobalCharge_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountCharge_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblSubAccountCharge_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountCharge" EntitySet="tblSubAccountCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObjects" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+    </AssociationSet>
+    <EntitySet Name="tblBrokerBranches" EntityType="Escrow.BOASModel.tblBrokerBranch" />
+    <AssociationSet Name="FK_tblBranchCharge_tblBrokerBranch" Association="Escrow.BOASModel.FK_tblBranchCharge_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+      <End Role="tblBranchCharge" EntitySet="tblBranchCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+    </AssociationSet>
+    <EntitySet Name="tblExchangeCharges" EntityType="Escrow.BOASModel.tblExchangeCharge" />
+    <EntitySet Name="tblExchangeChargeSlabs" EntityType="Escrow.BOASModel.tblExchangeChargeSlab" />
+    <AssociationSet Name="FK_tblExchangeCharge_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblExchangeCharge_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblExchangeCharge" EntitySet="tblExchangeCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblExchangeCharge_tblGlobalCharge1" Association="Escrow.BOASModel.FK_tblExchangeCharge_tblGlobalCharge1">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharges" />
+      <End Role="tblExchangeCharge" EntitySet="tblExchangeCharges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblExchangeChargeSlab_tblExchangeCharge" Association="Escrow.BOASModel.FK_tblExchangeChargeSlab_tblExchangeCharge">
+      <End Role="tblExchangeCharge" EntitySet="tblExchangeCharges" />
+      <End Role="tblExchangeChargeSlab" EntitySet="tblExchangeChargeSlabs" />
+    </AssociationSet>
+    <EntitySet Name="tblBranchAccountTypeSettings" EntityType="Escrow.BOASModel.tblBranchAccountTypeSetting" />
+    <EntitySet Name="tblGlobalAccountTypeSettings" EntityType="Escrow.BOASModel.tblGlobalAccountTypeSetting" />
+    <EntitySet Name="tblInvestorAccountTypeSettings" EntityType="Escrow.BOASModel.tblInvestorAccountTypeSetting" />
+    <EntitySet Name="tblSubAccountAccountTypeSettings" EntityType="Escrow.BOASModel.tblSubAccountAccountTypeSetting" />
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblBrokerBranch" Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranches" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue1" Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue2" Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue3" Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue4" Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1" Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2" Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3" Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting" Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1" Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2" Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3" Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4" Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue" Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1" Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2" Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3" Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4" Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting" Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValues" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSettings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblBranchCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branch_id" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="global_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_slab" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="minimum_charge" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblGlobalCharge" Relationship="Escrow.BOASModel.FK_tblBranchCharge_tblGlobalCharge" FromRole="tblBranchCharge" ToRole="tblGlobalCharge" />
+    <NavigationProperty Name="tblBranchChargeSlabs" Relationship="Escrow.BOASModel.FK_tblBranchChargeSlab_tblBranchCharge" FromRole="tblBranchCharge" ToRole="tblBranchChargeSlab" />
+    <NavigationProperty Name="tblBrokerBranch" Relationship="Escrow.BOASModel.FK_tblBranchCharge_tblBrokerBranch" FromRole="tblBranchCharge" ToRole="tblBrokerBranch" />
+  </EntityType>
+  <EntityType Name="tblBranchChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branch_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="amount_from" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="amount_to" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBranchCharge" Relationship="Escrow.BOASModel.FK_tblBranchChargeSlab_tblBranchCharge" FromRole="tblBranchChargeSlab" ToRole="tblBranchCharge" />
+  </EntityType>
+  <EntityType Name="tblGlobalCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="short_code" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="minimum_charge" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="charge_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="effective_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="is_slab" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="income_account_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="payable_account_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="payable_amount" Type="Decimal" Precision="15" Scale="10" />
+    <Property Name="is_payable_percentage" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBranchCharges" Relationship="Escrow.BOASModel.FK_tblBranchCharge_tblGlobalCharge" FromRole="tblGlobalCharge" ToRole="tblBranchCharge" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblGlobalCharge_DimDate" FromRole="tblGlobalCharge" ToRole="DimDate" />
+    <NavigationProperty Name="tblGlobalChargeSlabs" Relationship="Escrow.BOASModel.FK_tblGlobalChargeSlab_tblGlobalCharge" FromRole="tblGlobalCharge" ToRole="tblGlobalChargeSlab" />
+    <NavigationProperty Name="tblSubAccountCharges" Relationship="Escrow.BOASModel.FK_tblSubAccountCharge_tblGlobalCharge" FromRole="tblGlobalCharge" ToRole="tblSubAccountCharge" />
+    <NavigationProperty Name="tblInvestorCharges" Relationship="Escrow.BOASModel.FK_tblInvestorCharge_tblGlobalCharge" FromRole="tblGlobalCharge" ToRole="tblInvestorCharge" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblGlobalCharge_tblConstantObjectValue" FromRole="tblGlobalCharge" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblExchangeCharges" Relationship="Escrow.BOASModel.FK_tblExchangeCharge_tblGlobalCharge1" FromRole="tblGlobalCharge" ToRole="tblExchangeCharge" />
+  </EntityType>
+  <EntityType Name="tblGlobalChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="global_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="amount_from" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="amount_to" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblGlobalCharge" Relationship="Escrow.BOASModel.FK_tblGlobalChargeSlab_tblGlobalCharge" FromRole="tblGlobalChargeSlab" ToRole="tblGlobalCharge" />
+  </EntityType>
+  <EntityType Name="tblSubAccountCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sub_account_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="global_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_slab" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="minimum_charge" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblGlobalCharge" Relationship="Escrow.BOASModel.FK_tblSubAccountCharge_tblGlobalCharge" FromRole="tblSubAccountCharge" ToRole="tblGlobalCharge" />
+    <NavigationProperty Name="tblSubAccountChargeSlabs" Relationship="Escrow.BOASModel.FK_tblSubAccountChargeSlab_tblSubAccountCharge" FromRole="tblSubAccountCharge" ToRole="tblSubAccountChargeSlab" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblSubAccountCharge_tblConstantObjectValue" FromRole="tblSubAccountCharge" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblSubAccountChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sub_account_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="amount_from" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="amount_to" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblSubAccountCharge" Relationship="Escrow.BOASModel.FK_tblSubAccountChargeSlab_tblSubAccountCharge" FromRole="tblSubAccountChargeSlab" ToRole="tblSubAccountCharge" />
+  </EntityType>
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="IsHolidayUSA" Type="Boolean" />
+    <Property Name="IsWeekday" Type="Boolean" />
+    <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHolidayUK" Type="Boolean" />
+    <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHoliday" Type="Boolean" />
+    <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblGlobalCharges" Relationship="Escrow.BOASModel.FK_tblGlobalCharge_DimDate" FromRole="DimDate" ToRole="tblGlobalCharge" />
+    <NavigationProperty Name="tblBrokerBranches" Relationship="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="DimDate" ToRole="tblBrokerBranch" />
+  </EntityType>
+  <Association Name="FK_tblBranchCharge_tblGlobalCharge">
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchCharge" Role="tblBranchCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchChargeSlab_tblBranchCharge">
+    <End Type="Escrow.BOASModel.tblBranchCharge" Role="tblBranchCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchChargeSlab" Role="tblBranchChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBranchCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchChargeSlab">
+        <PropertyRef Name="branch_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalCharge_DimDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblGlobalCharge">
+        <PropertyRef Name="effective_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalChargeSlab_tblGlobalCharge">
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalChargeSlab" Role="tblGlobalChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblGlobalChargeSlab">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountCharge_tblGlobalCharge">
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountCharge" Role="tblSubAccountCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblSubAccountCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountChargeSlab_tblSubAccountCharge">
+    <End Type="Escrow.BOASModel.tblSubAccountCharge" Role="tblSubAccountCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountChargeSlab" Role="tblSubAccountChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubAccountCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblSubAccountChargeSlab">
+        <PropertyRef Name="sub_account_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblInvestorCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="9" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="global_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_slab" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="minimum_charge" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblGlobalCharge" Relationship="Escrow.BOASModel.FK_tblInvestorCharge_tblGlobalCharge" FromRole="tblInvestorCharge" ToRole="tblGlobalCharge" />
+    <NavigationProperty Name="tblInvestorChargeSlabs" Relationship="Escrow.BOASModel.FK_tblInvestorChargeSlab_tblInvestorCharge" FromRole="tblInvestorCharge" ToRole="tblInvestorChargeSlab" />
+  </EntityType>
+  <EntityType Name="tblInvestorChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="investor_charge_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="amount_from" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="amount_to" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblInvestorCharge" Relationship="Escrow.BOASModel.FK_tblInvestorChargeSlab_tblInvestorCharge" FromRole="tblInvestorChargeSlab" ToRole="tblInvestorCharge" />
+  </EntityType>
+  <Association Name="FK_tblInvestorCharge_tblGlobalCharge">
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorCharge" Role="tblInvestorCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestorCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorChargeSlab_tblInvestorCharge">
+    <End Type="Escrow.BOASModel.tblInvestorCharge" Role="tblInvestorCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorChargeSlab" Role="tblInvestorChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInvestorCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestorChargeSlab">
+        <PropertyRef Name="investor_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="object_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Purpose" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblConstantObjectValues" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObject" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="display_value" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="object_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="sorting_order" Type="Int16" />
+    <Property Name="is_default" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblGlobalCharges" Relationship="Escrow.BOASModel.FK_tblGlobalCharge_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblGlobalCharge" />
+    <NavigationProperty Name="tblSubAccountCharges" Relationship="Escrow.BOASModel.FK_tblSubAccountCharge_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblSubAccountCharge" />
+    <NavigationProperty Name="tblConstantObject" Relationship="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" FromRole="tblConstantObjectValue" ToRole="tblConstantObject" />
+    <NavigationProperty Name="tblExchangeCharges" Relationship="Escrow.BOASModel.FK_tblExchangeCharge_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblExchangeCharge" />
+    <NavigationProperty Name="tblBranchAccountTypeSettings" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblBranchAccountTypeSetting" />
+    <NavigationProperty Name="tblBranchAccountTypeSettings1" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue1" FromRole="tblConstantObjectValue" ToRole="tblBranchAccountTypeSetting" />
+    <NavigationProperty Name="tblBranchAccountTypeSettings2" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue2" FromRole="tblConstantObjectValue" ToRole="tblBranchAccountTypeSetting" />
+    <NavigationProperty Name="tblBranchAccountTypeSettings3" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue3" FromRole="tblConstantObjectValue" ToRole="tblBranchAccountTypeSetting" />
+    <NavigationProperty Name="tblBranchAccountTypeSettings4" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue4" FromRole="tblConstantObjectValue" ToRole="tblBranchAccountTypeSetting" />
+    <NavigationProperty Name="tblGlobalAccountTypeSettings" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblGlobalAccountTypeSetting" />
+    <NavigationProperty Name="tblGlobalAccountTypeSettings1" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1" FromRole="tblConstantObjectValue" ToRole="tblGlobalAccountTypeSetting" />
+    <NavigationProperty Name="tblGlobalAccountTypeSettings2" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2" FromRole="tblConstantObjectValue" ToRole="tblGlobalAccountTypeSetting" />
+    <NavigationProperty Name="tblGlobalAccountTypeSettings3" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3" FromRole="tblConstantObjectValue" ToRole="tblGlobalAccountTypeSetting" />
+    <NavigationProperty Name="tblGlobalAccountTypeSetting" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting" FromRole="tblConstantObjectValue" ToRole="tblGlobalAccountTypeSetting" />
+    <NavigationProperty Name="tblInvestorAccountTypeSettings" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblInvestorAccountTypeSetting" />
+    <NavigationProperty Name="tblInvestorAccountTypeSettings1" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1" FromRole="tblConstantObjectValue" ToRole="tblInvestorAccountTypeSetting" />
+    <NavigationProperty Name="tblInvestorAccountTypeSettings2" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2" FromRole="tblConstantObjectValue" ToRole="tblInvestorAccountTypeSetting" />
+    <NavigationProperty Name="tblInvestorAccountTypeSettings3" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3" FromRole="tblConstantObjectValue" ToRole="tblInvestorAccountTypeSetting" />
+    <NavigationProperty Name="tblInvestorAccountTypeSettings4" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4" FromRole="tblConstantObjectValue" ToRole="tblInvestorAccountTypeSetting" />
+    <NavigationProperty Name="tblSubAccountAccountTypeSettings" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue" FromRole="tblConstantObjectValue" ToRole="tblSubAccountAccountTypeSetting" />
+    <NavigationProperty Name="tblSubAccountAccountTypeSettings1" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1" FromRole="tblConstantObjectValue" ToRole="tblSubAccountAccountTypeSetting" />
+    <NavigationProperty Name="tblSubAccountAccountTypeSettings2" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2" FromRole="tblConstantObjectValue" ToRole="tblSubAccountAccountTypeSetting" />
+    <NavigationProperty Name="tblSubAccountAccountTypeSettings3" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3" FromRole="tblConstantObjectValue" ToRole="tblSubAccountAccountTypeSetting" />
+    <NavigationProperty Name="tblSubAccountAccountTypeSettings4" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4" FromRole="tblConstantObjectValue" ToRole="tblSubAccountAccountTypeSetting" />
+    <NavigationProperty Name="tblSubAccountAccountTypeSettings5" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting" FromRole="tblConstantObjectValue" ToRole="tblSubAccountAccountTypeSetting" />
+  </EntityType>
+  <Association Name="FK_tblGlobalCharge_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalCharge">
+        <PropertyRef Name="charge_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountCharge_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountCharge" Role="tblSubAccountCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountCharge">
+        <PropertyRef Name="sub_account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Type="Escrow.BOASModel.tblConstantObject" Role="tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblBrokerBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ipo_branch_code" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="contact_person" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="registration_dt" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBranchCharges" Relationship="Escrow.BOASModel.FK_tblBranchCharge_tblBrokerBranch" FromRole="tblBrokerBranch" ToRole="tblBranchCharge" />
+    <NavigationProperty Name="DimDate" Relationship="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" FromRole="tblBrokerBranch" ToRole="DimDate" />
+    <NavigationProperty Name="tblBranchAccountTypeSettings" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblBrokerBranch" FromRole="tblBrokerBranch" ToRole="tblBranchAccountTypeSetting" />
+  </EntityType>
+  <Association Name="FK_tblBranchCharge_tblBrokerBranch">
+    <End Type="Escrow.BOASModel.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchCharge" Role="tblBranchCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchCharge">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+    <End Type="Escrow.BOASModel.DimDate" Role="DimDate" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblBrokerBranch">
+        <PropertyRef Name="registration_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblExchangeCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="exchange_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="global_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="is_slab" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="minimum_charge" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblExchangeCharge_tblConstantObjectValue" FromRole="tblExchangeCharge" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblGlobalCharge" Relationship="Escrow.BOASModel.FK_tblExchangeCharge_tblGlobalCharge1" FromRole="tblExchangeCharge" ToRole="tblGlobalCharge" />
+    <NavigationProperty Name="tblExchangeChargeSlabs" Relationship="Escrow.BOASModel.FK_tblExchangeChargeSlab_tblExchangeCharge" FromRole="tblExchangeCharge" ToRole="tblExchangeChargeSlab" />
+  </EntityType>
+  <EntityType Name="tblExchangeChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="2" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="exchange_charge_id" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="amount_from" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="amount_to" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="charge_amount" Type="Decimal" Nullable="false" Precision="15" Scale="10" />
+    <Property Name="is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblExchangeCharge" Relationship="Escrow.BOASModel.FK_tblExchangeChargeSlab_tblExchangeCharge" FromRole="tblExchangeChargeSlab" ToRole="tblExchangeCharge" />
+  </EntityType>
+  <Association Name="FK_tblExchangeCharge_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblExchangeCharge" Role="tblExchangeCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblExchangeCharge">
+        <PropertyRef Name="exchange_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblExchangeCharge_tblGlobalCharge1">
+    <End Type="Escrow.BOASModel.tblGlobalCharge" Role="tblGlobalCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblExchangeCharge" Role="tblExchangeCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblExchangeCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblExchangeChargeSlab_tblExchangeCharge">
+    <End Type="Escrow.BOASModel.tblExchangeCharge" Role="tblExchangeCharge" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblExchangeChargeSlab" Role="tblExchangeChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblExchangeCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblExchangeChargeSlab">
+        <PropertyRef Name="exchange_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblBranchAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branch_id" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="account_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="initial_deposit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="minimum_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="withdraw_limit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="withdraw_limit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="withdraw_limit_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_ratio" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_max" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="loan_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="profit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblBrokerBranch" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblBrokerBranch" FromRole="tblBranchAccountTypeSetting" ToRole="tblBrokerBranch" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue" FromRole="tblBranchAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue1" FromRole="tblBranchAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue2" FromRole="tblBranchAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue3" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue3" FromRole="tblBranchAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue4" Relationship="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue4" FromRole="tblBranchAccountTypeSetting" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblGlobalAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="account_type_id" />
+    </Key>
+    <Property Name="account_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="initial_deposit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="minimum_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="withdraw_limit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="withdraw_limit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="withdraw_limit_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_ratio" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_max" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="loan_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="profit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue" FromRole="tblGlobalAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1" FromRole="tblGlobalAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2" FromRole="tblGlobalAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue3" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3" FromRole="tblGlobalAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue4" Relationship="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting" FromRole="tblGlobalAccountTypeSetting" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblInvestorAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="client_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="account_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="initial_deposit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="minimum_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="withdraw_limit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="withdraw_limit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="withdraw_limit_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_ratio" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_max" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="loan_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="profit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue" FromRole="tblInvestorAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1" FromRole="tblInvestorAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2" FromRole="tblInvestorAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue3" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3" FromRole="tblInvestorAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue4" Relationship="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4" FromRole="tblInvestorAccountTypeSetting" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <EntityType Name="tblSubAccountAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Decimal" Nullable="false" Precision="3" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sub_account_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="account_type_id" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="initial_deposit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="minimum_balance" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="minimum_balance_is_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="withdraw_limit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="withdraw_limit" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="withdraw_limit_percentage" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_ratio" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <Property Name="loan_max" Type="Decimal" Nullable="false" Precision="30" Scale="10" />
+    <Property Name="loan_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="profit_on" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="active_status_id" Type="Int32" Nullable="false" />
+    <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+    <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+    <NavigationProperty Name="tblConstantObjectValue" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue" FromRole="tblSubAccountAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue1" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1" FromRole="tblSubAccountAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue2" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2" FromRole="tblSubAccountAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue3" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3" FromRole="tblSubAccountAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue4" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4" FromRole="tblSubAccountAccountTypeSetting" ToRole="tblConstantObjectValue" />
+    <NavigationProperty Name="tblConstantObjectValue5" Relationship="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting" FromRole="tblSubAccountAccountTypeSetting" ToRole="tblConstantObjectValue" />
+  </EntityType>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblBrokerBranch">
+    <End Type="Escrow.BOASModel.tblBrokerBranch" Role="tblBrokerBranch" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchAccountTypeSetting" Role="tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchAccountTypeSetting" Role="tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue1">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchAccountTypeSetting" Role="tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue2">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchAccountTypeSetting" Role="tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue3">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchAccountTypeSetting" Role="tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue4">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblBranchAccountTypeSetting" Role="tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalAccountTypeSetting" Role="tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalAccountTypeSetting" Role="tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalAccountTypeSetting" Role="tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalAccountTypeSetting" Role="tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblGlobalAccountTypeSetting" Role="tblGlobalAccountTypeSetting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorAccountTypeSetting" Role="tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorAccountTypeSetting" Role="tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorAccountTypeSetting" Role="tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorAccountTypeSetting" Role="tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblInvestorAccountTypeSetting" Role="tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Role="tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Role="tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Role="tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Role="tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="sub_account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Role="tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting">
+    <End Type="Escrow.BOASModel.tblConstantObjectValue" Role="tblConstantObjectValue" Multiplicity="1" />
+    <End Type="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Role="tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

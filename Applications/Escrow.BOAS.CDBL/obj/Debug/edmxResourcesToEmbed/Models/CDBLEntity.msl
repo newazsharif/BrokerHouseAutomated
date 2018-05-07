@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EscrowBOASModelStoreContainer" CdmEntityContainer="CDBLEntities">
+    <FunctionImportMapping FunctionImportName="psp_export_pay_in_pay_out" FunctionName="Escrow.BOASModel.Store.psp_export_pay_in_pay_out">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Escrow.BOASModel.psp_export_pay_in_pay_out_Result">
+          <ScalarProperty Name="body" ColumnName="body" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="head" ColumnName="head" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ssp_CDBL_invalid_data_list" FunctionName="Escrow.BOASModel.Store.ssp_CDBL_invalid_data_list">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Escrow.BOASModel.ssp_CDBL_invalid_data_list_Result">
+          <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+          <ScalarProperty Name="ERROR_TITLE" ColumnName="ERROR_TITLE" />
+          <ScalarProperty Name="ERROR_DETAILS" ColumnName="ERROR_DETAILS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ssp_CDBL_invalid_data_list_process" FunctionName="Escrow.BOASModel.Store.ssp_CDBL_invalid_data_list_process">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Escrow.BOASModel.ssp_CDBL_invalid_data_list_process_Result">
+          <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+          <ScalarProperty Name="ERROR_TITLE" ColumnName="ERROR_TITLE" />
+          <ScalarProperty Name="ERROR_DETAILS" ColumnName="ERROR_DETAILS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblCdblIpoes">
+      <EntityTypeMapping TypeName="Escrow.BOASModel.tblCdblIpo">
+        <MappingFragment StoreEntitySet="tblCdblIpo">
+          <ScalarProperty Name="sold_qty" ColumnName="sold_qty" />
+          <ScalarProperty Name="unloak_date" ColumnName="unloak_date" />
+          <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+          <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+          <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+          <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+          <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+          <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+          <ScalarProperty Name="lock_qty" ColumnName="lock_qty" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="bo_name" ColumnName="bo_name" />
+          <ScalarProperty Name="bo_code" ColumnName="bo_code" />
+          <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="isin" ColumnName="isin" />
+          <ScalarProperty Name="ipo_id" ColumnName="ipo_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

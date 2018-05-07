@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCdblIpo">
+          <Key>
+            <PropertyRef Name="ipo_id" />
+          </Key>
+          <Property Name="ipo_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isin" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="company_name" Type="varchar" MaxLength="150" />
+          <Property Name="trans_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="bo_code" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="bo_name" Type="varchar" MaxLength="150" />
+          <Property Name="qty" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="lock_qty" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="transaction_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="active_status_id" Type="int" />
+          <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="changed_date" Type="datetime" Nullable="false" />
+          <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="unloak_date" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="sold_qty" Type="numeric" Precision="15" Scale="0" />
+        </EntityType>
+        <Function Name="psp_export_pay_in_pay_out" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDBL">
+          <Parameter Name="is_payin_payout" Type="varchar" Mode="In" />
+          <Parameter Name="trd_dt" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="ssp_CDBL_invalid_data_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDBL">
+          <Parameter Name="display_names" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="ssp_CDBL_invalid_data_list_process" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="CDBL">
+          <Parameter Name="display_names" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="EscrowBOASModelStoreContainer">
+          <EntitySet Name="tblCdblIpo" EntityType="Self.tblCdblIpo" Schema="CDBL" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CDBLEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="psp_export_pay_in_pay_out" ReturnType="Collection(Escrow.BOASModel.psp_export_pay_in_pay_out_Result)">
+            <Parameter Name="is_payin_payout" Mode="In" Type="String" />
+            <Parameter Name="trd_dt" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ssp_CDBL_invalid_data_list" ReturnType="Collection(Escrow.BOASModel.ssp_CDBL_invalid_data_list_Result)">
+          <Parameter Name="display_names" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ssp_CDBL_invalid_data_list_process" ReturnType="Collection(Escrow.BOASModel.ssp_CDBL_invalid_data_list_process_Result)">
+          <Parameter Name="display_names" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblCdblIpoes" EntityType="Escrow.BOASModel.tblCdblIpo" />
+        </EntityContainer>
+        <ComplexType Name="psp_export_pay_in_pay_out_Result">
+          <Property Type="String" Name="body" Nullable="true" MaxLength="103" />
+          <Property Type="String" Name="fName" Nullable="true" MaxLength="19" />
+          <Property Type="String" Name="head" Nullable="true" MaxLength="37" />
+        </ComplexType>
+        <ComplexType Name="ssp_CDBL_invalid_data_list_Result">
+          <Property Type="String" Name="TABLE_NAME" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ERROR_TITLE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ERROR_DETAILS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ssp_CDBL_invalid_data_list_process_Result">
+          <Property Type="String" Name="TABLE_NAME" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ERROR_TITLE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ERROR_DETAILS" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tblCdblIpo">
+          <Key>
+            <PropertyRef Name="ipo_id" />
+          </Key>
+          <Property Name="ipo_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isin" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="company_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="trans_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="bo_code" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="bo_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="lock_qty" Type="Decimal" Nullable="false" Precision="15" Scale="0" />
+          <Property Name="transaction_date" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="active_status_id" Type="Int32" />
+          <Property Name="membership_id" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="changed_user_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="changed_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_dirty" Type="Decimal" Nullable="false" Precision="1" Scale="0" />
+          <Property Name="unloak_date" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="sold_qty" Type="Decimal" Precision="15" Scale="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscrowBOASModelStoreContainer" CdmEntityContainer="CDBLEntities">
+          <FunctionImportMapping FunctionImportName="psp_export_pay_in_pay_out" FunctionName="Escrow.BOASModel.Store.psp_export_pay_in_pay_out">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Escrow.BOASModel.psp_export_pay_in_pay_out_Result">
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="head" ColumnName="head" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ssp_CDBL_invalid_data_list" FunctionName="Escrow.BOASModel.Store.ssp_CDBL_invalid_data_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Escrow.BOASModel.ssp_CDBL_invalid_data_list_Result">
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="ERROR_TITLE" ColumnName="ERROR_TITLE" />
+                <ScalarProperty Name="ERROR_DETAILS" ColumnName="ERROR_DETAILS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ssp_CDBL_invalid_data_list_process" FunctionName="Escrow.BOASModel.Store.ssp_CDBL_invalid_data_list_process">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Escrow.BOASModel.ssp_CDBL_invalid_data_list_process_Result">
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="ERROR_TITLE" ColumnName="ERROR_TITLE" />
+                <ScalarProperty Name="ERROR_DETAILS" ColumnName="ERROR_DETAILS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblCdblIpoes">
+            <EntityTypeMapping TypeName="Escrow.BOASModel.tblCdblIpo">
+              <MappingFragment StoreEntitySet="tblCdblIpo">
+                <ScalarProperty Name="sold_qty" ColumnName="sold_qty" />
+                <ScalarProperty Name="unloak_date" ColumnName="unloak_date" />
+                <ScalarProperty Name="is_dirty" ColumnName="is_dirty" />
+                <ScalarProperty Name="changed_date" ColumnName="changed_date" />
+                <ScalarProperty Name="changed_user_id" ColumnName="changed_user_id" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+                <ScalarProperty Name="active_status_id" ColumnName="active_status_id" />
+                <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+                <ScalarProperty Name="lock_qty" ColumnName="lock_qty" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="bo_name" ColumnName="bo_name" />
+                <ScalarProperty Name="bo_code" ColumnName="bo_code" />
+                <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="isin" ColumnName="isin" />
+                <ScalarProperty Name="ipo_id" ColumnName="ipo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

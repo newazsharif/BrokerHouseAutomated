@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblBank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="short_name" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="bank_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBrokerBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ipo_branch_code" Type="varchar" MaxLength="4" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="contact_person" Type="varchar" MaxLength="100" />
+    <Property Name="contact_no" Type="varchar" MaxLength="30" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="registration_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="investor_range" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="accMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gl_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ledger_head_id" Type="bigint" />
+  </EntityType>
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FullDateUK" Type="char" MaxLength="10" />
+    <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+    <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+    <Property Name="DayName" Type="varchar" MaxLength="9" />
+    <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+    <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+    <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="MonthName" Type="varchar" MaxLength="9" />
+    <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="Quarter" Type="char" MaxLength="1" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="Year" Type="char" MaxLength="4" />
+    <Property Name="YearName" Type="char" MaxLength="7" />
+    <Property Name="MonthYear" Type="char" MaxLength="10" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FirstDayOfMonth" Type="date" />
+    <Property Name="LastDayOfMonth" Type="date" />
+    <Property Name="FirstDayOfQuarter" Type="date" />
+    <Property Name="LastDayOfQuarter" Type="date" />
+    <Property Name="FirstDayOfYear" Type="date" />
+    <Property Name="LastDayOfYear" Type="date" />
+    <Property Name="IsHolidayUSA" Type="bit" />
+    <Property Name="IsWeekday" Type="bit" />
+    <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+    <Property Name="IsHolidayUK" Type="bit" />
+    <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+    <Property Name="IsHoliday" Type="bit" />
+    <Property Name="Holiday" Type="varchar" MaxLength="50" />
+    <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+    <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="FiscalYear" Type="char" MaxLength="4" />
+    <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+    <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+    <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FiscalFirstDayOfMonth" Type="date" />
+    <Property Name="FiscalLastDayOfMonth" Type="date" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+    <Property Name="FiscalLastDayOfQuarter" Type="date" />
+    <Property Name="FiscalFirstDayOfYear" Type="date" />
+    <Property Name="FiscalLastDayOfYear" Type="date" />
+    <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="remarks" Type="varchar" MaxLength="150" />
+    <Property Name="sorting_order" Type="smallint" />
+    <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblDailyWorkList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="work_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sort_order" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="is_done" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblBrokerBranch">
+        <PropertyRef Name="registration_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="tfun_get_ledger_head" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ledger_id" Type="bigint" Nullable="false" />
+          <Property Name="ledger_code" Type="nvarchar" MaxLength="100" />
+          <Property Name="ledger_name" Type="nvarchar" MaxLength="100" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <EntityContainer Name="EscrowBOASModelStoreContainer">
+    <EntitySet Name="tblBank" EntityType="Self.tblBank" Schema="Accounting" store:Type="Tables" />
+    <EntitySet Name="tblBrokerBranch" EntityType="Self.tblBrokerBranch" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="accMapping" EntityType="Self.accMapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDailyWorkList" EntityType="Self.tblDailyWorkList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Self.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

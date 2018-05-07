@@ -1,0 +1,271 @@
+﻿@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+@{
+    Layout = null;
+}
+
+<h2>Add New Investor</h2>
+<hr />
+<div @*class="container"*@ ng-controller="InvestorController" ng-init="LoadAllDropDown()">
+    <form class="form-horizontal" ng-submit="" name="newInvestorForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Name">Client Code</label>
+            </div>
+            <div class="col-md-10">
+                <input type="text" class="form-control input-sm" data-ng-model="investor.client_id" name="clientId" style="max-width : 765px" required onload-focus="true" ng-blur="CheckInvestorinfo(investor.client_id)" enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="Name">Client Name</label>
+            </div>
+            <div class="col-md-10">
+                <input type="text" class="form-control input-sm" data-ng-model="investor.first_holder_name" name="clientfirst_holder_name" style="max-width : 765px" required enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="BOReference">BO Reference</label>
+            </div>
+
+            <div class="col-md-4">
+                <select data-ng-model="investor.bo_refernce_id" class="dropdown form-control input-sm"
+                        ng-options="BO.value as BO.text for BO in BoRefList" ng-change="SetBoCode()" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-2">
+                <label for="BOCode">BO Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="investor.bo_code" ng-maxlength="16" ng-minlength="16" placeholder="Bo Code should be 16 digits" ng-blur="CheckBo(investor.bo_code)" enter-as-tab />
+                <p class="error" ng-show="newInvestorForm.investor.$dirty || submitted"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="DOB">Date Of Birth</label>
+            </div>
+
+            <div class="col-md-3">
+                <input type="text" class="form-control input-sm"  datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="investor.birth_date" is-open="opened1" min-date="'01/001/2016'" max-date="'31/12/2099'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+             </div>
+            <div class="col-md-1">
+                <span class="input-group-btn">
+                    <button style="margin-left : -19px" type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+
+            <div class="col-md-2">
+                <label for="Gender">Gender</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.gender_id" class="dropdown form-control input-sm"
+                        ng-options="Gender.value as Gender.text for Gender in GenderList" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="father_name">Father/Husband</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="investor.father_name" enter-as-tab />
+            </div>
+
+            <div class="col-md-2">
+                <label for="mother_name">Mother Name</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="investor.mother_name" enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="NID">National ID</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="NID" ng-model="investor.national_id" enter-as-tab />
+            </div>
+
+            <div class="col-md-2">
+                <label for="passport_no">Passport No</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" ng-model="investor.passport_no" enter-as-tab />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="nibondhon_no">Nibondhon No</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="nibondhon_no" ng-model="investor.nibondhon_no" enter-as-tab />
+            </div>
+
+            <div class="col-md-2">
+                <label for="branch_id">Branch</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.branch_id" class="dropdown form-control input-sm"
+                        ng-options="Branch.value as Branch.text for Branch in BranchList" enter-as-tab required>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="operation_type_id">Operation Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.operation_type_id" class="dropdown form-control input-sm"
+                        ng-options="Operation.value as Operation.text for Operation in OpetarionTypeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+
+
+            <div class="col-md-2">
+                <label for="ACType">A/C Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.account_type_id" class="dropdown form-control input-sm"
+                        ng-options="Ac.value as Ac.text for Ac in AcTypeList" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="bank_id">Bank</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.bank_id" class="dropdown form-control input-sm"
+                        ng-options="Bank.value as Bank.text for Bank in BankList" enter-as-tab required ng-change="LoadBankBranch(investor.bank_id)">
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="bank_branch_id">Bank Branch</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.bank_branch_id" class="dropdown form-control input-sm"
+                        ng-options="BankBranch.value as BankBranch.text for BankBranch in BankBranchList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="banc_account_no">Bank Account</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" name="banc_account_no" ng-model="investor.banc_account_no" enter-as-tab required />
+            </div>
+            <div class="col-md-2">
+                <label for="Trader">Trader</label>
+            </div>
+            <div class="col-md-4">
+                
+                <select data-ng-model="investor.trader_id" class="dropdown form-control input-sm"
+                        ng-options="Trader.value as Trader.text for Trader in TraderList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <div class="col-md-2">
+                    <label for="trader_id">Trader</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="investor.trader_id" class="dropdown form-control input-sm"
+                            ng-options="Sector.object_value_id as Sector.display_value for Sector in SectorList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="trade_type_id">Trade Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.trade_type_id" class="dropdown form-control input-sm"
+                        ng-options="TraderType.value as TraderType.text for TraderType in TraderTypeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="ipo_type_id">Ipo Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.ipo_type_id" class="dropdown form-control input-sm"
+                        ng-options="Ipo.value as Ipo.text for Ipo in IpoTypeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label for="active_status_id">Status</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="investor.active_status_id" class="dropdown form-control input-sm"
+                        ng-options="Status.value as Status.text for Status in StatusList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="checkbox" name="isBeftn" ng-model="investor.beftn_enabled" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isBeftn"> BEFTN Enabled</label>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <input type="checkbox" name="isEmail" ng-model="investor.email_enabled" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isEmail">Email Enabled</label>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <input type="checkbox" name="isInternet" ng-model="investor.internet_enabled" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isInternet"> Internet Enabled</label>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <input type="checkbox" name="isSms" ng-model="investor.sms_enabled" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isSms"> Sms Enabled</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Save" data-ng-click="AddNewInvestor()" />
+                    <input type="button" class="btn btn-default" value="Reset" data-ng-click="Reset()" />
+                    <a href="/#InvestorList" class="btn btn-default">List</a>
+                </div>
+            </div>
+
+</form>
+</div>

@@ -1,0 +1,91 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 17/8/2015
+    ///Reason: Broker Branch Edit View
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Edit Broker Branch";
+    Layout = null;
+}
+
+<h2>Edit Broker Branch</h2>
+<hr />
+<div @*class="container"*@ ng-controller="BrokerBranchController" ng-init="loadBrokerBranchAndDdlById()">
+    <form class="form-horizontal" ng-submit="" name="editBrokBraForm">
+        <input type="hidden" name="branchId" data-ng-model="editBroker.id" />
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Name</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="Name" class="form-control input-sm" data-ng-model="editBroker.name" ng-readonly="true" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Contact Person</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="ContactPerson" class="form-control input-sm" data-ng-model="editBroker.contact_person" onload-focus="true" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Contact No</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="ContactNo" class="form-control input-sm" data-ng-model="editBroker.contact_no" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Email</label>
+            </div>
+            <div class="col-md-7">
+                <input type="email" name="Email" class="form-control input-sm" data-ng-model="editBroker.email" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Registration Date</label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" name="RegisDt" class="form-control input-sm" data-ng-model="editBroker.regis_dt" ng-readonly="true" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Address</label>
+            </div>
+            <div class="col-md-7">
+                <textarea name="Address" class="form-control input-sm" data-ng-model="editBroker.address" enter-as-tab></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Active Status</label>
+            </div>
+            <div class="col-md-7">
+                <select data-ng-model="editBroker.active_status_id" class="dropdown form-control input-sm"
+                        ng-options="activeStatus.value as activeStatus.text for activeStatus in activeStatusList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="editBrokerBranch()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadBrokerBranchAndDdlById()" />
+                <a href="/#BrokerBranch" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section Scripts {
+}
+

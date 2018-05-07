@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="FullDateUK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FullDateUSA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DaySuffix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="DayName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekUSA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekUK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="DayOfWeekInMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfWeekInYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfQuarter" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="DayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfMonth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="WeekOfYear" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="MonthName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="MonthOfQuarter" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Quarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="QuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="YearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="MonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="MMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="LastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="IsHolidayUSA" Type="Boolean" />
+    <Property Name="IsWeekday" Type="Boolean" />
+    <Property Name="HolidayUSA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHolidayUK" Type="Boolean" />
+    <Property Name="HolidayUK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsHoliday" Type="Boolean" />
+    <Property Name="Holiday" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalDayOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalWeekOfYear" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalQuarter" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalQuarterName" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="FiscalYear" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalYearName" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMonthYear" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalMMYYYY" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="FiscalFirstDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfMonth" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfQuarter" Type="DateTime" Precision="0" />
+    <Property Name="FiscalFirstDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FiscalLastDayOfYear" Type="DateTime" Precision="0" />
+    <Property Name="FullDateCDBL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblDayProcess" Relationship="Self.FK_tblDayProcess_DimDate" FromRole="DimDate" ToRole="tblDayProcess" />
+  </EntityType>
+  <EntityType Name="tblDayProcess">
+    <Key>
+      <PropertyRef Name="process_date" />
+    </Key>
+    <Property Name="process_date" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="start_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="end_date" Type="DateTime" Precision="3" />
+    <Property Name="end_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="membership_id" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+    <NavigationProperty Name="DimDate" Relationship="Self.FK_tblDayProcess_DimDate" FromRole="tblDayProcess" ToRole="DimDate" />
+  </EntityType>
+  <Association Name="FK_tblDayProcess_DimDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblDayProcess" Type="Self.tblDayProcess" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblDayProcess">
+        <PropertyRef Name="process_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProcessEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DimDates" EntityType="Self.DimDate" />
+    <EntitySet Name="tblDayProcesses" EntityType="Self.tblDayProcess" />
+    <AssociationSet Name="FK_tblDayProcess_DimDate" Association="Self.FK_tblDayProcess_DimDate">
+      <End Role="DimDate" EntitySet="DimDates" />
+      <End Role="tblDayProcess" EntitySet="tblDayProcesses" />
+    </AssociationSet>
+    <FunctionImport Name="psp_day_end">
+      <Parameter Name="process_dt" Mode="In" Type="Decimal" />
+      <Parameter Name="end_by" Mode="In" Type="String" />
+      <Parameter Name="membership_id" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="psp_db_backup">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="path" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

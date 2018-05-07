@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Clients ProcessingMode="BatchInsertOrUpdate" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xsi:noNamespaceSchemaLocation="Flextrade-BOS-Clients.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+</Clients>

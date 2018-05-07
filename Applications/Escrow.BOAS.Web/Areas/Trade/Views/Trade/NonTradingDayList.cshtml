@@ -1,0 +1,93 @@
+﻿@*
+    ///Created by: SHOHID
+    ///Edit date: 15/05/2016
+    ///Reason: Non Trading Day List view
+*@
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+@{
+    ViewBag.Title = "Non Trading Day List";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<h2>Non Trading Day List</h2>
+<hr />
+<div class="row" ng-controller="NonTradingDayController" ng-init="loadNonTradingDayList()">
+    <div class="col-md-12">
+        <a href="/#CreateNonTradingDay" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" min="1" class="form-control input-sm" ng-model="itemsByPage" numbers-only style="width : 150px" />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="from_date">From Date</th>
+                    <th st-sort="to_date">To Date</th>
+                    <th st-sort="type">Type</th>
+                    <th st-sort="remarks">Remarks</th>
+                    @*<th st-sort="input_info">Input info</th>*@
+                             
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <th colspan="7"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" style="width : 200px" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.from_date}}</td>
+                    <td>{{row.to_date}}</td>
+                    <td>{{row.type}}</td>
+                    <td>{{row.remarks}}</td>
+                    @*<td>{{row.input_info}}</td>*@               
+                    @*<td><a href="/#DetailNonTradingDay/{{row.id}}" class="btn btn-link"><i class="fa fa-calendar" aria-hidden="true"></i></a></td>*@
+                  
+                    <td><button class=" btn btn-link" data-toggle="modal" ng-click="DetailNonTradingDayById(row.Id)" data-target="#myModal"><i class="fa fa-calendar" aria-hidden="true"></i></button></td>
+                    
+                    
+                      @*<td><a ng-click="DeleteConstantObject(row)" class="btn btn-link">&#@Constant.Delete;</a></td>*@
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+
+@* modal *@
+
+    <div id="myModal" class="modal fade" style="margin-top:100px;" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">All Non Trading Day Details</h4>
+                    </div>
+                <div class="modal-body" ng-repeat="rowDetail in rowDetailCollection">
+                    {{rowDetail.non_trading_date}}<button type="button" class="btn btn-danger pull-right"><i class="fa fa-times" ng-click="DeleteNonTradingDayById(rowDetail.Id,rowDetail.master_id)" aria-hidden="true"></i></button>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

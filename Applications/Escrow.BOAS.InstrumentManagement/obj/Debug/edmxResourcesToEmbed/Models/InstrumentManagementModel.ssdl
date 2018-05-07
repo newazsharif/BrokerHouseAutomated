@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FullDateUK" Type="char" MaxLength="10" />
+    <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+    <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+    <Property Name="DayName" Type="varchar" MaxLength="9" />
+    <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+    <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+    <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="MonthName" Type="varchar" MaxLength="9" />
+    <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="Quarter" Type="char" MaxLength="1" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="Year" Type="char" MaxLength="4" />
+    <Property Name="YearName" Type="char" MaxLength="7" />
+    <Property Name="MonthYear" Type="char" MaxLength="10" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FirstDayOfMonth" Type="date" />
+    <Property Name="LastDayOfMonth" Type="date" />
+    <Property Name="FirstDayOfQuarter" Type="date" />
+    <Property Name="LastDayOfQuarter" Type="date" />
+    <Property Name="FirstDayOfYear" Type="date" />
+    <Property Name="LastDayOfYear" Type="date" />
+    <Property Name="IsHolidayUSA" Type="bit" />
+    <Property Name="IsWeekday" Type="bit" />
+    <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+    <Property Name="IsHolidayUK" Type="bit" />
+    <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+    <Property Name="IsHoliday" Type="bit" />
+    <Property Name="Holiday" Type="varchar" MaxLength="50" />
+    <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+    <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="FiscalYear" Type="char" MaxLength="4" />
+    <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+    <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+    <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FiscalFirstDayOfMonth" Type="date" />
+    <Property Name="FiscalLastDayOfMonth" Type="date" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+    <Property Name="FiscalLastDayOfQuarter" Type="date" />
+    <Property Name="FiscalFirstDayOfYear" Type="date" />
+    <Property Name="FiscalLastDayOfYear" Type="date" />
+    <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="remarks" Type="varchar" MaxLength="150" />
+    <Property Name="sorting_order" Type="smallint" />
+    <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblInstrument">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isin" Type="varchar" MaxLength="12" />
+    <Property Name="security_code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="instrument_name" Type="varchar" MaxLength="150" />
+    <Property Name="sector_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="instument_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="depository_company_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="face_value" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="discount" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="premium" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="lot" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="is_marginable" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="group_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="closed_price" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="is_foreign" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="authorized_capital" Type="numeric" Precision="24" Scale="4" />
+    <Property Name="paid_up_capital" Type="numeric" Precision="24" Scale="4" />
+    <Property Name="current_eps" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="current_nav" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="current_pe" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="market_type_id" Type="numeric" Precision="4" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblInstrumentFundamentalInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="effective_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="eps" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="pe" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="nav" Type="numeric" Precision="12" Scale="4" Nullable="false" />
+    <Property Name="total_asset" Type="numeric" Precision="24" Scale="4" Nullable="false" />
+    <Property Name="total_liability" Type="numeric" Precision="24" Scale="4" Nullable="false" />
+    <Property Name="total_share" Type="numeric" Precision="24" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblInstrumentManualInOut">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="20" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="transaction_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="reference_no" Type="varchar" MaxLength="50" />
+    <Property Name="transaction_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="rate" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="remarks" Type="varchar" MaxLength="500" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="approve_by" Type="varchar" MaxLength="128" />
+    <Property Name="approve_date" Type="numeric" Precision="9" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblInstrumentMarginabilityHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="effective_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="is_marginable" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="highest_rate" Type="numeric" Precision="12" Scale="4" />
+    <Property Name="percentage" Type="numeric" Precision="8" Scale="4" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Escrow.BOAS.Charge.vw_all_investors_account_type_setting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_all_investors_account_type_setting">
+    <Key>
+      <PropertyRef Name="client_id" />
+      <PropertyRef Name="account_type_name" />
+      <PropertyRef Name="initial_deposit" />
+      <PropertyRef Name="minimum_balance_on" />
+      <PropertyRef Name="minimun_balance_on_name" />
+      <PropertyRef Name="minimum_balance" />
+      <PropertyRef Name="minimum_balance_is_percentage" />
+      <PropertyRef Name="withdraw_limit_on" />
+      <PropertyRef Name="withdraw_limit_on_name" />
+      <PropertyRef Name="withdraw_limit" />
+      <PropertyRef Name="withdraw_limit_percentage" />
+      <PropertyRef Name="loan_ratio" />
+      <PropertyRef Name="loan_max" />
+      <PropertyRef Name="loan_on" />
+      <PropertyRef Name="loan_on_name" />
+      <PropertyRef Name="profit_on" />
+      <PropertyRef Name="profit_on_name" />
+      <PropertyRef Name="available_balance" />
+      <PropertyRef Name="ledger_balance" />
+      <PropertyRef Name="purchase_power" />
+      <PropertyRef Name="withdrawable_amount" />
+    </Key>
+    <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="account_type_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="initial_deposit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="minimun_balance_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="minimum_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="withdraw_limit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="withdraw_limit_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_ratio" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_max" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="loan_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="loan_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="profit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="profit_on_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="available_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="ledger_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="purchase_power" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="withdrawable_amount" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Escrow.BOAS.Investor.vw_InvestorShareBalance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_InvestorShareBalance">
+    <Key>
+      <PropertyRef Name="transaction_date" />
+      <PropertyRef Name="client_id" />
+      <PropertyRef Name="instrument_id" />
+      <PropertyRef Name="ledger_quantity" />
+      <PropertyRef Name="salable_quantity" />
+      <PropertyRef Name="ipo_receivable_quantity" />
+      <PropertyRef Name="bonus_receivable_quantity" />
+      <PropertyRef Name="lock_quantity" />
+      <PropertyRef Name="pledge_quantity" />
+      <PropertyRef Name="cost_average" />
+      <PropertyRef Name="cost_value" />
+      <PropertyRef Name="market_price" />
+      <PropertyRef Name="market_value" />
+      <PropertyRef Name="active_status_id" />
+      <PropertyRef Name="membership_id" />
+      <PropertyRef Name="changed_user_id" />
+      <PropertyRef Name="changed_date" />
+      <PropertyRef Name="is_dirty" />
+    </Key>
+    <Property Name="transaction_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="instrument_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="ledger_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="salable_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="ipo_receivable_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="bonus_receivable_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="lock_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="pledge_quantity" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="cost_average" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="cost_value" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="market_price" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="market_value" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrument_InstrumentDepositoryCompany">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInstrument">
+        <PropertyRef Name="depository_company_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrument_InstrumentGroup">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInstrument">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrument_InstrumentSector">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInstrument">
+        <PropertyRef Name="sector_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrument_InstrumentType">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInstrument">
+        <PropertyRef Name="instument_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblInstrumentFundamentalInfo" Type="Self.tblInstrumentFundamentalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblInstrumentFundamentalInfo">
+        <PropertyRef Name="effective_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentFundamentalInfo_tblInstrument">
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="1" />
+    <End Role="tblInstrumentFundamentalInfo" Type="Self.tblInstrumentFundamentalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInstrument">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInstrumentFundamentalInfo">
+        <PropertyRef Name="instrument_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentManualInOut_DimDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblInstrumentManualInOut" Type="Self.tblInstrumentManualInOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblInstrumentManualInOut">
+        <PropertyRef Name="transaction_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentManualInOut_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInstrumentManualInOut" Type="Self.tblInstrumentManualInOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInstrumentManualInOut">
+        <PropertyRef Name="transaction_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentManualInOut_tblInstrument">
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="1" />
+    <End Role="tblInstrumentManualInOut" Type="Self.tblInstrumentManualInOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInstrument">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInstrumentManualInOut">
+        <PropertyRef Name="instrument_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblInstrumentMarginabilityHistory" Type="Self.tblInstrumentMarginabilityHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblInstrumentMarginabilityHistory">
+        <PropertyRef Name="effective_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInstrumentMarginabilityHistory_tblInstrument">
+    <End Role="tblInstrument" Type="Self.tblInstrument" Multiplicity="1" />
+    <End Role="tblInstrumentMarginabilityHistory" Type="Self.tblInstrumentMarginabilityHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInstrument">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInstrumentMarginabilityHistory">
+        <PropertyRef Name="instrument_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="psp_investor_share_transaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Investor">
+    <Parameter Name="id" Type="varchar(max)" Mode="In" />
+    <Parameter Name="SHARE_LEDGER_TYPE_ID" Type="numeric" Mode="In" />
+    <Parameter Name="membership_id" Type="numeric" Mode="In" />
+    <Parameter Name="changed_user_id" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="EscrowBOASModelStoreContainer">
+    <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInstrument" EntityType="Self.tblInstrument" Schema="Instrument" store:Type="Tables" />
+    <EntitySet Name="tblInstrumentFundamentalInfo" EntityType="Self.tblInstrumentFundamentalInfo" Schema="Instrument" store:Type="Tables" />
+    <EntitySet Name="tblInstrumentManualInOut" EntityType="Self.tblInstrumentManualInOut" Schema="Instrument" store:Type="Tables" />
+    <EntitySet Name="tblInstrumentMarginabilityHistory" EntityType="Self.tblInstrumentMarginabilityHistory" Schema="Instrument" store:Type="Tables" />
+    <EntitySet Name="vw_all_investors_account_type_setting" EntityType="Self.vw_all_investors_account_type_setting" store:Type="Views" store:Schema="Charge">
+      <DefiningQuery>SELECT 
+    [vw_all_investors_account_type_setting].[client_id] AS [client_id], 
+    [vw_all_investors_account_type_setting].[account_type_id] AS [account_type_id], 
+    [vw_all_investors_account_type_setting].[account_type_name] AS [account_type_name], 
+    [vw_all_investors_account_type_setting].[initial_deposit] AS [initial_deposit], 
+    [vw_all_investors_account_type_setting].[minimum_balance_on] AS [minimum_balance_on], 
+    [vw_all_investors_account_type_setting].[minimun_balance_on_name] AS [minimun_balance_on_name], 
+    [vw_all_investors_account_type_setting].[minimum_balance] AS [minimum_balance], 
+    [vw_all_investors_account_type_setting].[minimum_balance_is_percentage] AS [minimum_balance_is_percentage], 
+    [vw_all_investors_account_type_setting].[withdraw_limit_on] AS [withdraw_limit_on], 
+    [vw_all_investors_account_type_setting].[withdraw_limit_on_name] AS [withdraw_limit_on_name], 
+    [vw_all_investors_account_type_setting].[withdraw_limit] AS [withdraw_limit], 
+    [vw_all_investors_account_type_setting].[withdraw_limit_percentage] AS [withdraw_limit_percentage], 
+    [vw_all_investors_account_type_setting].[loan_ratio] AS [loan_ratio], 
+    [vw_all_investors_account_type_setting].[loan_max] AS [loan_max], 
+    [vw_all_investors_account_type_setting].[loan_on] AS [loan_on], 
+    [vw_all_investors_account_type_setting].[loan_on_name] AS [loan_on_name], 
+    [vw_all_investors_account_type_setting].[profit_on] AS [profit_on], 
+    [vw_all_investors_account_type_setting].[profit_on_name] AS [profit_on_name], 
+    [vw_all_investors_account_type_setting].[available_balance] AS [available_balance], 
+    [vw_all_investors_account_type_setting].[ledger_balance] AS [ledger_balance], 
+    [vw_all_investors_account_type_setting].[purchase_power] AS [purchase_power], 
+    [vw_all_investors_account_type_setting].[withdrawable_amount] AS [withdrawable_amount]
+    FROM [Charge].[vw_all_investors_account_type_setting] AS [vw_all_investors_account_type_setting]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_InvestorShareBalance" EntityType="Self.vw_InvestorShareBalance" store:Type="Views" store:Schema="Investor">
+      <DefiningQuery>SELECT 
+    [vw_InvestorShareBalance].[transaction_date] AS [transaction_date], 
+    [vw_InvestorShareBalance].[client_id] AS [client_id], 
+    [vw_InvestorShareBalance].[instrument_id] AS [instrument_id], 
+    [vw_InvestorShareBalance].[ledger_quantity] AS [ledger_quantity], 
+    [vw_InvestorShareBalance].[salable_quantity] AS [salable_quantity], 
+    [vw_InvestorShareBalance].[ipo_receivable_quantity] AS [ipo_receivable_quantity], 
+    [vw_InvestorShareBalance].[bonus_receivable_quantity] AS [bonus_receivable_quantity], 
+    [vw_InvestorShareBalance].[lock_quantity] AS [lock_quantity], 
+    [vw_InvestorShareBalance].[pledge_quantity] AS [pledge_quantity], 
+    [vw_InvestorShareBalance].[cost_average] AS [cost_average], 
+    [vw_InvestorShareBalance].[cost_value] AS [cost_value], 
+    [vw_InvestorShareBalance].[market_price] AS [market_price], 
+    [vw_InvestorShareBalance].[market_value] AS [market_value], 
+    [vw_InvestorShareBalance].[active_status_id] AS [active_status_id], 
+    [vw_InvestorShareBalance].[membership_id] AS [membership_id], 
+    [vw_InvestorShareBalance].[changed_user_id] AS [changed_user_id], 
+    [vw_InvestorShareBalance].[changed_date] AS [changed_date], 
+    [vw_InvestorShareBalance].[is_dirty] AS [is_dirty]
+    FROM [Investor].[vw_InvestorShareBalance] AS [vw_InvestorShareBalance]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrument_InstrumentDepositoryCompany" Association="Self.FK_tblInstrument_InstrumentDepositoryCompany">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrument_InstrumentGroup" Association="Self.FK_tblInstrument_InstrumentGroup">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrument_InstrumentSector" Association="Self.FK_tblInstrument_InstrumentSector">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrument_InstrumentType" Association="Self.FK_tblInstrument_InstrumentType">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate" Association="Self.FK_tblInstrumentFundamentalInfo_InstrumentFundamentalInfoEffectiveDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblInstrumentFundamentalInfo" EntitySet="tblInstrumentFundamentalInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentFundamentalInfo_tblInstrument" Association="Self.FK_tblInstrumentFundamentalInfo_tblInstrument">
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+      <End Role="tblInstrumentFundamentalInfo" EntitySet="tblInstrumentFundamentalInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentManualInOut_DimDate" Association="Self.FK_tblInstrumentManualInOut_DimDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentManualInOut_tblConstantObjectValue" Association="Self.FK_tblInstrumentManualInOut_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentManualInOut_tblInstrument" Association="Self.FK_tblInstrumentManualInOut_tblInstrument">
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+      <End Role="tblInstrumentManualInOut" EntitySet="tblInstrumentManualInOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate" Association="Self.FK_tblInstrumentMarginabilityHistory_InstrumentMarginabilityHistoryEffectiveDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblInstrumentMarginabilityHistory" EntitySet="tblInstrumentMarginabilityHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInstrumentMarginabilityHistory_tblInstrument" Association="Self.FK_tblInstrumentMarginabilityHistory_tblInstrument">
+      <End Role="tblInstrument" EntitySet="tblInstrument" />
+      <End Role="tblInstrumentMarginabilityHistory" EntitySet="tblInstrumentMarginabilityHistory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

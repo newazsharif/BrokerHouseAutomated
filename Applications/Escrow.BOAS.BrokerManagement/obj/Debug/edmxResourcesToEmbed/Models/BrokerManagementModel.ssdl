@@ -1,0 +1,743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOAS.BrokerManagement.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblBank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="short_name" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="bank_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBankBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="branch_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="routing_no" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="bank_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="contact_person" Type="varchar" MaxLength="150" />
+    <Property Name="contact_number" Type="varchar" MaxLength="30" />
+    <Property Name="email_address" Type="varchar" MaxLength="50" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="district_id" Type="numeric" Precision="4" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblBrokerBankAccount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bank_branch_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="account_no" Type="varchar" MaxLength="50" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_default" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBrokerBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ipo_branch_code" Type="varchar" MaxLength="4" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="contact_person" Type="varchar" MaxLength="100" />
+    <Property Name="contact_no" Type="varchar" MaxLength="30" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="registration_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBrokerImages">
+    <Key>
+      <PropertyRef Name="membership_id" />
+    </Key>
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="report_header_image" Type="image" />
+    <Property Name="report_footer_image" Type="image" />
+    <Property Name="report_logo" Type="image" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDepositoryPerticipant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dp_no" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="clearance_no" Type="varchar" MaxLength="16" />
+    <Property Name="bo_reference_no" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="is_omnibus" Type="numeric" Precision="1" Scale="0" />
+    <Property Name="omnibus_master_id" Type="varchar" MaxLength="10" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="5" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employee_code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="father_name" Type="varchar" MaxLength="100" />
+    <Property Name="national_id" Type="varchar" MaxLength="50" />
+    <Property Name="branch_id" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="birth_date" Type="datetime" />
+    <Property Name="mailing_address" Type="varchar" MaxLength="250" />
+    <Property Name="permanent_address" Type="varchar" MaxLength="250" />
+    <Property Name="contact_no" Type="varchar" MaxLength="30" />
+    <Property Name="ref1_details" Type="varchar" MaxLength="250" />
+    <Property Name="ref2_details" Type="varchar" MaxLength="250" />
+    <Property Name="department_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="joining_dt" Type="numeric" Precision="9" Scale="0" />
+    <Property Name="release_dt" Type="numeric" Precision="9" Scale="0" />
+    <Property Name="designation_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="gender_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="email_address" Type="varchar" MaxLength="50" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="mother_name" Type="varchar" MaxLength="100" />
+    <Property Name="photo" Type="image" />
+  </EntityType>
+  <EntityType Name="tblEmployeeUserMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="5" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employee_id" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblTrader">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="trader_code" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="employee_id" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="ar_no" Type="varchar" MaxLength="30" />
+    <Property Name="trade_work_station" Type="varchar" MaxLength="30" />
+    <Property Name="license_renew_dt" Type="numeric" Precision="9" Scale="0" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="branch_id" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="Is_Default" Type="bit" />
+    <Property Name="investor_range" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FullDateUK" Type="char" MaxLength="10" />
+    <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+    <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+    <Property Name="DayName" Type="varchar" MaxLength="9" />
+    <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+    <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+    <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="MonthName" Type="varchar" MaxLength="9" />
+    <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="Quarter" Type="char" MaxLength="1" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="Year" Type="char" MaxLength="4" />
+    <Property Name="YearName" Type="char" MaxLength="7" />
+    <Property Name="MonthYear" Type="char" MaxLength="10" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FirstDayOfMonth" Type="date" />
+    <Property Name="LastDayOfMonth" Type="date" />
+    <Property Name="FirstDayOfQuarter" Type="date" />
+    <Property Name="LastDayOfQuarter" Type="date" />
+    <Property Name="FirstDayOfYear" Type="date" />
+    <Property Name="LastDayOfYear" Type="date" />
+    <Property Name="IsHolidayUSA" Type="bit" />
+    <Property Name="IsWeekday" Type="bit" />
+    <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+    <Property Name="IsHolidayUK" Type="bit" />
+    <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+    <Property Name="IsHoliday" Type="bit" />
+    <Property Name="Holiday" Type="varchar" MaxLength="50" />
+    <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+    <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="FiscalYear" Type="char" MaxLength="4" />
+    <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+    <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+    <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FiscalFirstDayOfMonth" Type="date" />
+    <Property Name="FiscalLastDayOfMonth" Type="date" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+    <Property Name="FiscalLastDayOfQuarter" Type="date" />
+    <Property Name="FiscalFirstDayOfYear" Type="date" />
+    <Property Name="FiscalLastDayOfYear" Type="date" />
+    <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="remarks" Type="varchar" MaxLength="150" />
+    <Property Name="sorting_order" Type="smallint" />
+    <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+  </EntityType>
+  <EntityType Name="tblInvestor">
+    <Key>
+      <PropertyRef Name="client_id" />
+    </Key>
+    <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="bo_refernce_id" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="bo_code" Type="varchar" MaxLength="16" />
+    <Property Name="first_holder_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="birth_date" Type="datetime" />
+    <Property Name="gender_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="national_id" Type="varchar" MaxLength="30" />
+    <Property Name="passport_no" Type="varchar" MaxLength="20" />
+    <Property Name="nibondhon_no" Type="varchar" MaxLength="20" />
+    <Property Name="father_name" Type="varchar" MaxLength="150" />
+    <Property Name="mother_name" Type="varchar" MaxLength="150" />
+    <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="operation_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="sub_account_type_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="mailing_address" Type="varchar" MaxLength="250" />
+    <Property Name="permanent_address" Type="varchar" MaxLength="250" />
+    <Property Name="thana_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="district_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="phone_no" Type="varchar" MaxLength="30" />
+    <Property Name="mobile_no" Type="varchar" MaxLength="30" />
+    <Property Name="email_address" Type="varchar" MaxLength="50" />
+    <Property Name="bank_id" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="bank_branch_id" Type="numeric" Precision="4" Scale="0" />
+    <Property Name="banc_account_no" Type="varchar" MaxLength="20" />
+    <Property Name="beftn_enabled" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="email_enabled" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="internet_enabled" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="sms_enabled" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="branch_id" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="opening_date" Type="numeric" Precision="9" Scale="0" />
+    <Property Name="passport_issue_place" Type="varchar" MaxLength="50" />
+    <Property Name="passport_issue_date" Type="datetime" />
+    <Property Name="passport_valid_to_date" Type="datetime" />
+    <Property Name="trader_id" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="introducer_id" Type="numeric" Precision="3" Scale="0" />
+    <Property Name="ipo_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="trade_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="omnibus_master_id" Type="varchar" MaxLength="10" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="export_st" Type="numeric" Precision="1" Scale="0" />
+    <Property Name="export_log_id" Type="numeric" Precision="20" Scale="0" />
+  </EntityType>
+  <Association Name="FK_tblBankBranch_tblBank">
+    <End Role="tblBank" Type="Self.tblBank" Multiplicity="1" />
+    <End Role="tblBankBranch" Type="Self.tblBankBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBankBranch">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerBankAccount_tblBankBranch">
+    <End Role="tblBankBranch" Type="Self.tblBankBranch" Multiplicity="1" />
+    <End Role="tblBrokerBankAccount" Type="Self.tblBrokerBankAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBrokerBankAccount">
+        <PropertyRef Name="bank_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblBrokerBranch">
+        <PropertyRef Name="registration_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeDepartment">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeDesignation">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="designation_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeGender">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeJoiningDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="0..1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="joining_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_EmployeeReleaseDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="0..1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="release_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployee_tblBrokerBranch">
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEmployeeUserMapping_tblEmployee">
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+    <End Role="tblEmployeeUserMapping" Type="Self.tblEmployeeUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblEmployeeUserMapping">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_DimDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="opening_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblBank">
+    <End Role="tblBank" Type="Self.tblBank" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblBankBranch">
+    <End Role="tblBankBranch" Type="Self.tblBankBranch" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="bank_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblBrokerBranch">
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue1">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue2">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="operation_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue3">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="sub_account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue4">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="thana_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue5">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="district_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue6">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="ipo_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblConstantObjectValue7">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="trade_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblDepositoryPerticipant">
+    <End Role="tblDepositoryPerticipant" Type="Self.tblDepositoryPerticipant" Multiplicity="0..1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepositoryPerticipant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="bo_refernce_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestor_tblTrader">
+    <End Role="tblTrader" Type="Self.tblTrader" Multiplicity="1" />
+    <End Role="tblInvestor" Type="Self.tblInvestor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTrader">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestor">
+        <PropertyRef Name="trader_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTrader_tblEmployee">
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+    <End Role="tblTrader" Type="Self.tblTrader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblTrader">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTrader_TraderLicenseRenewDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="0..1" />
+    <End Role="tblTrader" Type="Self.tblTrader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblTrader">
+        <PropertyRef Name="license_renew_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ssp_branches_by_user_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="broker">
+    <Parameter Name="user_id" Type="varchar" Mode="In" />
+    <Parameter Name="membership_id" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="ssp_get_investor_info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Investor">
+    <Parameter Name="investor_ids" Type="varchar(max)" Mode="In" />
+    <Parameter Name="trader_id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="EscrowBOASBrokerManagementModelsStoreContainer">
+    <EntitySet Name="tblBank" EntityType="Self.tblBank" Schema="Accounting" store:Type="Tables" />
+    <EntitySet Name="tblBankBranch" EntityType="Self.tblBankBranch" Schema="Accounting" store:Type="Tables" />
+    <EntitySet Name="tblBrokerBankAccount" EntityType="Self.tblBrokerBankAccount" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblBrokerBranch" EntityType="Self.tblBrokerBranch" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblBrokerImages" EntityType="Self.tblBrokerImages" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblDepositoryPerticipant" EntityType="Self.tblDepositoryPerticipant" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblEmployeeUserMapping" EntityType="Self.tblEmployeeUserMapping" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblTrader" EntityType="Self.tblTrader" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInvestor" EntityType="Self.tblInvestor" Schema="Investor" store:Type="Tables" />
+    <AssociationSet Name="FK_tblBankBranch_tblBank" Association="Self.FK_tblBankBranch_tblBank">
+      <End Role="tblBank" EntitySet="tblBank" />
+      <End Role="tblBankBranch" EntitySet="tblBankBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerBankAccount_tblBankBranch" Association="Self.FK_tblBrokerBankAccount_tblBankBranch">
+      <End Role="tblBankBranch" EntitySet="tblBankBranch" />
+      <End Role="tblBrokerBankAccount" EntitySet="tblBrokerBankAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Self.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeDepartment" Association="Self.FK_tblEmployee_EmployeeDepartment">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeDesignation" Association="Self.FK_tblEmployee_EmployeeDesignation">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeGender" Association="Self.FK_tblEmployee_EmployeeGender">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeJoiningDate" Association="Self.FK_tblEmployee_EmployeeJoiningDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_EmployeeReleaseDate" Association="Self.FK_tblEmployee_EmployeeReleaseDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployee_tblBrokerBranch" Association="Self.FK_tblEmployee_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEmployeeUserMapping_tblEmployee" Association="Self.FK_tblEmployeeUserMapping_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+      <End Role="tblEmployeeUserMapping" EntitySet="tblEmployeeUserMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_DimDate" Association="Self.FK_tblInvestor_DimDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblBank" Association="Self.FK_tblInvestor_tblBank">
+      <End Role="tblBank" EntitySet="tblBank" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblBankBranch" Association="Self.FK_tblInvestor_tblBankBranch">
+      <End Role="tblBankBranch" EntitySet="tblBankBranch" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblBrokerBranch" Association="Self.FK_tblInvestor_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue" Association="Self.FK_tblInvestor_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue1" Association="Self.FK_tblInvestor_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue2" Association="Self.FK_tblInvestor_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue3" Association="Self.FK_tblInvestor_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue4" Association="Self.FK_tblInvestor_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue5" Association="Self.FK_tblInvestor_tblConstantObjectValue5">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue6" Association="Self.FK_tblInvestor_tblConstantObjectValue6">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblConstantObjectValue7" Association="Self.FK_tblInvestor_tblConstantObjectValue7">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblDepositoryPerticipant" Association="Self.FK_tblInvestor_tblDepositoryPerticipant">
+      <End Role="tblDepositoryPerticipant" EntitySet="tblDepositoryPerticipant" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestor_tblTrader" Association="Self.FK_tblInvestor_tblTrader">
+      <End Role="tblTrader" EntitySet="tblTrader" />
+      <End Role="tblInvestor" EntitySet="tblInvestor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTrader_tblEmployee" Association="Self.FK_tblTrader_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+      <End Role="tblTrader" EntitySet="tblTrader" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTrader_TraderLicenseRenewDate" Association="Self.FK_tblTrader_TraderLicenseRenewDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblTrader" EntitySet="tblTrader" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

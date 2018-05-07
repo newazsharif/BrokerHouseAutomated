@@ -1,0 +1,81 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 31/01/2016
+    ///Reason:
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Branch Account Type Setting";
+    Layout = null;
+}
+
+<h2>Branch Account Type Setting</h2>
+<div class="row" ng-controller="BranchAccountTypeSettingController" ng-init="loadBranchAccTypeSettingList()">
+    <div class="col-md-12">
+        <a href="/#BranchAccountTypeSetting" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="branch">Branch</th>
+                    <th st-sort="account_type">Acc Type</th>
+                    <th st-sort="initial_deposit">Initial Deposit</th>
+                    <th st-sort="minimum_balance_on">Min Balance On</th>
+                    <th st-sort="minimum_balance">Min Balance</th>
+                    <th st-sort="minimum_balance_is_percentage">Percentage</th>
+                    <th st-sort="withdraw_limit_on">Withdraw Limit On</th>
+                    <th st-sort="withdraw_limit">Withdraw Limit</th>
+                    <th st-sort="withdraw_limit_percentage">Percentage</th>
+                    <th st-sort="loan_on">Loan On</th>
+                    <th st-sort="loan_ratio">Loan Ratio</th>
+                    <th st-sort="loan_max">Max Loan</th>
+                    <th st-sort="profit_on">Profit On</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="15"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{ row.branch }}</td>
+                    <td>{{ row.account_type }}</td>
+                    <td>{{ row.initial_deposit }}</td>
+                    <td>{{ row.minimum_balance_on }}</td>
+                    <td>{{ row.minimum_balance }}</td>
+                    <td>{{ row.minimum_balance_is_percentage }}</td>
+                    <td>{{ row.withdraw_limit_on }}</td>
+                    <td>{{ row.withdraw_limit }}</td>
+                    <td>{{ row.withdraw_limit_percentage }}</td>
+                    <td>{{ row.loan_on }}</td>
+                    <td>{{ row.loan_ratio }}</td>
+                    <td>{{ row.loan_max }}</td>
+                    <td>{{ row.profit_on }}</td>
+                    <td><a href="/#EditBranchAccountTypeSetting/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteBranchAccTypeSetting(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            <tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="15" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+}
+

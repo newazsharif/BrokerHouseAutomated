@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Flextrade-BOS-Trades" version="0.7.10" elementFormDefault="qualified">
+  <xs:element name="Trades">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Detail" maxOccurs="unbounded">
+          <xs:complexType>
+            <!-- Action for the order : New for Order; Exec for Execution -->
+            <xs:attribute name="Action" type="ActionDef" />
+            <!-- Order Status -->
+            <xs:attribute name="Status" type="SubActionDef" />
+            <!-- ISIN code for the ticker -->
+            <xs:attribute name="ISIN" type="xs:string" />
+            <!-- Asset class or Market -->
+            <xs:attribute name="AssetClass" type="AssetClassDef" />
+            <!-- Identifier for the related order -->
+            <xs:attribute name="OrderID" type="xs:string" />
+            <!-- Identifier for the order referenced -->
+            <xs:attribute name="RefOrderID" type="xs:string" />
+            <!-- Side of the order -->
+            <xs:attribute name="Side" type="SideDef" />
+            <!-- Identifier of the client account (16 digit Back office ID)-->
+            <xs:attribute name="BOID" type="BeneficiaryOwnerID" />
+            <!-- Stock Code /Security Identifier -->
+            <xs:attribute name="SecurityCode" type="SecurityCode" />
+            <!-- Board Identifier -->
+            <xs:attribute name="Board" type="BoardDef" />
+            <!-- Order Submission Date / Order Execution Date, e.g. YYYYMMDD -->
+            <xs:attribute name="Date" type="DateType" />
+            <!-- Transaciton Time, e.g. HH:MM:SS -->
+            <xs:attribute name="Time" type="TimeType" />
+            <!-- Order / Execution Quantity -->
+            <xs:attribute name="Quantity" type="xs:long" />
+            <!-- Order / Execution Price -->
+            <xs:attribute name="Price" type="xs:double" />
+            <!-- Order / Execution Value -->
+            <xs:attribute name="Value" type="xs:double" />
+            <!-- Reference ID of Execution from ME -->
+            <xs:attribute name="ExecID" type="xs:string" />
+            <!-- Session of execution happened -->
+            <xs:attribute name="Session" type="SessionDef" />
+            <!-- Fill Type -->
+            <xs:attribute name="FillType" type="FillTypeDef" />
+            <!-- Instrucment Category -->
+            <xs:attribute name="Category" type="CategoryDef" />
+            <!-- Compulsary Spot -->
+            <xs:attribute name="CompulsorySpot" type="CompulsorySpotDef" />
+            <!-- Client BOID (10 digit Back office ID); also known as Investor ID in Flex OMS -->
+            <xs:attribute name="ClientCode" type="ClientCode" />
+            <!-- Dealer ID - Trader, i.e. the dealer who actually sent the order -->
+            <xs:attribute name="TraderDealerID" type="DealerID" />
+            <!-- Dealer ID - Owner, i.e. the dealer who owns the client -->
+            <!-- Note: OwnerDealerID is not mandatory 
+            For technical reasons, FlexTrade will not provide it for 1st go-live -->
+            <xs:attribute name="OwnerDealerID" type="DealerID" />
+            <!-- Trade Report Type - 1-broker or 2-broker -->
+            <xs:attribute name="TradeReportType" type="TradeReportType" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="SecurityCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="8" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TimeType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="8" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ActionDef">
+    <xs:restriction base="xs:string">
+      <!-- New Order Request -->
+      <xs:enumeration value="NEW" />
+      <!-- Replace Request -->
+      <xs:enumeration value="RPLREQ" />
+      <!-- Cancel Request -->
+      <xs:enumeration value="CXLREQ" />
+      <!-- Execution Report -->
+      <xs:enumeration value="EXEC" />
+      <!-- Replace-Reject Execution Report -->
+      <xs:enumeration value="REJ" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SubActionDef">
+    <xs:restriction base="xs:string">
+      <!-- Acknowledgement for the order from ME -->
+      <xs:enumeration value="ACK" />
+      <!-- Partial Fill Execution -->
+      <xs:enumeration value="PF" />
+      <!-- Fully Fill Execution -->
+      <xs:enumeration value="FILL" />
+      <!-- Done for the Day -->
+      <xs:enumeration value="DONE" />
+      <!-- Cancelled Execution Report -->
+      <xs:enumeration value="CXLD" />
+      <!-- Replaced Execution Report -->
+      <xs:enumeration value="RPLD" />
+      <!-- Pending Acknowledgement Report -->
+      <xs:enumeration value="PENDACK" />
+      <!-- Pending Replace Report -->
+      <xs:enumeration value="PENDRPL" />
+      <!-- Pending Cancel Report -->
+      <xs:enumeration value="PENDCXL" />
+      <!-- Rejection Report -->
+      <xs:enumeration value="REJ" />
+      <!-- Bust Execution Report -->
+      <xs:enumeration value="BUST" />
+      <!-- Update/Correction Execution Report -->
+      <xs:enumeration value="UPDATE" />
+      <!-- Expired, after market closing -->
+      <xs:enumeration value="EXPIRED" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SideDef">
+    <xs:restriction base="xs:string">
+      <!-- Buy -->
+      <xs:enumeration value="B" />
+      <!-- Sell -->
+      <xs:enumeration value="S" />
+      <!-- Short Sell -->
+      <xs:enumeration value="R" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AssetClassDef">
+    <xs:restriction base="xs:string">
+      <!-- Ordinary -->
+      <xs:enumeration value="EQ" />
+      <!-- Mutual Fund -->
+      <xs:enumeration value="MF" />
+      <!-- Govt. Bond -->
+      <xs:enumeration value="TB" />
+      <!-- Debentures -->
+      <xs:enumeration value="DB" />
+      <!-- Corporate Bonds -->
+      <xs:enumeration value="CB" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BoardDef">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+      <xs:enumeration value="PUBLIC" />
+      <xs:enumeration value="BLOCK" />
+      <xs:enumeration value="BUYIN" />
+      <xs:enumeration value="SPOT" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CompulsorySpotDef">
+    <!-- Settlement requirement -->
+    <xs:restriction base="xs:string">
+      <!-- If instrument is SPOT, then Yes -->
+      <xs:enumeration value="Y" />
+      <!-- If instrument is PUBLIC, then No -->
+      <xs:enumeration value="N" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FillTypeDef">
+    <xs:restriction base="xs:string">
+      <!-- Partial Fill -->
+      <xs:enumeration value="PF" />
+      <!-- Fully Fill -->
+      <xs:enumeration value="FILL" />
+      <!-- Whole or None -->
+      <xs:enumeration value="WON" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SessionDef">
+    <xs:restriction base="xs:string">
+      <!-- Pre-Open Auction Session -->
+      <xs:enumeration value="PREOPEN" />
+      <!-- Continuous Session -->
+      <xs:enumeration value="CONTINUOUS" />
+      <!-- Post Closing Session -->
+      <xs:enumeration value="POSTCLOSING" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BrokerID">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BeneficiaryOwnerID">
+    <xs:restriction base="xs:string">
+      <xs:length value="16" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ClientCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DealerID">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CategoryDef">
+    <xs:restriction base="xs:string">
+      <!-- 1st class stock -->
+      <xs:enumeration value="A" />
+      <!-- 2nd class stock -->
+      <xs:enumeration value="B" />
+      <!-- Green class stock -->
+      <xs:enumeration value="G" />
+      <!-- New stock -->
+      <xs:enumeration value="N" />
+      <!-- Junk stock -->
+      <xs:enumeration value="Z" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TradeReportType">
+    <xs:restriction base="xs:string">
+      <!-- 1-broker Trade Report -->
+      <xs:enumeration value="1-broker" />
+      <!-- 2-broker Trade Report -->
+      <xs:enumeration value="2-broker" />
+      <!-- For No valid value -->
+      <xs:enumeration value="-" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

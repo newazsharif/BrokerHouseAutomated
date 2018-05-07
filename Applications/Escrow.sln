@@ -1,0 +1,223 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Web", "Escrow.BOAS.Web\Escrow.BOAS.Web.csproj", "{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.Security", "Escrow.Security\Escrow.Security.csproj", "{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Configuration", "Escrow.BOAS.Configuration\Escrow.BOAS.Configuration.csproj", "{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.Utility", "Escrow.Utility\Escrow.Utility.csproj", "{1861170E-D78F-45E2-8B0C-325DDB9E6E46}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Escrow.BOAS.Architecture", "Escrow.BOAS.Architecture\Escrow.BOAS.Architecture.modelproj", "{9E538D5C-7A39-4322-9B05-3469B2202EE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.ArchitectureLib", "Escrow.BOAS.ArchitectureLib\Escrow.BOAS.ArchitectureLib.csproj", "{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.InvestorManagement", "Escrow.BOAS.InvestorManagement\Escrow.BOAS.InvestorManagement.csproj", "{5299B220-DD4F-4A65-B995-EA452B5FB7E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.BrokerManagement", "Escrow.BOAS.BrokerManagement\Escrow.BOAS.BrokerManagement.csproj", "{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.InstrumentManagement", "Escrow.BOAS.InstrumentManagement\Escrow.BOAS.InstrumentManagement.csproj", "{D4EE9116-4374-4875-8653-CE8C53659D7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Transaction", "Escrow.BOAS.Transaction\Escrow.BOAS.Transaction.csproj", "{8057A46D-2351-4F5C-95D8-F4B38D415142}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.AccountingManagement", "Escrow.BOAS.AccountingManagement\Escrow.BOAS.AccountingManagement.csproj", "{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Charge", "Escrow.BOAS.Charge\Escrow.BOAS.Charge.csproj", "{A5813CCA-43AB-4614-9D77-27BF84A35945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.CDBL", "Escrow.BOAS.CDBL\Escrow.BOAS.CDBL.csproj", "{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Trade", "Escrow.BOAS.Trade\Escrow.BOAS.Trade.csproj", "{69185C5D-06EA-4722-81FC-2BCA629C6152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Process", "Escrow.BOAS.Process\Escrow.BOAS.Process.csproj", "{42F68BBB-320A-45E8-88E4-AB144DAF0E56}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Escrow.BOAS.ReportingService", "Escrow.BOAS.ReportingService\Escrow.BOAS.ReportingService.rptproj", "{882BDB6D-283B-4208-80C6-57DC537D5845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.Service", "Escrow.Service\Escrow.Service.csproj", "{F72BE39A-6D01-4304-B0CF-BAAFB4938037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escrow.BOAS.Service", "Escrow.BOAS.Service\Escrow.BOAS.Service.csproj", "{42CB406A-A1A7-4EB3-AC95-0170EE14848D}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 19
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.168.0.9:8080/tfs/escrow
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Escrow.Security\\Escrow.Security.csproj
+		SccProjectName1 = Escrow.Security
+		SccLocalPath1 = Escrow.Security
+		SccProjectUniqueName2 = Escrow.BOAS.Web\\Escrow.BOAS.Web.csproj
+		SccProjectName2 = Escrow.BOAS.Web
+		SccLocalPath2 = Escrow.BOAS.Web
+		SccProjectUniqueName3 = Escrow.BOAS.Configuration\\Escrow.BOAS.Configuration.csproj
+		SccProjectName3 = Escrow.BOAS.Configuration
+		SccLocalPath3 = Escrow.BOAS.Configuration
+		SccProjectUniqueName4 = Escrow.Utility\\Escrow.Utility.csproj
+		SccProjectName4 = Escrow.Utility
+		SccLocalPath4 = Escrow.Utility
+		SccProjectUniqueName5 = Escrow.BOAS.Architecture\\Escrow.BOAS.Architecture.modelproj
+		SccProjectName5 = Escrow.BOAS.Architecture
+		SccLocalPath5 = Escrow.BOAS.Architecture
+		SccProjectUniqueName6 = Escrow.BOAS.ArchitectureLib\\Escrow.BOAS.ArchitectureLib.csproj
+		SccProjectName6 = Escrow.BOAS.ArchitectureLib
+		SccLocalPath6 = Escrow.BOAS.ArchitectureLib
+		SccProjectUniqueName7 = Escrow.BOAS.InvestorManagement\\Escrow.BOAS.InvestorManagement.csproj
+		SccProjectName7 = Escrow.BOAS.InvestorManagement
+		SccLocalPath7 = Escrow.BOAS.InvestorManagement
+		SccProjectUniqueName8 = Escrow.BOAS.BrokerManagement\\Escrow.BOAS.BrokerManagement.csproj
+		SccProjectName8 = Escrow.BOAS.BrokerManagement
+		SccLocalPath8 = Escrow.BOAS.BrokerManagement
+		SccProjectUniqueName9 = Escrow.BOAS.InstrumentManagement\\Escrow.BOAS.InstrumentManagement.csproj
+		SccProjectName9 = Escrow.BOAS.InstrumentManagement
+		SccLocalPath9 = Escrow.BOAS.InstrumentManagement
+		SccProjectUniqueName10 = Escrow.BOAS.Transaction\\Escrow.BOAS.Transaction.csproj
+		SccProjectName10 = Escrow.BOAS.Transaction
+		SccLocalPath10 = Escrow.BOAS.Transaction
+		SccProjectUniqueName11 = Escrow.BOAS.AccountingManagement\\Escrow.BOAS.AccountingManagement.csproj
+		SccProjectName11 = Escrow.BOAS.AccountingManagement
+		SccLocalPath11 = Escrow.BOAS.AccountingManagement
+		SccProjectUniqueName12 = Escrow.BOAS.Charge\\Escrow.BOAS.Charge.csproj
+		SccProjectName12 = Escrow.BOAS.Charge
+		SccLocalPath12 = Escrow.BOAS.Charge
+		SccProjectUniqueName13 = Escrow.BOAS.CDBL\\Escrow.BOAS.CDBL.csproj
+		SccProjectName13 = Escrow.BOAS.CDBL
+		SccLocalPath13 = Escrow.BOAS.CDBL
+		SccProjectUniqueName14 = Escrow.BOAS.Trade\\Escrow.BOAS.Trade.csproj
+		SccProjectName14 = Escrow.BOAS.Trade
+		SccLocalPath14 = Escrow.BOAS.Trade
+		SccProjectUniqueName15 = Escrow.BOAS.Process\\Escrow.BOAS.Process.csproj
+		SccProjectName15 = Escrow.BOAS.Process
+		SccLocalPath15 = Escrow.BOAS.Process
+		SccProjectUniqueName16 = Escrow.BOAS.ReportingService\\Escrow.BOAS.ReportingService.rptproj
+		SccProjectName16 = Escrow.BOAS.ReportingService
+		SccLocalPath16 = Escrow.BOAS.ReportingService
+		SccProjectUniqueName17 = Escrow.Service\\Escrow.Service.csproj
+		SccProjectName17 = Escrow.Service
+		SccLocalPath17 = Escrow.Service
+		SccProjectUniqueName18 = Escrow.BOAS.Service\\Escrow.BOAS.Service.csproj
+		SccProjectName18 = Escrow.BOAS.Service
+		SccLocalPath18 = Escrow.BOAS.Service
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugLocal|Any CPU = DebugLocal|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A0D619-5FBF-4B6F-8ABD-3C6F97A6AF06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86DA6E0-D2D8-4C64-8C1C-873BD04B5835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1861170E-D78F-45E2-8B0C-325DDB9E6E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1861170E-D78F-45E2-8B0C-325DDB9E6E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1861170E-D78F-45E2-8B0C-325DDB9E6E46}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{1861170E-D78F-45E2-8B0C-325DDB9E6E46}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{1861170E-D78F-45E2-8B0C-325DDB9E6E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1861170E-D78F-45E2-8B0C-325DDB9E6E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E538D5C-7A39-4322-9B05-3469B2202EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E538D5C-7A39-4322-9B05-3469B2202EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E538D5C-7A39-4322-9B05-3469B2202EE3}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E538D5C-7A39-4322-9B05-3469B2202EE3}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{9E538D5C-7A39-4322-9B05-3469B2202EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E538D5C-7A39-4322-9B05-3469B2202EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5C1805F-D79D-4A1B-AF79-0107EF3B291F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5299B220-DD4F-4A65-B995-EA452B5FB7E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5299B220-DD4F-4A65-B995-EA452B5FB7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5299B220-DD4F-4A65-B995-EA452B5FB7E9}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{5299B220-DD4F-4A65-B995-EA452B5FB7E9}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{5299B220-DD4F-4A65-B995-EA452B5FB7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5299B220-DD4F-4A65-B995-EA452B5FB7E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D1A4B6-537A-4F93-AC23-9060F2851ED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4EE9116-4374-4875-8653-CE8C53659D7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EE9116-4374-4875-8653-CE8C53659D7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4EE9116-4374-4875-8653-CE8C53659D7C}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EE9116-4374-4875-8653-CE8C53659D7C}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{D4EE9116-4374-4875-8653-CE8C53659D7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4EE9116-4374-4875-8653-CE8C53659D7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8057A46D-2351-4F5C-95D8-F4B38D415142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8057A46D-2351-4F5C-95D8-F4B38D415142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8057A46D-2351-4F5C-95D8-F4B38D415142}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{8057A46D-2351-4F5C-95D8-F4B38D415142}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{8057A46D-2351-4F5C-95D8-F4B38D415142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8057A46D-2351-4F5C-95D8-F4B38D415142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE7EFB3-30A2-4489-AB41-57DC3DF1717B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5813CCA-43AB-4614-9D77-27BF84A35945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5813CCA-43AB-4614-9D77-27BF84A35945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5813CCA-43AB-4614-9D77-27BF84A35945}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5813CCA-43AB-4614-9D77-27BF84A35945}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{A5813CCA-43AB-4614-9D77-27BF84A35945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5813CCA-43AB-4614-9D77-27BF84A35945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E30A6BB-560A-40CF-95C5-FBDD5EF5EDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69185C5D-06EA-4722-81FC-2BCA629C6152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69185C5D-06EA-4722-81FC-2BCA629C6152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69185C5D-06EA-4722-81FC-2BCA629C6152}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{69185C5D-06EA-4722-81FC-2BCA629C6152}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{69185C5D-06EA-4722-81FC-2BCA629C6152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69185C5D-06EA-4722-81FC-2BCA629C6152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F68BBB-320A-45E8-88E4-AB144DAF0E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F68BBB-320A-45E8-88E4-AB144DAF0E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F68BBB-320A-45E8-88E4-AB144DAF0E56}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F68BBB-320A-45E8-88E4-AB144DAF0E56}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{42F68BBB-320A-45E8-88E4-AB144DAF0E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F68BBB-320A-45E8-88E4-AB144DAF0E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.Debug|Any CPU.ActiveCfg = Debug
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.Debug|Any CPU.Build.0 = Debug
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.Debug|Any CPU.Deploy.0 = Debug
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.Release|Any CPU.ActiveCfg = Release
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.Release|Any CPU.Build.0 = Release
+		{882BDB6D-283B-4208-80C6-57DC537D5845}.Release|Any CPU.Deploy.0 = Release
+		{F72BE39A-6D01-4304-B0CF-BAAFB4938037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72BE39A-6D01-4304-B0CF-BAAFB4938037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F72BE39A-6D01-4304-B0CF-BAAFB4938037}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72BE39A-6D01-4304-B0CF-BAAFB4938037}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{F72BE39A-6D01-4304-B0CF-BAAFB4938037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F72BE39A-6D01-4304-B0CF-BAAFB4938037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42CB406A-A1A7-4EB3-AC95-0170EE14848D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CB406A-A1A7-4EB3-AC95-0170EE14848D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CB406A-A1A7-4EB3-AC95-0170EE14848D}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CB406A-A1A7-4EB3-AC95-0170EE14848D}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{42CB406A-A1A7-4EB3-AC95-0170EE14848D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CB406A-A1A7-4EB3-AC95-0170EE14848D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

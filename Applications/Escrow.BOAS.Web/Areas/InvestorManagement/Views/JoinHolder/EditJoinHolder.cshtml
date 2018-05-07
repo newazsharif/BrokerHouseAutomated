@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<h2>Edit Join Holder</h2>
+<hr />
+
+<div  ng-controller="JoinHolderController" ng-init="LoadAllDropDown()">
+    <form class="form-horizontal" ng-submit="" name="editJoinHolderForm" ng-init="loadJoinHolderById()">
+        <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="client_id">Client Code</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control input-sm" data-ng-model="editJoinHolder.client_id" required onload-focus="true" readonly enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="join_holder_name">Join Holder Name</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control input-sm" data-ng-model="editJoinHolder.join_holder_name" required enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="father_name">Father/Husband</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control input-sm" data-ng-model="editJoinHolder.father_name" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="mother_name">Mother</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control input-sm" data-ng-model="editJoinHolder.mother_name" enter-as-tab />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="birth_date">Date Of Birth</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editJoinHolder.DOB" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+            </div>
+            <div class="col-md-1">
+                <span class="input-group-btn">
+                    <button style="margin-left : -19px" type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="Gender">Gender</label>
+            </div>
+            <div class="col-md-8">
+                <select data-ng-model="editJoinHolder.gender_id" class="dropdown form-control input-sm"
+                        ng-options="Gender.value as Gender.text for Gender in GenderList" enter-as-tab>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="active_status_id">Status</label>
+            </div>
+            <div class="col-md-8">
+                <select data-ng-model="editJoinHolder.active_status_id" class="dropdown form-control input-sm"
+                        ng-options="Status.value as Status.text for Status in StatusList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-10">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="UpdateJoinHolder(picFile,sigFile)" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="LoadEditJoinHolder()" />
+                <a href="/#JoinHolderList" class="btn btn-default">List</a>
+            </div>
+        </div>
+</div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Investor Information :  </label>
+                <label ng-style="customStyle.style">{{InvestorName}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <img ngf-src="picFile || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                <input type="file" ngf-select ng-model="picFile" name="file"
+                       accept="image/*" ngf-max-size="2MB"><b>Picture</b><br />
+            </div>
+
+            <div class="col-md-6">
+                @*<img ngf-src="sigFile" ngf-default-src="../Images/signature.jpg" style="height: 150px; width: 200px;" />*@
+                <img ngf-src="sigFile || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;">
+                <input type="file" ngf-select ng-model="sigFile" name="file"
+                       accept="image/*" ngf-max-size="2MB"><b>Signature</b><br />
+            </div>
+        </div>
+
+
+
+    </form>
+</div>

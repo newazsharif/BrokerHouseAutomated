@@ -1,0 +1,72 @@
+﻿@*
+    Created By : Rifad
+    Date: 17-05-2017
+    Reason:
+*@
+@{
+    ViewBag.Title = "Omnibus List";
+    Layout = null;
+}
+<h2>Omnibus Information</h2>
+<div class="row" ng-controller="OmnibusController" ng-init="loadOmnibusList()">
+    <div class="col-md-12">
+        <a href="/#AddNewOmnibus" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="omnibus_id" style="display:none;">id</th>
+                    <th st-sort="short_name">Short Name</th>
+                    <th st-sort="contact_person">Contact Person</th>
+                    <th st-sort="contact_no">Contact No</th>
+                    <th st-sort="address">Address</th>
+                    <th st-sort="email">Email</th>
+                    <th st-sort="active_status_id">Active Status</th>
+                    <th st-sort="is_dirty">Dirty</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="10"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{ row.name }}</td>
+                    <td style="display:none;">{{ row.omnibus_id }}</td>
+                    <td>{{ row.short_name }}</td>
+                    <td>{{ row.contact_person }}</td>
+                    <td>{{ row.contact_no }}</td>
+                    <td>{{ row.address }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.active_status_id }}</td>
+                    <td>{{ row.is_dirty }}</td>
+                    <td><a href="/#UpdateOmnibusInfomation/{{row.omnibus_id}}" class="btn btn-link">&#@Escrow.Utility.Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteOmnibus($index)" class="btn btn-link">&#@Escrow.Utility.Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@section Scripts {
+
+}
+
+
+
+

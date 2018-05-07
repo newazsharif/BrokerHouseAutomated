@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="06a8f3b46ea8499693944ec84e9dfc40" Name="Diagram1" ZoomLevel="37">
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBranchCharge" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBranchChargeSlab" Width="1.5" PointX="7.5" PointY="13.125" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblGlobalCharge" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblGlobalChargeSlab" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblSubAccountCharge" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblSubAccountChargeSlab" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.DimDate" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchCharge_tblGlobalCharge" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchChargeSlab_tblBranchCharge" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalCharge_DimDate" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalChargeSlab_tblGlobalCharge" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountCharge_tblGlobalCharge" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountChargeSlab_tblSubAccountCharge" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorCharge" Width="1.5" PointX="5.25" PointY="21.125" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorChargeSlab" Width="1.5" PointX="7.5" PointY="21.625" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorCharge_tblGlobalCharge" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorChargeSlab_tblInvestorCharge" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObject" Width="1.5" PointX="3.75" PointY="3.125" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObjectValue" Width="1.5" PointX="0.75" PointY="7.75" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalCharge_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountCharge_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBrokerBranch" Width="1.5" PointX="3" PointY="14.125" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchCharge_tblBrokerBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblExchangeCharge" Width="1.5" PointX="8.25" PointY="8.875" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblExchangeChargeSlab" Width="1.5" PointX="10.5" PointY="9.5" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblExchangeCharge_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblExchangeCharge_tblGlobalCharge1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblExchangeChargeSlab_tblExchangeCharge" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBranchAccountTypeSetting" Width="1.5" PointX="10.25" PointY="13.25" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblGlobalAccountTypeSetting" Width="1.5" PointX="3" PointY="30" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorAccountTypeSetting" Width="1.5" PointX="3" PointY="18.625" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblSubAccountAccountTypeSetting" Width="1.5" PointX="3" PointY="24.25" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblBrokerBranch" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBranchAccountTypeSetting_tblConstantObjectValue4" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+<h2>Edit Controller</h2>
+<hr />
+
+<div @*class="container"*@ ng-controller="ControllerController" ng-init="GetDdlModule()">
+    <form name="EditControllerForm" class="form-horizontal" ng-init="GetControllerById()">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>
+                    Controller Name
+                </label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editController.name" name="name" required onload-focus="true" enter-as-tab />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Module</label>
+            </div>
+
+            <div class="col-md-4">
+                <select data-ng-model="editController.ui_module_id" class="dropdown form-control input-sm"
+                        ng-options="Module.value as Module.text for Module in ModuleList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="UpdateController()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="GetControllerById()" />
+                <a href="/#ControllerList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>

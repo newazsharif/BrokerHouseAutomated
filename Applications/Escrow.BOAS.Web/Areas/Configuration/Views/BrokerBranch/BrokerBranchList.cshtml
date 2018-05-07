@@ -1,0 +1,67 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 16/8/2015
+    ///Reason: Constant Object List View
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+
+@{
+    ViewBag.Title = "Broker Branch";
+    Layout = null;
+}
+
+<h2>Broker Branch</h2>
+<hr />
+<div class="row" ng-controller="BrokerBranchController" ng-init="loadBrokerList()">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="name">Name</th>
+                    <th st-sort="address">Address</th>
+                    <th st-sort="contact_person">Contact Person</th>
+                    <th st-sort="contact_no">Contact No</th>
+                    <th st-sort="email">Email</th>
+                    <th st-sort="regis_dt">Registration Date</th>
+                    <th>Edit</th>
+                </tr>
+                <tr>
+                    <th colspan="7"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.name}}</td>
+                    <td>{{row.address}}</td>
+                    <td>{{row.contact_person}}</td>
+                    <td>{{row.contact_no}}</td>
+                    <td>{{row.email}}</td>
+                    <td>{{row.regis_dt}}</td>
+                    <td><a href="/#EditBroker/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+@section Scripts {
+}
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68df1b0b03a947dbb336adeb8b4f205d" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="Escrow.BOASModel.DimDate" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblDayProcess" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblDayProcess_DimDate" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

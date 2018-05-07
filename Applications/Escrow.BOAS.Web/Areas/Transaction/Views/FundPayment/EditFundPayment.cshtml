@@ -1,0 +1,209 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 25/8/2015
+    ///Reason: Fund Payment Edit View
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Fund Payment";
+    Layout = null;
+}
+
+<h2>Fund Payment</h2>
+<div @*class="container"*@ ng-controller="FundPaymentController" ng-init="loadFndPaymentAndDdlById()">
+    <form class="form-horizontal" ng-submit="" name="editFndPaymentForm">
+        <input type="hidden" name="Id" data-ng-model="editFndPayment.id" />
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Voucher No</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editFndPayment.voucher_no" ng-readonly="true" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Investor Code</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editFndPayment.client_id" ng-blur="getInvestorInfoForEdit()" onload-focus="true" enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyle.style">{{editFndPayment.first_holder_name}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Transaction Mode</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editFndPayment.transaction_mode_id" class="dropdown form-control input-sm"
+                        ng-options="transactionMode.value as transactionMode.text for transactionMode in transactionModeList" ng-change="showHideBankInfoForEdit()" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+        </div>
+
+        <fieldset ng-show="editFndPayment.fldBank">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Cheque No</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" data-ng-model="editFndPayment.cheque_no" enter-as-tab />
+                </div>
+
+                <div class="col-md-2">
+                    <label>Cheque Date</label>
+                </div>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editFndPayment.cheque_dt" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Broker Bank</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="editFndPayment.bank_branch_id" class="dropdown form-control input-sm" style="width:800px"
+                            ng-options="brokerBankAccount.value as brokerBankAccount.text for brokerBankAccount in brokerBankAccountList" enter-as-tab></select>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Amount</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editFndPayment.amount" ng-blur="amountInWord(editFndPayment.amount)" positive-numbers-only enter-as-tab required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="col-md-12 control-label" ng-style="customStyleAmountInWord.style">{{amount_in_word}}</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Payment Date</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editFndPayment.payment_dt" enter-as-tab ng-readonly="true" />
+            </div>
+
+            <div class="col-md-2">
+                <label>Value Date</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editFndPayment.value_dt" is-open="opened2" min-date="minDate" max-date="'31/12/9999'" ng-required="false" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Broker Branch</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editFndPayment.broker_branch_id" class="dropdown form-control input-sm"
+                        ng-options="branch.value as branch.text for branch in branchList" enter-as-tab required></select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Remarks</label>
+            </div>
+            <div class="col-md-4">
+                <textarea class="form-control input-sm" data-ng-model="editFndPayment.remarks" enter-as-tab></textarea>
+            </div>
+        </div>
+
+        <fieldset ng-show="editFndPayment.fldInv">
+            <legend>Investor Information</legend>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Available Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-4 control-label">{{editFndPayment.available_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Ledger Balance</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-md-4 control-label">{{editFndPayment.ledger_balance}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Purchase Power</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label">{{editFndPayment.purchase_power}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Withdrawable Amount</label>
+                </div>
+                <div class="col-md-4">
+                    <label id="lbl" class="col-md-4 control-label" ng-if="withdraw_limit_on_name != 'NOT APPLICABLE'">{{editFndPayment.withdrawable_amount}}</label>
+                    <label id="lbl" class="col-md-4 control-label" ng-if="withdraw_limit_on_name == 'NOT APPLICABLE'">Any</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Investor Photo</p>
+                    <img ngf-src="editFndPayment.invPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Investor Signature</p>
+                    <img ngf-src="editFndPayment.invSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <p>Joint Holders Photo</p>
+                    <img ngf-src="editFndPayment.invJoinHolderPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+                <div class="col-md-4">
+                    <p>Joint Holders Signature</p>
+                    <img ngf-src="editFndPayment.invJoinHolderSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="editFundPayment()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadFndPaymentAndDdlById()" />
+                <a href="/#FundPaymentList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

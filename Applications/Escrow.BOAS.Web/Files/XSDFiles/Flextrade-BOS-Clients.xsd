@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Flextrade-BOS-Clients" version="0.7.9" elementFormDefault="qualified">
+  <xs:element nillable="false" name="Clients">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- If you want to re-upload all the clients, then set the following tag:
+              - it will deactivate all existing clients in Mottai (for that broker)
+              - when uploading clients from the XML file, only those contained in the XML file (tag "Register") will be re-activated -->
+        <xs:element name="DeactivateAllClients" minOccurs="0" maxOccurs="1" />
+        <!-- Register or re-activate a client identified by ClientCode -->
+        <xs:element name="Register" type="ClientRegistration" minOccurs="0" maxOccurs="unbounded" />
+        <!-- Suspend or resume a client identified by ClientCode
+              Note: it allows to suspend buy or sell trading or both -->
+        <xs:element name="Suspend" type="ClientSuspension" minOccurs="0" maxOccurs="unbounded" />
+        <!-- Deactivate a client identified by ClientCode -->
+        <xs:element name="Deactivate" type="ClientDeactivation" minOccurs="0" maxOccurs="unbounded" />
+        <!-- Provides limits for client identified by ClientCode 
+              Note 1: Cash limit is mandatory
+              Note 2: explicit initial limits are expected every morning for each active client;
+                      if not sent, yesterday initial limit is assumed -->
+        <xs:element name="Limits" type="ClientLimits" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="ProcessingMode" type="ProcessingMode" default="BatchInsertOrUpdate" use="optional" />
+      <xs:attribute name="BrokerID" type="BrokerID" use="optional" />
+    </xs:complexType>
+    <xs:unique name="RegisterUniqueKey">
+      <xs:selector xpath="Register" />
+      <xs:field xpath="ClientCode" />
+    </xs:unique>
+    <xs:unique name="SuspendUniqueKey">
+      <xs:selector xpath="Suspend" />
+      <xs:field xpath="ClientCode" />
+    </xs:unique>
+    <xs:unique name="DeactivateUniqueKey">
+      <xs:selector xpath="Deactivate" />
+      <xs:field xpath="ClientCode" />
+    </xs:unique>
+    <xs:unique name="LimitsUniqueKey">
+      <xs:selector xpath="Limits" />
+      <xs:field xpath="ClientCode" />
+    </xs:unique>
+  </xs:element>
+  <xs:simpleType name="ProcessingMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BatchInsertOrUpdate" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ClientRegistration">
+    <xs:all minOccurs="1" maxOccurs="1">
+      <!-- Client identifier as per BOS / unique by broker -->
+      <xs:element name="ClientCode" type="ClientCode" />
+      <!-- Dealer ID current format at DSE
+               For Dealer ID: XXXTRDR999 (10 characters)
+            or for Prop Trader ID: XXXDLR999 (9 characters)
+            where XXX is the three letter ID of the broker
+                  999 is a unique id of the user at a given broker -->
+      <xs:element name="DealerID" type="DealerID" />
+      <!-- Client identifier as defined at the Exchange or Custodian -->
+      <xs:element name="BOID" type="BeneficiaryOwnerID" />
+      <xs:element name="WithNetAdjustment" type="BooleanYesNo" minOccurs="0" default="No" />
+      <xs:element name="Name" type="Name" />
+      <xs:element name="ShortName" type="ShortName" minOccurs="0" />
+      <xs:element name="Address" type="Address" minOccurs="0" />
+      <xs:element name="Tel" type="Phone" minOccurs="0" />
+      <xs:element name="ICNo" type="ICNo" minOccurs="0" />
+      <xs:element name="AccountType" type="AccountType" minOccurs="0" default="N" />
+      <xs:element name="ShortSellingAllowed" type="BooleanYesNo" minOccurs="0" default="No" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ClientSuspension">
+    <xs:all minOccurs="1" maxOccurs="1">
+      <xs:element name="ClientCode" type="ClientCode" />
+      <xs:element name="Sell_Suspend" type="SuspendResume" default="NoChange" />
+      <xs:element name="Buy_Suspend" type="SuspendResume" default="NoChange" />
+      <xs:element name="Remark" type="Remark" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ClientDeactivation">
+    <xs:all minOccurs="1" maxOccurs="1">
+      <xs:element name="ClientCode" type="ClientCode" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ClientLimits">
+    <xs:all minOccurs="1" maxOccurs="1">
+      <xs:element name="ClientCode" type="ClientCode" />
+      <!-- In any case, cash limit is required -->
+      <xs:element name="Cash" type="ExposureLimit" minOccurs="1" maxOccurs="1" />
+      <!-- If client type is "Margin", then this limit is required;
+          Note: providing this limit implicitely qualifies client type as "Margin";
+                if not provided, then client type is "Cash" -->
+      <xs:element name="Margin" type="MarginLimit" minOccurs="0" maxOccurs="1" />
+      <!-- The four limits below are optional (Mottai standard limits) -->
+      <xs:element name="MaxCapitalBuy" type="ExposureLimit" minOccurs="0" />
+      <xs:element name="MaxCapitalSell" type="ExposureLimit" minOccurs="0" />
+      <xs:element name="TotalTransaction" type="ExposureLimit" minOccurs="0" />
+      <xs:element name="NetTransaction" type="ExposureLimit" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="BrokerID">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ClientCode">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ShortName">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Name">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Address">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="160" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Phone">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Client ID as given by the exchange-->
+  <xs:simpleType name="BeneficiaryOwnerID">
+    <xs:restriction base="xs:string">
+      <xs:length value="16" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Client national ID number :BeneficiaryOwnerID -->
+  <xs:simpleType name="ICNo">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="14" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Each client has to be assigned to a Dealer
+      This is the identifier of the dealer to which the related client is associated -->
+  <xs:simpleType name="DealerID">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AccountType">
+    <xs:restriction base="xs:string">
+      <!-- Normal -->
+      <xs:enumeration value="N" />
+      <!-- Foreign -->
+      <xs:enumeration value="F" />
+      <!-- Corporate/Institution -->
+      <xs:enumeration value="I" />
+      <!-- Proprietary Trader -->
+      <xs:enumeration value="D" />
+      <!-- NRB -->
+      <xs:enumeration value="R" />
+      <!-- Omnibus -->
+      <xs:enumeration value="M" />
+      <!-- Others -->
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BooleanYesNo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="No" />
+      <xs:enumeration value="Yes" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SuspendResume">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Suspend" />
+      <xs:enumeration value="Resume" />
+      <xs:enumeration value="NoChange" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Remark">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="120" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExposureLimit">
+    <xs:restriction base="xs:long">
+      <xs:minInclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MarginLimit">
+    <xs:attribute name="Deposit" type="ExposureLimit" default="0" />
+    <xs:attribute name="MarginRatio">
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:minExclusive value="0" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

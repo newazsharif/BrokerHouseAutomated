@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+<h2>List of Join Holder</h2>
+<hr />
+<div class="row" ng-controller="JoinHolderController" ng-init="getAllJoinHolder()">
+    <div class="col-md-12">
+        <a href="/#AddNewJoinHolder" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" min="1" class="form-control input-sm" ng-model="itemsByPage" numbers-only style="width : 150px" />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="client_id">Client Code</th>
+                    <th st-sort="join_holder_name">Client Name</th>
+                    <th st-sort="bo_code">BO Code</th>
+                    
+                    <th st-sort="gender">Gender</th>
+                   
+                    <th>Edit</th>
+                </tr>
+                <tr>
+                    <th colspan="8"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" style="width : 200px" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.client_id}}</td>
+                    <td>{{row.join_holder_name}}</td>
+                    <td>{{row.bo_code}}</td>
+                  
+                    <td>{{row.gender}}</td>
+                    
+                    <td><a href="/#EditJoinHolder/{{row.client_id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    @*<td><a ng-click="DeleteConstantObject(row)" class="btn btn-link">&#@Constant.Delete;</a></td>*@
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>

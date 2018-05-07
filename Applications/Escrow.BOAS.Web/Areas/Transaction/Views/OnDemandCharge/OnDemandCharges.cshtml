@@ -1,0 +1,308 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 9/9/2015
+    ///Reason:
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "On Demand Charges";
+    Layout = null;
+}
+
+<h2>On Demand Charges</h2>
+<div @*class="container"*@ ng-controller="OnDemandChargeController" ng-init="loadDropdowns()">
+
+    <form class="form-horizontal" ng-submit="" name="newOnDemCharForm">
+
+        <modal title="Error List" visible="showErrorModal">
+            <table st-table="errorDisplayedCollection" st-safe-src="errorRowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="Investor_Code">Investor Code/ BO Code</th>
+                        <th st-sort="Error">Errors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in errorDisplayedCollection">
+                        <td>{{row.Investor_Code}}</td>
+                        <td>{{row.Error}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <div st-pagination="" st-items-by-page="10" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            Please solve these errors!!!!
+        </modal>
+
+        <modal title="Upload List" visible="showUploadListModal">
+            <table st-table="uploadDisplayedCollection" st-safe-src="uploadRowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="client_id">Investor Code</th>
+                        <th st-sort="bo_code">BO Code</th>
+                        <th st-sort="amount">Amount</th>
+                        <th st-sort="processed">Processed</th>
+                        <th st-sort="remarks">Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in uploadDisplayedCollection">
+                        <td>{{row.client_id}}</td>
+                        <td>{{row.bo_code}}</td>
+                        <td>{{row.amount}}</td>
+                        <td>{{row.processed}}</td>
+                        <td>{{row.remarks}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <div st-pagination="" st-items-by-page="10" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </modal>
+
+        <modal title="Upload List" visible="showProcessedListModal">
+            <table st-table="processedDisplayedCollection" st-safe-src="processedRowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="client_id">Investor Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in processedDisplayedCollection">
+                        <td>{{row.client_id}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="1" class="text-center">
+                            <div st-pagination="" st-items-by-page="10" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            These investor charge are already applied. Press Contnue to update these investor charges according to your excel file, Skip to import your excel file without these investor.
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="submit" class="btn btn-default" value="Continue" data-ng-click="saveExcelData('true')" />
+                    <input type="submit" class="btn btn-default" value="Skip" data-ng-click="saveExcelData('false')" />
+                    <input type="submit" class="btn btn-default" value="Cancel" data-ng-click="closeProcessedListModal()" />
+                </div>
+            </div>
+        </modal>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <a href="~/Files/OnDemandCharge.xls" class="btn btn-default">Download Template</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <input type="radio" class="col-md-2" name="fromExcel" value="From Excel" style="margin-left : 0px" data-ng-model="OnDemChar.excel_all_single_investor" ng-change="enableDisableFields()" enter-as-tab /><label for="fromExcel">From Excel</label>
+            </div>
+
+            <fieldset ng-show="OnDemChar.fldFile">
+                <div class="col-md-3">
+                    <input type="file" ngf-select ng-model="exelFile" class="btn-primary" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ngf-max-size="2MB"><br />
+                </div>
+
+                <div class="col-md-2">
+                    <input type="button" class="btn btn-default btn-sm" value="Upload List" data-ng-click="uploadList(exelFile)" />
+                </div>
+            </fieldset>
+        </div>
+
+        <fieldset ng-show="OnDemChar.fldFileView">
+            <div class="form-group">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <input type="button" class="btn btn-default" value="View List" data-ng-click="viewList()" />
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <input type="radio" class="col-md-2" name="allSingleInvestor" value="All Investor" style="margin-left : 0px" data-ng-model="OnDemChar.excel_all_single_investor" ng-change="enableDisableFields()" enter-as-tab /><label for="allInvestor">All Investor</label>
+            </div>
+
+            <div class="col-md-2">
+                <input type="radio" name="allSingleInvestor" value="Single Investor" style="margin-left : 0px" data-ng-model="OnDemChar.excel_all_single_investor" ng-change="enableDisableFields()" enter-as-tab /><label for="singleInvestor">Single Investor</label>
+            </div>
+        </div>
+
+        <fieldset>
+            <legend></legend>
+
+            <fieldset ng-show="OnDemChar.fldSlInv">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Serial No</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" data-ng-model="OnDemChar.serial_no" ng-readonly="true" enter-as-tab />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Investor Code</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" data-ng-model="OnDemChar.client_id" ng-blur="getInvestorInfoForAdd()" onload-focus="true" enter-as-tab />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="col-md-12 control-label" id="first_holder_name" ng-style="customStyle.style">{{OnDemChar.first_holder_name}}</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="OnDemChar.fldCharTran">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Charges</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select data-ng-model="OnDemChar.charge_id" class="dropdown form-control input-sm"
+                                ng-options="charge.value as charge.text for charge in chargeList" enter-as-tab required>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Trans. Mode</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select data-ng-model="OnDemChar.transaction_type_id" class="dropdown form-control input-sm"
+                                ng-options="transactionType.value as transactionType.text for transactionType in transactionTypeList" enter-as-tab required>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="OnDemChar.fldAmount">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Amount</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" data-ng-model="OnDemChar.amount" ng-blur="amountInWord(OnDemChar.amount)" positive-numbers-only enter-as-tab />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="col-md-12 control-label" ng-style="customStyleAmountInWord.style">{{amount_in_word}}</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="OnDemChar.fldOther">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Transaction Date</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" data-ng-model="OnDemChar.transaction_dt" enter-as-tab ng-readonly="true" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Value Date</label>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="input-group">
+                            <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="OnDemChar.value_dt" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" ng-required="false" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Remarks</label>
+                    </div>
+                    <div class="col-md-4">
+                        <textarea class="form-control input-sm" data-ng-model="OnDemChar.remarks" enter-as-tab></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="OnDemChar.fldInv">
+                <legend>Investor Information</legend>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Available Balance</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label id="lbl" class="col-md-4 control-label">{{OnDemChar.available_balance}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Ledger Balance</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label id="lbl" class="col-md-4 control-label">{{OnDemChar.ledger_balance}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <p>Investor Photo</p>
+                        <img ngf-src="OnDemChar.invPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                    </div>
+                    <div class="col-md-4">
+                        <p>Investor Signature</p>
+                        <img ngf-src="OnDemChar.invSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <p>Joint Holders Photo</p>
+                        <img ngf-src="OnDemChar.invJoinHolderPic || image" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                    </div>
+                    <div class="col-md-4">
+                        <p>Joint Holders Signature</p>
+                        <img ngf-src="OnDemChar.invJoinHolderSignature || signature" ngf-accept="'image/*'" style="height: 150px; width: 200px;" />
+                    </div>
+                </div>
+            </fieldset>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveNewOnDemandCharge()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#OnDemandChargetList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

@@ -1,0 +1,969 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Escrow.BOASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblBrokerBranch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ipo_branch_code" Type="varchar" MaxLength="4" />
+    <Property Name="address" Type="varchar" MaxLength="250" />
+    <Property Name="contact_person" Type="varchar" MaxLength="100" />
+    <Property Name="contact_no" Type="varchar" MaxLength="30" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="registration_dt" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBranchAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="branch_id" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="initial_deposit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="minimum_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="withdraw_limit_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_ratio" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_max" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="loan_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="profit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBranchCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="branch_id" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+    <Property Name="global_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_slab" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="minimum_charge" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBranchChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="branch_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="amount_from" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="amount_to" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblExchangeCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="exchange_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="global_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_slab" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="minimum_charge" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblExchangeChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="exchange_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="amount_from" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="amount_to" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblGlobalAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="account_type_id" />
+    </Key>
+    <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="initial_deposit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="minimum_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="withdraw_limit_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_ratio" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_max" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="loan_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="profit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblGlobalCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="short_code" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="minimum_charge" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="charge_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="effective_date" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="is_slab" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="income_account_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="payable_account_no" Type="varchar" MaxLength="50" />
+    <Property Name="payable_amount" Type="numeric" Precision="15" Scale="10" />
+    <Property Name="is_payable_percentage" Type="numeric" Precision="1" Scale="0" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblGlobalChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="global_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="amount_from" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="amount_to" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblInvestorAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="initial_deposit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="minimum_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="withdraw_limit_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_ratio" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_max" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="loan_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="profit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblInvestorCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="client_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="global_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_slab" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="minimum_charge" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblInvestorChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="investor_charge_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="amount_from" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="amount_to" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSubAccountAccountTypeSetting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sub_account_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="account_type_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="initial_deposit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="minimum_balance" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="minimum_balance_is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="withdraw_limit" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="withdraw_limit_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_ratio" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="loan_max" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="loan_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="profit_on" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSubAccountCharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sub_account_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="global_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="is_slab" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="minimum_charge" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="active_status_id" Type="int" Nullable="false" />
+    <Property Name="membership_id" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="changed_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="changed_date" Type="datetime" Nullable="false" />
+    <Property Name="is_dirty" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSubAccountChargeSlab">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="numeric" Precision="2" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sub_account_charge_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="amount_from" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="amount_to" Type="numeric" Precision="30" Scale="10" Nullable="false" />
+    <Property Name="charge_amount" Type="numeric" Precision="15" Scale="10" Nullable="false" />
+    <Property Name="is_percentage" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DimDate">
+    <Key>
+      <PropertyRef Name="DateKey" />
+    </Key>
+    <Property Name="DateKey" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="FullDateUK" Type="char" MaxLength="10" />
+    <Property Name="FullDateUSA" Type="char" MaxLength="10" />
+    <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DaySuffix" Type="varchar" MaxLength="4" />
+    <Property Name="DayName" Type="varchar" MaxLength="9" />
+    <Property Name="DayOfWeekUSA" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekUK" Type="char" MaxLength="1" />
+    <Property Name="DayOfWeekInMonth" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfWeekInYear" Type="varchar" MaxLength="2" />
+    <Property Name="DayOfQuarter" Type="varchar" MaxLength="3" />
+    <Property Name="DayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="WeekOfMonth" Type="varchar" MaxLength="1" />
+    <Property Name="WeekOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="WeekOfYear" Type="varchar" MaxLength="2" />
+    <Property Name="Month" Type="varchar" MaxLength="2" />
+    <Property Name="MonthName" Type="varchar" MaxLength="9" />
+    <Property Name="MonthOfQuarter" Type="varchar" MaxLength="2" />
+    <Property Name="Quarter" Type="char" MaxLength="1" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="Year" Type="char" MaxLength="4" />
+    <Property Name="YearName" Type="char" MaxLength="7" />
+    <Property Name="MonthYear" Type="char" MaxLength="10" />
+    <Property Name="MMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FirstDayOfMonth" Type="date" />
+    <Property Name="LastDayOfMonth" Type="date" />
+    <Property Name="FirstDayOfQuarter" Type="date" />
+    <Property Name="LastDayOfQuarter" Type="date" />
+    <Property Name="FirstDayOfYear" Type="date" />
+    <Property Name="LastDayOfYear" Type="date" />
+    <Property Name="IsHolidayUSA" Type="bit" />
+    <Property Name="IsWeekday" Type="bit" />
+    <Property Name="HolidayUSA" Type="varchar" MaxLength="50" />
+    <Property Name="IsHolidayUK" Type="bit" />
+    <Property Name="HolidayUK" Type="varchar" MaxLength="50" />
+    <Property Name="IsHoliday" Type="bit" />
+    <Property Name="Holiday" Type="varchar" MaxLength="50" />
+    <Property Name="FiscalDayOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalWeekOfYear" Type="varchar" MaxLength="3" />
+    <Property Name="FiscalMonth" Type="varchar" MaxLength="2" />
+    <Property Name="FiscalQuarter" Type="char" MaxLength="1" />
+    <Property Name="FiscalQuarterName" Type="varchar" MaxLength="9" />
+    <Property Name="FiscalYear" Type="char" MaxLength="4" />
+    <Property Name="FiscalYearName" Type="char" MaxLength="7" />
+    <Property Name="FiscalMonthYear" Type="char" MaxLength="10" />
+    <Property Name="FiscalMMYYYY" Type="char" MaxLength="6" />
+    <Property Name="FiscalFirstDayOfMonth" Type="date" />
+    <Property Name="FiscalLastDayOfMonth" Type="date" />
+    <Property Name="FiscalFirstDayOfQuarter" Type="date" />
+    <Property Name="FiscalLastDayOfQuarter" Type="date" />
+    <Property Name="FiscalFirstDayOfYear" Type="date" />
+    <Property Name="FiscalLastDayOfYear" Type="date" />
+    <Property Name="FullDateCDBL" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="tblConstantObject">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="object_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Purpose" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tblConstantObjectValue">
+    <Key>
+      <PropertyRef Name="object_value_id" />
+    </Key>
+    <Property Name="object_value_id" Type="numeric" Precision="4" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="display_value" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="object_id" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+    <Property Name="remarks" Type="varchar" MaxLength="150" />
+    <Property Name="sorting_order" Type="smallint" />
+    <Property Name="is_default" Type="numeric" Precision="1" Scale="0" />
+  </EntityType>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblBrokerBranch">
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="1" />
+    <End Role="tblBranchAccountTypeSetting" Type="Self.tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblBranchAccountTypeSetting" Type="Self.tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue1">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblBranchAccountTypeSetting" Type="Self.tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue2">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblBranchAccountTypeSetting" Type="Self.tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue3">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblBranchAccountTypeSetting" Type="Self.tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue4">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblBranchAccountTypeSetting" Type="Self.tblBranchAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblBranchAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchCharge_tblBrokerBranch">
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="1" />
+    <End Role="tblBranchCharge" Type="Self.tblBranchCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBrokerBranch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchCharge">
+        <PropertyRef Name="branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchCharge_tblGlobalCharge">
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="1" />
+    <End Role="tblBranchCharge" Type="Self.tblBranchCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBranchChargeSlab_tblBranchCharge">
+    <End Role="tblBranchCharge" Type="Self.tblBranchCharge" Multiplicity="1" />
+    <End Role="tblBranchChargeSlab" Type="Self.tblBranchChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBranchCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblBranchChargeSlab">
+        <PropertyRef Name="branch_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblBrokerBranch" Type="Self.tblBrokerBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblBrokerBranch">
+        <PropertyRef Name="registration_dt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblConstantObjectValue_ConstantObjects">
+    <End Role="tblConstantObject" Type="Self.tblConstantObject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObject">
+        <PropertyRef Name="object_id" />
+      </Principal>
+      <Dependent Role="tblConstantObjectValue">
+        <PropertyRef Name="object_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblExchangeCharge_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblExchangeCharge" Type="Self.tblExchangeCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblExchangeCharge">
+        <PropertyRef Name="exchange_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblExchangeCharge_tblGlobalCharge1">
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="1" />
+    <End Role="tblExchangeCharge" Type="Self.tblExchangeCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblExchangeCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblExchangeChargeSlab_tblExchangeCharge">
+    <End Role="tblExchangeCharge" Type="Self.tblExchangeCharge" Multiplicity="1" />
+    <End Role="tblExchangeChargeSlab" Type="Self.tblExchangeChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblExchangeCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblExchangeChargeSlab">
+        <PropertyRef Name="exchange_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblGlobalAccountTypeSetting" Type="Self.tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblGlobalAccountTypeSetting" Type="Self.tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblGlobalAccountTypeSetting" Type="Self.tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblGlobalAccountTypeSetting" Type="Self.tblGlobalAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblGlobalAccountTypeSetting" Type="Self.tblGlobalAccountTypeSetting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalCharge_DimDate">
+    <End Role="DimDate" Type="Self.DimDate" Multiplicity="1" />
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimDate">
+        <PropertyRef Name="DateKey" />
+      </Principal>
+      <Dependent Role="tblGlobalCharge">
+        <PropertyRef Name="effective_date" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalCharge_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblGlobalCharge">
+        <PropertyRef Name="charge_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGlobalChargeSlab_tblGlobalCharge">
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="1" />
+    <End Role="tblGlobalChargeSlab" Type="Self.tblGlobalChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblGlobalChargeSlab">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestorAccountTypeSetting" Type="Self.tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestorAccountTypeSetting" Type="Self.tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestorAccountTypeSetting" Type="Self.tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestorAccountTypeSetting" Type="Self.tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblInvestorAccountTypeSetting" Type="Self.tblInvestorAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblInvestorAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorCharge_tblGlobalCharge">
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="1" />
+    <End Role="tblInvestorCharge" Type="Self.tblInvestorCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestorCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInvestorChargeSlab_tblInvestorCharge">
+    <End Role="tblInvestorCharge" Type="Self.tblInvestorCharge" Multiplicity="1" />
+    <End Role="tblInvestorChargeSlab" Type="Self.tblInvestorChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInvestorCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblInvestorChargeSlab">
+        <PropertyRef Name="investor_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountAccountTypeSetting" Type="Self.tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="loan_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountAccountTypeSetting" Type="Self.tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="minimum_balance_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountAccountTypeSetting" Type="Self.tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="profit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountAccountTypeSetting" Type="Self.tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="sub_account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountAccountTypeSetting" Type="Self.tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="withdraw_limit_on" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountAccountTypeSetting" Type="Self.tblSubAccountAccountTypeSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountAccountTypeSetting">
+        <PropertyRef Name="account_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountCharge_tblConstantObjectValue">
+    <End Role="tblConstantObjectValue" Type="Self.tblConstantObjectValue" Multiplicity="1" />
+    <End Role="tblSubAccountCharge" Type="Self.tblSubAccountCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblConstantObjectValue">
+        <PropertyRef Name="object_value_id" />
+      </Principal>
+      <Dependent Role="tblSubAccountCharge">
+        <PropertyRef Name="sub_account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountCharge_tblGlobalCharge">
+    <End Role="tblGlobalCharge" Type="Self.tblGlobalCharge" Multiplicity="1" />
+    <End Role="tblSubAccountCharge" Type="Self.tblSubAccountCharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGlobalCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblSubAccountCharge">
+        <PropertyRef Name="global_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubAccountChargeSlab_tblSubAccountCharge">
+    <End Role="tblSubAccountCharge" Type="Self.tblSubAccountCharge" Multiplicity="1" />
+    <End Role="tblSubAccountChargeSlab" Type="Self.tblSubAccountChargeSlab" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubAccountCharge">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblSubAccountChargeSlab">
+        <PropertyRef Name="sub_account_charge_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EscrowBOASModelStoreContainer">
+    <EntitySet Name="tblBrokerBranch" EntityType="Self.tblBrokerBranch" Schema="broker" store:Type="Tables" />
+    <EntitySet Name="tblBranchAccountTypeSetting" EntityType="Self.tblBranchAccountTypeSetting" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblBranchCharge" EntityType="Self.tblBranchCharge" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblBranchChargeSlab" EntityType="Self.tblBranchChargeSlab" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblExchangeCharge" EntityType="Self.tblExchangeCharge" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblExchangeChargeSlab" EntityType="Self.tblExchangeChargeSlab" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblGlobalAccountTypeSetting" EntityType="Self.tblGlobalAccountTypeSetting" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblGlobalCharge" EntityType="Self.tblGlobalCharge" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblGlobalChargeSlab" EntityType="Self.tblGlobalChargeSlab" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblInvestorAccountTypeSetting" EntityType="Self.tblInvestorAccountTypeSetting" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblInvestorCharge" EntityType="Self.tblInvestorCharge" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblInvestorChargeSlab" EntityType="Self.tblInvestorChargeSlab" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblSubAccountAccountTypeSetting" EntityType="Self.tblSubAccountAccountTypeSetting" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblSubAccountCharge" EntityType="Self.tblSubAccountCharge" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="tblSubAccountChargeSlab" EntityType="Self.tblSubAccountChargeSlab" Schema="Charge" store:Type="Tables" />
+    <EntitySet Name="DimDate" EntityType="Self.DimDate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObject" EntityType="Self.tblConstantObject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConstantObjectValue" EntityType="Self.tblConstantObjectValue" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblBrokerBranch" Association="Self.FK_tblBranchAccountTypeSetting_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue" Association="Self.FK_tblBranchAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue1" Association="Self.FK_tblBranchAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue2" Association="Self.FK_tblBranchAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue3" Association="Self.FK_tblBranchAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchAccountTypeSetting_tblConstantObjectValue4" Association="Self.FK_tblBranchAccountTypeSetting_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblBranchAccountTypeSetting" EntitySet="tblBranchAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchCharge_tblBrokerBranch" Association="Self.FK_tblBranchCharge_tblBrokerBranch">
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+      <End Role="tblBranchCharge" EntitySet="tblBranchCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchCharge_tblGlobalCharge" Association="Self.FK_tblBranchCharge_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+      <End Role="tblBranchCharge" EntitySet="tblBranchCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBranchChargeSlab_tblBranchCharge" Association="Self.FK_tblBranchChargeSlab_tblBranchCharge">
+      <End Role="tblBranchCharge" EntitySet="tblBranchCharge" />
+      <End Role="tblBranchChargeSlab" EntitySet="tblBranchChargeSlab" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBrokerBranch_BrokerBranchRegistrationDate" Association="Self.FK_tblBrokerBranch_BrokerBranchRegistrationDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblBrokerBranch" EntitySet="tblBrokerBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblConstantObjectValue_ConstantObjects" Association="Self.FK_tblConstantObjectValue_ConstantObjects">
+      <End Role="tblConstantObject" EntitySet="tblConstantObject" />
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblExchangeCharge_tblConstantObjectValue" Association="Self.FK_tblExchangeCharge_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblExchangeCharge" EntitySet="tblExchangeCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblExchangeCharge_tblGlobalCharge1" Association="Self.FK_tblExchangeCharge_tblGlobalCharge1">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+      <End Role="tblExchangeCharge" EntitySet="tblExchangeCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblExchangeChargeSlab_tblExchangeCharge" Association="Self.FK_tblExchangeChargeSlab_tblExchangeCharge">
+      <End Role="tblExchangeCharge" EntitySet="tblExchangeCharge" />
+      <End Role="tblExchangeChargeSlab" EntitySet="tblExchangeChargeSlab" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue" Association="Self.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1" Association="Self.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2" Association="Self.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3" Association="Self.FK_tblGlobalAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting" Association="Self.FK_tblGlobalAccountTypeSetting_tblGlobalAccountTypeSetting">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblGlobalAccountTypeSetting" EntitySet="tblGlobalAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalCharge_DimDate" Association="Self.FK_tblGlobalCharge_DimDate">
+      <End Role="DimDate" EntitySet="DimDate" />
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalCharge_tblConstantObjectValue" Association="Self.FK_tblGlobalCharge_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGlobalChargeSlab_tblGlobalCharge" Association="Self.FK_tblGlobalChargeSlab_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+      <End Role="tblGlobalChargeSlab" EntitySet="tblGlobalChargeSlab" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue" Association="Self.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1" Association="Self.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2" Association="Self.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3" Association="Self.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4" Association="Self.FK_tblInvestorAccountTypeSetting_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblInvestorAccountTypeSetting" EntitySet="tblInvestorAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorCharge_tblGlobalCharge" Association="Self.FK_tblInvestorCharge_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+      <End Role="tblInvestorCharge" EntitySet="tblInvestorCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInvestorChargeSlab_tblInvestorCharge" Association="Self.FK_tblInvestorChargeSlab_tblInvestorCharge">
+      <End Role="tblInvestorCharge" EntitySet="tblInvestorCharge" />
+      <End Role="tblInvestorChargeSlab" EntitySet="tblInvestorChargeSlab" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue" Association="Self.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1" Association="Self.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue1">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2" Association="Self.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue2">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3" Association="Self.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue3">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4" Association="Self.FK_tblSubAccountAccountTypeSetting_tblConstantObjectValue4">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting" Association="Self.FK_tblSubAccountAccountTypeSetting_tblSubAccountAccountTypeSetting">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountAccountTypeSetting" EntitySet="tblSubAccountAccountTypeSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountCharge_tblConstantObjectValue" Association="Self.FK_tblSubAccountCharge_tblConstantObjectValue">
+      <End Role="tblConstantObjectValue" EntitySet="tblConstantObjectValue" />
+      <End Role="tblSubAccountCharge" EntitySet="tblSubAccountCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountCharge_tblGlobalCharge" Association="Self.FK_tblSubAccountCharge_tblGlobalCharge">
+      <End Role="tblGlobalCharge" EntitySet="tblGlobalCharge" />
+      <End Role="tblSubAccountCharge" EntitySet="tblSubAccountCharge" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubAccountChargeSlab_tblSubAccountCharge" Association="Self.FK_tblSubAccountChargeSlab_tblSubAccountCharge">
+      <End Role="tblSubAccountCharge" EntitySet="tblSubAccountCharge" />
+      <End Role="tblSubAccountChargeSlab" EntitySet="tblSubAccountChargeSlab" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,70 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 6/1/2015
+    ///Reason: 
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Investor Charge";
+    Layout = null;
+}
+
+<h2>Investot Charge</h2>
+<hr />
+<div class="row" ng-controller="InvestorChargesController" ng-init="loadInvChargeList()">
+    <div class="col-md-12">
+        <a href="/#InvestorCharges" class="btn btn-default">&#10011; &nbsp;Add New</a><br /><br />
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Item by page</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control input-sm" ng-model="itemsByPage" positive-numbers-only />
+                </div>
+            </div>
+        </div>
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="client_id">Investor Code</th>
+                    <th st-sort="charge_name">Charge</th>
+                    <th st-sort="minimum_charge">Minimum Charge</th>
+                    <th st-sort="charge_amount">Amount</th>
+                    <th st-sort="is_percentage">Percentage</th>
+                    <th st-sort="is_slab">Slab</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <th colspan="8"><input st-search="" class="form-control input-sm" placeholder="global search ..." type="text" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td>{{row.client_id}}</td>
+                    <td>{{row.charge_name}}</td>
+                    <td>{{row.minimum_charge}}</td>
+                    <td>{{row.charge_amount}}</td>
+                    <td>{{row.is_percentage}}</td>
+                    <td>{{row.is_slab}}</td>
+                    <td><a href="/#EditInvestorCharges/{{row.id}}" class="btn btn-link">&#@Constant.Edit;</a></td>
+                    <td><a ng-click="DeleteInvCharge(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+@section Scripts {
+}
+

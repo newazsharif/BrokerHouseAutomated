@@ -1,0 +1,46 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 16/8/2015
+    ///Reason: Constant Object Add View
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Create New Constant Object";
+    Layout = null;
+}
+
+<h2>Create New Constant Object</h2>
+<hr />
+<div @*class="container"*@ ng-controller="ConstantObjectController">
+    <form class="form-horizontal" ng-submit="" name="newConsForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Object Name</label>
+            </div>
+            <div class="col-md-10">
+                <input type="text" name="objectName" class="form-control input-sm" data-ng-model="constantObject.object_name" ng-change="constantObject.object_name=constantObject.object_name.toUpperCase();" onload-focus="true" enter-as-tab required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Purpose</label>
+            </div>
+            <div class="col-md-10">
+                <textarea name="Purpose" class="form-control input-sm" data-ng-model="constantObject.Purpose" enter-as-tab></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="saveNewConstantObject()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="refresh()" />
+                <a href="/#ConstantObject" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+

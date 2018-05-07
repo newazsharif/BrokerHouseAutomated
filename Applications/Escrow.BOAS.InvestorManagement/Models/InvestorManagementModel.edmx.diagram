@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11c204f72e674a5f950e2cf0514df51a" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBank" Width="1.5" PointX="3" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBankBranch" Width="1.5" PointX="3" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblBrokerBranch" Width="1.5" PointX="3" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblTrader" Width="1.5" PointX="3" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.DimDate" Width="1.5" PointX="0.75" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObject" Width="1.5" PointX="0.75" PointY="49.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblConstantObjectValue" Width="1.5" PointX="3" PointY="47.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblDayProcess" Width="1.5" PointX="3" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblAccountClosing" Width="1.5" PointX="10.5" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestor" Width="1.5" PointX="5.25" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorFinancialLedger" Width="1.5" PointX="7.5" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorFundBalance" Width="1.5" PointX="13.5" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorImage" Width="1.5" PointX="7.5" PointY="48.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorShareBalance" Width="1.5" PointX="7.5" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorShareLedger" Width="1.5" PointX="10.5" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblJoinHolder" Width="1.5" PointX="10.5" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblNominee" Width="1.5" PointX="13.5" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblPowerOfAtornee" Width="1.5" PointX="16.5" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblInvestorTemp" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.vw_InvestorFundBalance" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.vw_InvestorShareBalance" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBankBranch_tblBank" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblBank" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblBankBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBrokerBranch_BrokerBranchRegistrationDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblBrokerBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblTrader" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblTrader_TraderLicenseRenewDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblAccountClosing_AccountClosingDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblDayProcess_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFinancialLedger_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFundBalance_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorShareBalance_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorShareLedger_DimDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNominee_NomineeBirthDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNominee_NomineeOpenDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_PowerOfAtorneeBirthDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_PowerOfAtorneeOpenDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_PowerOfAtorneeValidFromDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_PowerOfAtorneeValidToDate" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblConstantObjectValue_ConstantObjects" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue1" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue2" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue3" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue4" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue5" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue6" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblConstantObjectValue7" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFinancialLedger_tblInvestorFinancialLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFundBalance_tblConstantObjectValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblJoinHolder_tblConstantObjectValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblJoinHolder_tblConstantObjectValue1" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNominee_NomineeGender" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNominee_NomineeRelation" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_PowerOfAtorneeGender" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_PowerOfAtorneeRelation" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblAccountClosing_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblClientFundBalance_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorFinancialLedger_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorImage_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorShareBalance_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestorShareLedger_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblJoinHolder_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblNominee_tblInvestor" ManuallyRouted="false" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblPowerOfAtornee_tblInvestor" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.vw_all_investors_account_type_setting" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.vw_all_investors_charges" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblIntroducer" Width="1.5" PointX="5.25" PointY="47.875" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblBankBranch_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblIntroducer_IntroducerValidFrom" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblIntroducer_IntroducerValidTo" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblIntroducer_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblIntroducer_tblConstantObjectValue1" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblIntroducer_tblIntroducer" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblIntroducer" />
+        <EntityTypeShape EntityType="Escrow.BOASModel.tblOmnibu" Width="1.5" PointX="5.25" PointY="54.75" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblOmnibus_tblConstantObjectValue" />
+        <AssociationConnector Association="Escrow.BOASModel.FK_tblInvestor_tblOmnibus" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

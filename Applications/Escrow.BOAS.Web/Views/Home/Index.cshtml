@@ -1,0 +1,49 @@
+﻿@using Escrow.BOAS.Utility
+@{
+    Layout = null;
+    ViewBag.Title = "Home";
+}
+
+<div class="jumbotron">
+    <h1>ESCROW</h1>
+    <p class="lead">A capital market solution</p>
+</div>
+
+
+
+
+<div class="row">
+        @if (Request.IsAuthenticated && !SessionManger.IsSessionNull(Session) && SessionManger.isUserLoggedIn())
+        {
+            <div class="col-md-5" ng-controller="HomeController">
+                <h2>Today Target</h2>
+                <p ng-init="getTodayTaskStatus()">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="row in workList"><span class="badge" style="float: left; margin-right: 7px;">{{row.sort_order}} </span><span class="badge"><i class={{row.is_done}}></i></span>{{row.work_name}}</li>
+                    </ul>
+                </p>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-5">
+                <h2>Escrow Target</h2>
+                <p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><span class="badge">&#9989;</span>&#10102; Broker based IPO management</li>
+                        @*<li class="list-group-item"><span class="badge">&#9997;</span>&#10102; Broker based IPO management</li>*@
+                        <li class="list-group-item"><span class="badge">&#9997;</span>&#10103; Investor based IPO management</li>
+                        <li class="list-group-item"><span class="badge">&#10026;</span>&#10104; Live trading from everywhere</li>
+                        <li class="list-group-item"><span class="badge">&#10026;</span>&#10105; 100% own security management as an investor from everywhere</li>
+                        <li class="list-group-item"><span class="badge">&#10026;</span>&#10106; Fund deposit and withdraw from everywhere</li>
+                        <li class="list-group-item"><span class="badge">&#10026;</span>&#10107; Get portfolio, ledger, gain/loss statement anytime</li>
+                        <li class="list-group-item"><span class="badge">&#10026;</span>&#10108; Investor’s own profile modify request anytime everywhere</li>
+                    </ul>
+                </p>
+            </div>
+        }
+
+        <div class="col-md-7" id="login">
+            @Html.Partial("_Login")
+        </div>
+    </div>

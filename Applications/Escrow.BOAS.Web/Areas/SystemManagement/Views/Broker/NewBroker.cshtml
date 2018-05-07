@@ -1,0 +1,555 @@
+﻿@using Microsoft.AspNet.Identity
+@using Escrow.BOAS.Utility
+@using Escrow.BOAS.Web
+@{
+    Layout = null;
+}
+<h2>Setup New Broker</h2>
+<hr />
+<br />
+@if (Request.IsAuthenticated && !SessionManger.IsSessionNull(Session) && SessionManger.isUserLoggedIn())
+{   
+<div ng-controller="BrokerController" ng-init="LoadAllDropDown()">
+
+    <form class="form-horizontal" ng-submit="" name="newBrokerForm">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="Name">Broker Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" data-ng-model="broker.Name" name="broker_name" required onload-focus="true" enter-as-tab  />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="Instrument Type">User Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" data-ng-model="RegisterBroker.UserName" required enter-as-tab ng-blur="CheckUser()" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="Instrument Type">Address</label>
+                </div>
+                <div class="col-md-4">
+                    <textarea class="form-control input-sm" ng-model="broker.mail_address" enter-as-tab  />
+                </div>
+                <div class="form-group" >
+                    <div class="col-md-2">
+                        <label for="Instrument Type">Password</label>
+                    </div>
+                    <div class="col-md-4" style="margin-left:-5px">
+                        @*<input type="text" class="form-control input-sm" data-ng-model="user.Password" name="user_password" required onload-focus="true" enter-as-tab />*@
+                        <input type="password" name="Password" class="form-control input-sm" ng-model="RegisterBroker.Password" ng-minlength="6" required enter-as-tab />
+                        <p class="error" ng-show="newBrokerForm.Password.$error.minlength || submitted">Password must at least be 6 digits</p>
+                    </div>
+                    <div class="col-md-2">
+                        <br /> <label for="Instrument Type">Confirm Password</label>
+                    </div>
+                    <div class="col-md-4" style="margin-left:-5px">
+                        <br />@*<input type="text" class="form-control input-sm" data-ng-model="user.rePassword" name="user_repassword" required onload-focus="true" enter-as-tab />*@
+                        <input type="password" name="ConfirmPassword" class="form-control input-sm" ng-model="RegisterBroker.ConfirmPassword" ng-minlength="6" required enter-as-tab ng-blur="CheckPassword()" />
+                        <p class="error" ng-show="newBrokerForm.ConfirmPassword.$error.mismatch || submitted">Password and confirm password does not match</p>
+                    </div>
+                </div>           
+
+            </div>    
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="depository_company">Short Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.short_name" enter-as-tab required />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="Reserved Capital">Trec Number</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.trec_number" enter-as-tab required />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="depository_company">Membership Id</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.membership_id" ng-blur="CheckBroker()" enter-as-tab numbers-only required />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="Reserved Capital">Active Status Id</label>
+                </div>
+                <div class="col-md-4">
+                    <select data-ng-model="broker.active_status_id" class="dropdown form-control input-sm"
+                            ng-options="Status.value as Status.text for Status in StatusList" enter-as-tab required>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="depository_company">Registration No</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.registration_no" enter-as-tab numbers-only />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="Reserved Capital">Paid Up Capital</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.paid_up_capital" enter-as-tab numbers-only />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="depository_company">Authorized Capital</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.authorized_capital" enter-as-tab numbers-only />
+                </div>
+
+                <div class="col-md-2">
+                    <label for="Reserved Capital">Compliance Capital</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" ng-model="broker.compliance_authority" enter-as-tab numbers-only />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Sector">No of AR</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" ng-model="broker.no_of_ar" enter-as-tab />
+                </div>
+            </div>          
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Authorise Capital">Contact No</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" ng-model="broker.contact_no" enter-as-tab required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Paid_up_capital">Email</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control input-sm" ng-model="broker.email" enter-as-tab required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Security_code">Registration Date</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="broker.registration_date" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <button style="margin-left : -56px" type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="Reserved Capital">Logo</label>
+                </div>
+                <div class="col-md-8">
+                    <img ngf-src="logoFile || limage" style="height: 150px; width: 278px;" />
+                    <input type="file" ngf-select ng-model="logoFile" name="file"
+                           accept="image/*" ngf-max-size="2MB"><b>Logo</b><br />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="Reserved Capital">Header Image</label>
+                </div>
+                <div class="col-md-9">
+                    <img ngf-src="headFile || himage" style="height: 160px; width: 100%;" />
+                    <input type="file" ngf-select ng-model="headFile" name="file"
+                           accept="image/*" ngf-max-size="2MB"><b>Header</b><br />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Import Cash Limits</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="file" class="btn-primary" ngf-select ng-model="Cashfile" id="CashFileUpload" name="FileUpload"><br />
+                </div>
+
+                <div class="col-md-1" style="margin-left:-56px; margin-top:-2px">
+                    <input type="submit" class="btn btn-default btn-sm" value="Upload" data-ng-click="UploadCashFile(Cashfile)" />
+                </div>
+
+                <div class="col-md-2">
+                    <label>Import Share Limits</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="btn-primary" type="file" ngf-select ng-model="Sharefile" id="ShareFileUpload" name="FileUpload"><br />
+                </div>
+
+                <div class="col-md-1" style="margin-left:-56px; margin-top:-2px">
+                    <input type="submit" class="btn btn-default btn-sm" value="Upload" data-ng-click="UploadShareFile(Sharefile)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Stock Exchange</label>
+                </div>
+                <div class="col-md-3">
+                    <select data-ng-model="broker.stock_exchange_id" class="dropdown form-control input-sm"
+                            ng-options="Stock.value as Stock.text for Stock in StockList" enter-as-tab>
+                        <option value="">---------------Select---------------</option>
+                    </select>
+                </div>                
+                <div class="col-md-1" style="margin-left:-56px">                    
+
+                </div>
+                <div class="col-md-2">
+                    <label>Clossing Price File</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="btn-primary" type="file" ngf-select ng-model="file" id="FileUpload" name="FileUpload"><br />
+                </div>
+
+                <div class="col-md-1" style="margin-left:-56px; margin-top:-2px">
+                    <input type="submit" class="btn btn-default btn-sm" value="Upload" data-ng-click="UploadPriceFile(file)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Trade File (last 10 days)</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="btn-primary" type="file" ngf-select ng-model="Tradefile" id="TradeFileUpload" name="TradeFileUpload"><br />
+                </div>
+
+                <div class="col-md-1" style="margin-left:-56px; margin-top:-2px">
+                    <input type="submit" class="btn btn-default btn-sm" value="Upload" data-ng-click="UploadTradeFile(Tradefile)" />
+                </div>
+                <div class="col-md-2">
+                    <label>Client Recivable Payable</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="btn-primary" type="file" ngf-select ng-model="RecPayfile" id="RecPayFileUpload" name="RecPayFileUpload"><br />
+                </div>
+
+                <div class="col-md-1" style="margin-left:-56px; margin-top:-2px">
+                    <input type="submit" class="btn btn-default btn-sm" value="Upload" data-ng-click="UploadRecPayFile(RecPayfile)" />
+                </div>
+                <div class="col-md-1">
+                    <a href="~/Files/ClientReceivablePayable.xlsx" class="btn btn-default btn-sm" style="margin-top:-2px">Template</a>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-5">
+                   
+                    <input type="button" class="btn btn-default" value="Reset" data-ng-click="ResetForAuthUser()" />
+                    <input type="submit" class="btn btn-default" value="Save" data-ng-click="AddNewBroker(logoFile,headFile)" />                 
+                </div>
+            </div>
+        </div>     
+    </form>
+</div>
+}
+else
+{
+    <div ng-controller="BrokerController" ng-init="LoadAllDropDown()">
+
+        <form ng-hide="showme" class="form-horizontal" ng-submit="" name="newBrokerFormSteepOne">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="Name">Broker Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" data-ng-model="broker.Name" name="broker_name" required onload-focus="true" enter-as-tab @*style="max-width : 90%;"*@ />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="Instrument Type">Address</label>
+                    </div>
+                    <div class="col-md-4">
+                        <textarea class="form-control input-sm" ng-model="broker.mail_address" enter-as-tab />
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="depository_company">Short Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.short_name" enter-as-tab required />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="Reserved Capital">Trec Number</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.trec_number" enter-as-tab required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="depository_company">Membership Id</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.membership_id" ng-blur="CheckBroker()" enter-as-tab numbers-only required />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="Reserved Capital">Active Status Id</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select data-ng-model="broker.active_status_id" class="dropdown form-control input-sm"
+                                ng-options="Status.value as Status.text for Status in StatusList" enter-as-tab required>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="depository_company">Registration No</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.registration_no" enter-as-tab numbers-only />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="Reserved Capital">Paid Up Capital</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.paid_up_capital" enter-as-tab numbers-only />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="depository_company">Authorized Capital</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.authorized_capital" enter-as-tab numbers-only />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="Reserved Capital">Compliance Capital</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.compliance_authority" enter-as-tab numbers-only />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="Sector">No of AR</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.no_of_ar" enter-as-tab />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="Security_code">Registration Date</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="broker.registration_date" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                    </div>
+                    <div class="col-md-1">
+                        <span class="input-group-btn">
+                            <button style="margin-left : -56px" type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="Paid_up_capital">Email</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.email" enter-as-tab required />
+                    </div>                  
+
+                    <div class="col-md-2">
+                        <label for="Authorise Capital">Contact No</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="broker.contact_no" enter-as-tab required />
+                    </div>
+                </div>               
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-5">
+                        <input type="button" class="btn btn-default" value="Reset" data-ng-click="ResetForAnonimusOne()" />
+                        <input type="submit" id="next_one" class="btn btn-default" value="Next" ng-click="NextOne()" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <form ng-show="showme" class="form-horizontal" ng-submit="" name="newBrokerFormSteepTwo">
+            <div ng-hide="hideme">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="Reserved Capital">Logo</label>
+                        </div>
+                        <div class="col-md-10">
+                            <img ngf-src="logoFile || limage" style="height: 150px; width: 200px;" />
+                            <input type="file" ngf-select ng-model="logoFile" name="file"
+                                   accept="image/*" ngf-max-size="2MB"><b>Logo</b><br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="Reserved Capital">Header Image</label>
+                        </div>
+                        <div class="col-md-8">
+                            <img ngf-src="headFile || himage" style="height: 160px; width: 100%;" />
+                            <input type="file" ngf-select ng-model="headFile" name="file"
+                                   accept="image/*" ngf-max-size="2MB"><b>Header</b><br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-5">
+                            <input type="button" class="btn btn-default" value="Previous" ng-click="showme=false" />
+                            <input type="button" class="btn btn-default" value="Reset" data-ng-click="" />
+                            <input type="submit" class="btn btn-default" value="Next" ng-click="NextTwo()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <form ng-show="hideme" class="form-horizontal" ng-submit="" name="newBrokerFormSteepThree">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="Instrument Type">User Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" data-ng-model="RegisterBroker.UserName" required enter-as-tab ng-blur="CheckUser()" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="Instrument Type">Password</label>
+                    </div>
+                    <div class="col-md-4">
+                       <input type="password" name="Password" class="form-control input-sm" ng-model="RegisterBroker.Password" ng-minlength="6" required enter-as-tab />
+                        <p class="error" ng-show="newBrokerFormSteepThree.Password.$error.minlength || submitted">Password must at least be 6 digits</p>
+                    </div>
+
+                    <div class="col-md-offset-2 col-md-3">
+                        <a href="~/Files/ClientReceivablePayable.xlsx" class="btn btn-default">Client Receivable Payable Template</a>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                       <label for="Instrument Type">Confirm Password</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="password" name="ConfirmPassword" class="form-control input-sm" ng-model="RegisterBroker.ConfirmPassword" ng-minlength="6" required enter-as-tab ng-blur="CheckPassword()" />
+                        <p class="error" ng-show="newBrokerFormSteepThree.ConfirmPassword.$error.mismatch || submitted">Password and confirm password does not match</p>
+                    </div>
+                </div>               
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Import Cash Limit File</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn btn-primary btn-sm" type="file" ngf-select ng-model="Cashfile" id="CashFileUpload" name="FileUpload"><br />
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-default " value="Upload" data-ng-click="UploadCashFile(Cashfile)" style="margin-left: -89px;margin-top: -2px;" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Import Share Limit File</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn btn-primary btn-sm" type="file" ngf-select ng-model="Sharefile" id="ShareFileUpload" name="FileUpload"><br />
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-default" value="Upload" data-ng-click="UploadShareFile(Sharefile)" style="margin-left: -89px;margin-top: -2px;" />
+                    </div>
+                </div>
+
+               <div class="form-group">
+                   <div class="col-md-2">
+                       <label>Clossing Price File</label>
+                   </div>
+                   <div class="col-md-3">
+                       <input class="btn btn-primary btn-sm" type="file" ngf-select ng-model="file" id="FileUpload" name="FileUpload"><br />
+                   </div>
+                   <div class="col-md-1">
+                       <input type="submit" class="btn btn-default" value="Upload" data-ng-click="UploadPriceFile(file)" style="margin-left: -89px;margin-top: -2px;" />
+                   </div>
+
+                   <div class="col-md-2">
+                       <label>Import Client Receivable Payable</label>
+                   </div>
+                   <div class="col-md-3">
+                       <input class="btn btn-primary btn-sm" type="file" ngf-select ng-model="RecPayfile" id="RecPayFileUpload" name="RecPayFileUpload"><br />
+                   </div>
+                   <div class="col-md-1">
+                       <input type="submit" class="btn btn-default" value="Upload" data-ng-click="UploadRecPayFile(RecPayfile)" style="margin-left: -89px;margin-top: -2px;" />
+                   </div>                  
+                </div>
+               
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Stock Exchange</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select data-ng-model="broker.stock_exchange_id" class="dropdown form-control input-sm"
+                                ng-options="Stock.value as Stock.text for Stock in StockList" enter-as-tab>
+                            <option value="">---------------Select---------------</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-2">
+                        <label>Trade File (last 10 days)</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn btn-primary btn-sm" type="file" ngf-select ng-model="Tradefile" id="TradeFileUpload" name="TradeFileUpload"><br />
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-default" value="Upload" data-ng-click="UploadTradeFile(Tradefile)" style="margin-left: -89px;margin-top: -2px;" />
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                   
+                </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-5">
+                        <input type="button" class="btn btn-default" value="Previous" ng-click="hideme=false" />
+                        <input type="button" class="btn btn-default" value="Reset" data-ng-click="" />
+                        <input type="submit" class="btn btn-default" value="Save" ng-click="AddNewBrokerAnonimus(logoFile,headFile)" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+}

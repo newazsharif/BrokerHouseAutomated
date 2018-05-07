@@ -1,0 +1,112 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 5/10/2015
+    ///Reason:
+*@
+
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Import CDBL Transaction Files";
+    Layout = null;
+}
+
+<h2>Import CDBL Transaction Files</h2>
+<hr />
+<div class="row" ng-controller="ImportCDBLController" ng-init="loadCDBLFileList()">
+
+    <modal title="Error List" visible="showErrorModal">
+        <div style="overflow-y:scroll; width:100%; height:450px">
+            <table st-table="errorDisplayedCollection" st-safe-src="errorRowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="TABLE_NAME">File Name</th>
+                        <th st-sort="ERROR_TITLE">Error Title</th>
+                        <th st-sort="ERROR_DETAILS">Error Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in errorDisplayedCollection">
+                        <td>{{row.TABLE_NAME}}</td>
+                        <td>{{row.ERROR_TITLE}}</td>
+                        <td>{{row.ERROR_DETAILS}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            <div st-pagination="" st-items-by-page="10" st-displayed-pages="" st-template="~/Scripts/Areas/pagination.custom.html"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            Please solve these errors!!!!
+</modal>
+
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="ac">CDBL Mapping Path</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" name="CDBLFilePath" data-ng-model="cdbl_file_path" ng-readonly="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label class="col-md-2 control-label">From</label>
+                </div>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="from_date" is-open="opened1" min-date="minDate" max-date="to_date" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="col-md-2 control-label">To</label>
+                </div>
+                <div class="col-md-4">
+                    <p class="input-group">
+                        <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="to_date" is-open="opened2" min-date="from_date" max-date="maxDate" show-weeks="false" show-button-bar="false" enter-as-tab required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th row-select-all="displayedCollection" selected="selected" ng-click="selectAll(displayedCollection)"></th>
+                    <th>Select All</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in displayedCollection">
+                    <td row-select="row" ng-click="select(row.id)"></td>
+                    <td>{{row.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Import" data-ng-click="importCDBLFiles()" />
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+}
+

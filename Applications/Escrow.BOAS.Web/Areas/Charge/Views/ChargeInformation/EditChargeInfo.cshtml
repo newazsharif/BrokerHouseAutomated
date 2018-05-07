@@ -1,0 +1,126 @@
+﻿@*
+    ///Created by: Asif
+    ///Edit date: 12/1/2015
+    ///Reason: Charge Information Edit View
+*@
+
+@using Microsoft.AspNet.Identity
+@using Escrow.Utility
+
+@{
+    ViewBag.Title = "Charge Information";
+    Layout = null;
+}
+
+<h2>Charge Information</h2>
+<div @*class="container"*@ ng-controller="ChargeInformationController" ng-init="loadDropdownsAndInfo()">
+    <form class="form-horizontal" ng-submit="" name="editChargeInfoForm">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Name</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editChargeInfo.name" onload-focus="true" enter-as-tab required />
+            </div>
+
+            <div class="col-md-2">
+                <label>Short Name</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editChargeInfo.short_code" enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Charges Type</label>
+            </div>
+            <div class="col-md-4">
+                <select data-ng-model="editChargeInfo.charge_type_id" class="dropdown form-control input-sm"
+                        ng-options="chargeType.value as chargeType.text for chargeType in chargeTypeList" enter-as-tab required>
+                    <option value="">---------------Select---------------</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label>Effective Date</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy" ng-readonly="true" data-ng-model="editChargeInfo.effective_dt" is-open="opened1" min-date="minDate" max-date="'31/12/9999'" show-weeks="false" show-button-bar="false" enter-as-tab />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Charge Amount</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editChargeInfo.charge_amount" positive-numbers-only enter-as-tab required />
+            </div>
+
+            <div class="col-md-2">
+                <label>Minimum Charge</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control input-sm" data-ng-model="editChargeInfo.minimum_charge" positive-numbers-only enter-as-tab required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="isPercentage" data-ng-model="editChargeInfo.is_percentage" ng-true-value=1 ng-false-value=0 enter-as-tab /><label for="isPercentage"> Percentage</label>
+            </div>
+
+            <div class="col-md-4">
+                <input type="checkbox" name="isSlab" data-ng-model="editChargeInfo.is_slab" ng-true-value=1 ng-false-value=0 ng-change="showHideSlabForEdit()" enter-as-tab /><label for="isSlab"> Slab</label>
+            </div>
+        </div>
+
+        <fieldset ng-show="fldSlab">
+            <legend>Slab Details</legend>
+
+            <div class="col-md-3">
+                <input type="button" class="btn btn-default" value="Add" data-ng-click="AddChargeInfoSlabForEdit()" />
+            </div>
+            <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th st-sort="amount_from">Amount From</th>
+                        <th st-sort="amount_to">Amount To</th>
+                        <th st-sort="charge_amount">Charge Amount</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in displayedCollection">
+                        <td>{{row.amount_from}}</td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="row.amount_to" positive-numbers-only style="border:none; width:100px" /></td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="row.charge_amount" positive-numbers-only style="border:none; width:100px" /></td>
+                        <td><a ng-click="DeleteChargeInfoSlab(row)" class="btn btn-link">&#@Constant.Delete;</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default" value="Save" data-ng-click="editChargeInformation()" />
+                <input type="button" class="btn btn-default" value="Reset" data-ng-click="loadDropdownsAndInfo()" />
+                <a href="/#ChargeInformationList" class="btn btn-default">List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+}
+
